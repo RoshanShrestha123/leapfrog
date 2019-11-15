@@ -102,11 +102,13 @@
 	float: right;
 	width: 70%;
 
+
 }
 .main{
 	
 	float: left;
 	width: 70%;
+
 	
 
 }
@@ -145,6 +147,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	padding: 10px;
 	
 
 
@@ -156,6 +159,7 @@
 	padding: 10px;
 	justify-content: center;
 	align-content: center;
+
 }
 
 .card-4 img{
@@ -199,7 +203,7 @@ background-color: #ECECEC;
 }
 .jquery-image li{
 	
-	width: 130px;
+	width: 120px;
 	padding: 10px;
 
 
@@ -226,7 +230,15 @@ background-color: #ECECEC;
 .footer-main-leftmost{
 	width: 60%;
 	float: left;
+	list-style: none;
+	
+
 }
+.footer-main-leftmost p{
+	padding-top: 20px;
+
+}
+
 .footer-right-leftmost{
 	width: 30%;
 	float: right;
@@ -255,4 +267,11 @@ background-color: #ECECEC;
 .footer-main-rightmost{
 	width: 60%;
 	float: right;
+	list-style: none;;
+}
+.from-blog{
+	display: flex;
+}
+.blog-date{
+	color: grey;
 }
