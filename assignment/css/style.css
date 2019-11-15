@@ -1,0 +1,15 @@
+.link-disable{
+	color: grey;
+}
+.link-enable a{
+	color: grey;
+	text-decoration: none;
+}
+.heading-scale-design{
+	background-image: ("../images/scale.png");
+	background-repeat: repeat-x;
+}
+.container-title{
+	color: #DC514C;
+	font-size: 30px;
+}
