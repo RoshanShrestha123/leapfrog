@@ -1,0 +1,69 @@
+
+.footer{
+	background-color: #76C7C1;
+	    padding-top: 50px;
+}
+.footer-leftmost{
+	width: 50%;
+	float: left;
+	color: white;
+	
+}
+.footer-rightmost{
+	width: 50%;
+	float: right;
+	color: white;
+	
+}
+
+.footer-main-leftmost{
+	width: 60%;
+	float: left;
+	list-style: none;
+	
+
+}
+.footer-main-leftmost p{
+	padding-top: 20px;
+
+}
+
+.footer-right-leftmost{
+	width: 30%;
+	float: right;
+	list-style: none;
+
+}
+.footer-right-leftmost h2{
+	color: grey;
+}
+.footer-right-leftmost li a{
+	color: white;
+	text-decoration: none;
+}
+.footer-left-rightmost{
+	width: 30%;
+	float: left;
+	list-style: none;
+}
+.footer-left-rightmost li a{
+	color: white;
+	text-decoration: none;
+}
+.footer-left-rightmost h2{
+	color: grey;
+}
+.footer-main-rightmost{
+	width: 60%;
+	float: right;
+	list-style: none;;
+}
+.from-blog{
+	display: flex;
+}
+.blog-date{
+	color: grey;
+}
+.blog-text{
+	padding-left: 10px;
+}
