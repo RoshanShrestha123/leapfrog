@@ -1,26 +1,182 @@
 
+/* global css */
+*{
+	margin:0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+.wrapper{
+	width: 1170px;;
+	margin:0 auto;
+}
+.flow-wrapper{
+	width: 100%;
+}
+.grey-13{
+	color: grey;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+
+
+
+
+/* header css */
+.heading-above-color{
+	background-color: #79c8c3;
+}
+.heading-wrapper{
+	width: 1170px;
+	margin:0 auto;
+}
+
+.heading-above{
+
+	overflow: auto;
+	clear: both;
+	line-height: 80px;
+}
+
+.logo{
+	float: left;
+}
+
+.navbar{
+	float: right;
+}
+
+.navbar ul li{
+	display: inline-block;
+	padding-left: 50px;
+}
+
+.navbar ul li a{
+	color: black;
+	text-decoration: none;
+	font-size: 12px;
+	color: white;
+
+}
+/* end of above header  */
+.heading-below{
+
+	overflow: auto;
+	clear: both;
+	line-height: 80px;
+
+}
+.heading-below-color{
+		background-color: #ececec;
+}
+.below-left{
+	float: left;
+}
+.below-left h3{
+	font-size: 18px;
+	color: grey;
+}
+.below-right{
+	float: right;
+}
+.below-right ul li{
+	display: inline-block;
+	color: grey;
+	font-size: 12px;
+
+}
+.below-right ul li a{
+	text-decoration: none;
+	color: inherit;
+
+
+
+}
+/* end of below header */
+.heading-downarrow-color{
+	background-color: #f3f3f3;
+}
+.heading-downarrow{
+
+
+
+}
+/* end of down arrow -below header */
+.container-color-whyus{
+	background-color: #f3f3f3;
+}
+.container-paragraph{
+	padding-top: 42px;
+}
+.container-title{
+	color: #e05443;
+}
+.container-content{
+	padding-top: 25px;
+	line-height: 1.6;
+}
+.col-3{
+	padding-top: 75px;
+}
+.container-choose-us{
+	padding-top: 22px;
+}
+.l{
+	width: 276px;
+	float: left;
+}
+.l-list{
+	padding-top: 18px;
+	background-color: red;
+}
+.main-wrapper{
+	width: 894px;
+	float: right;
+
+}
+.main{
+	float: left;
+	width: 618px;
+}
+.card-4{
+	float: left;
+}
+.right{
+	float: right;
+	width: 276px;
+
+}
+.our-team{
+	clear: both;
+}
+
+
+
 .footer{
 	background-color: #76C7C1;
 	    padding-top: 50px;
 }
+
 .footer-leftmost{
 	width: 50%;
 	float: left;
 	color: white;
-	
+
 }
 .footer-rightmost{
 	width: 50%;
 	float: right;
 	color: white;
-	
+
 }
 
 .footer-main-leftmost{
 	width: 60%;
 	float: left;
 	list-style: none;
-	
+
 
 }
 .footer-main-leftmost p{
