@@ -1,0 +1,302 @@
+
+/* header css */
+.heading-above-color{
+	background-color: #79c8c3;
+}
+
+.heading-above{
+
+	overflow: auto;
+	clear: both;
+  	background-color: #79c8c3;
+    padding-top: 17px 14px;
+}
+
+.logo{
+	float: left;
+}
+
+.navbar{
+	float: right;
+}
+
+.navbar ul li{
+	display: inline-block;
+
+}
+
+.navbar ul li a{
+	color: black;
+	text-decoration: none;
+
+	color: white;
+	display: block;
+  padding-left: 50px;
+
+  font-size: 12px;
+
+}
+/* end of above header  */
+.heading-below{
+
+	overflow: auto;
+	clear: both;
+
+
+}
+.heading-below-color{
+			background-color: #ececec;
+}
+.below-left{
+	float: left;
+}
+.below-left h3{
+
+	color: grey;
+}
+.below-right{
+	float: right;
+}
+.below-right ul li{
+	display: inline-block;
+	color: grey;
+
+
+}
+.below-right ul li a{
+	text-decoration: none;
+	color: inherit;
+
+
+
+}
+/* end of below header */
+.heading-downarrow-color{
+	background-color: #f3f3f3;
+}
+.heading-downarrow{
+
+width: 2.9%;
+
+}
+
+
+
+
+.banner-main-color{
+width: 100%;
+background-color: #f3f3f3;
+
+}
+.banner-secondary{
+  width:74.5%;
+float: left;
+
+
+}
+.banner-secondary-small{
+  width:23.3%;
+  float: right;
+
+}
+.sidebar-image-holder{
+  width: 25%;
+float: left;
+padding-right: 5%;
+margin: 0 auto;
+
+}
+.card-wrapper{
+
+  background-color: red;
+
+}
+.card-4-left-wrapper{
+  float: left;
+  width: 50%;
+}
+.card-4-right-wrapper{
+  float: right;
+    width: 50%;
+}
+.card-4-1-left{
+  width: 50%;
+  position: relative;
+  float: left;
+
+}
+.card-4-1-right{
+  width:50%;
+  position: relative;
+  float: right;
+
+}
+
+.card-btn-holder{
+bottom: -10%;
+  position: absolute;
+  width: 74.07%;
+left: 13%;
+}
+
+/* end of card css */
+
+
+.accordation-wrapper{
+  width: 100%;
+  clear: both;
+  padding-top: 10%;
+}
+.left-accordation{
+  width: 74.5%;
+  float: left;
+}
+.right-accordation{
+  width: 24%;
+  float: right;
+
+}
+.accordation-holder{
+  width: 100%;
+  padding-bottom: 1%;
+
+}
+.accordation-hidden{
+  position: relative;
+}
+.accordation-unhidden{
+  position: relative;
+}
+.accordation-title{
+position: absolute;
+  left: 1%;
+  top: 30%;
+
+}
+.accordation-btn{
+position: absolute;
+right: 1%;
+  top: 30%;
+}
+
+.footer-above-color{
+	background-color: #76c7c1;
+	overflow: auto;
+}
+
+
+.footer-leftmost{
+
+	float: left;
+	color: white;
+	width: 50%;
+	padding-top: 54px;
+	padding-bottom: 16px;
+
+
+}
+.footer-rightmost{
+
+	float: right;
+	color: white;
+	width: 50%;
+	padding-top: 54px;
+	padding-bottom: 16px;
+
+}
+
+.footer-main-leftmost{
+
+	float: left;
+	width: 64.1%;
+
+
+}
+.footer-main-leftmost p{
+	padding-top: 20px;
+	line-height: 1.6;
+	font-size: 14px;
+
+}
+.footer-ph-email{
+	padding-top: 34px;
+}
+
+
+.footer-right-leftmost{
+
+	float: right;
+	width: 35.8%;
+
+
+}
+.footer-right-leftmost h2{
+	color: grey;
+}
+.footer-right-leftmost li a{
+	color: white;
+	text-decoration: none;
+}
+
+.footer-left-rightmost{
+
+	float: left;
+	width: 35.8%;
+
+}
+.footer-left-rightmost li a{
+	color: white;
+	text-decoration: none;
+}
+.footer-left-rightmost h2{
+	color: grey;
+}
+.footer-main-rightmost{
+
+	float: right;
+		width: 64.1%;
+}
+.footer-list{
+	padding-top: 20px;
+	padding-left: 24px;
+}
+.footer-list li{
+	padding-bottom: 14px;
+}
+.footer-list a{
+	padding-left: 10px;
+}
+.footer-ph-email-large{
+	font-weight: bold;
+	font-style: italic;
+	font-size: 20px;
+}
+.blog-image{
+	float: left;
+	padding-right: 19px;
+}
+.from-blog{
+	clear:both;
+	padding-top: 20px;
+}
+.blog-date{
+	color: grey;
+}
+.blog-text{
+
+}
+.footer-lower-color{
+	background-color: #6bb4ad;
+	color: white;
+}
+.footer-lower{
+
+	overflow: auto;
+
+}
+.footer-lower-left{
+	float: left;
+}
+.footer-lower-right{
+	float: right;
+}
