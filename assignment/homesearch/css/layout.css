@@ -68,7 +68,7 @@ li{
 	text-decoration: none;
 	font-size: 12px;
 	color: white;
-	display: block;	
+	display: block;
 }
 /* end of above header  */
 .heading-below{
@@ -117,6 +117,7 @@ li{
 .container-color-whyus{
 	background-color: #f3f3f3;
 	overflow: auto;
+	padding-bottom: 78px;
 }
 .container-paragraph{
 	padding-top: 42px;
@@ -130,6 +131,7 @@ li{
 }
 .col-3{
 	padding-top: 75px;
+
 }
 .container-choose-us{
 	padding-top: 22px;
@@ -363,4 +365,94 @@ line-height: 50px;
 }
 .footer-lower-right{
 	float: right;
+}
+
+
+.flow-wrapper{
+  width: 100%;
+}
+.wrapper{
+  width: 1170px;
+  margin:0 auto;
+}
+.our-team{
+  text-align: center;
+}
+.card-hover{
+  position: relative;
+  width: 272px;
+  float: left;
+  padding-right: 18px;
+	padding-top: 80px;
+
+
+}
+.card-hover a{
+  text-decoration: none;
+}
+.card-image-holder{
+
+  height: 313px;
+  background-image: url("../images/ourteam-background.png");
+  z-index: 1;
+
+}
+
+
+.card-button{
+  position: absolute;
+  width: 200px;
+  height: 54px;
+  background-image: url("../images/non-hover-button.png");
+  z-index: 2;
+
+   bottom: -23px;
+  left: 35px;
+  color: white;
+}
+.card-button h2{
+
+    text-align: center;
+}
+.card-hover:hover .card-image-holder{
+background-image: url();
+background-color: #90d1cb;
+
+}
+.card-hover:hover .card-button{
+  background-color: #e9645b;
+  background-image: url();
+}
+.on-hover{
+  display: none;
+}
+.card-hover:hover .on-hover{
+  display: block;
+
+}
+.on-hover-links{
+  padding-left: 38px;
+  padding-right: 38px;
+  padding-top: 66px;
+}
+
+.on-hover-text{
+  padding: 10px;
+  color: white;
+  font-style: italic;
+  padding-left: 38px;
+  padding-right: 38px;
+  line-height: 1.6;
+
+}
+.our-team-color{
+	background-image: url("../images/background-team.png");
+	background-repeat: repeat-x;
+	overflow: auto;
+padding-bottom: 78px;
+
+
+}
+.our-team h2{
+	padding-top: 81px;
 }
