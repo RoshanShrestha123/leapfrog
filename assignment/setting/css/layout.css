@@ -9,7 +9,13 @@
 	overflow: auto;
 	clear: both;
   	background-color: #79c8c3;
-    padding-top: 17px 14px;
+    	padding-top: 1%;
+			padding-bottom: 1%;
+}
+.hamburger{
+	width: 10%;
+	float: right;
+	display:none;
 }
 
 .logo{
@@ -18,10 +24,12 @@
 
 .navbar{
 	float: right;
+
 }
 
 .navbar ul li{
 	display: inline-block;
+padding-left: 30px;
 
 }
 
@@ -31,9 +39,12 @@
 
 	color: white;
 	display: block;
-  padding-left: 50px;
 
-  font-size: 12px;
+
+
+  font-size: 0.8em;
+
+
 
 }
 /* end of above header  */
@@ -46,6 +57,8 @@
 }
 .heading-below-color{
 			background-color: #ececec;
+			padding-top: 1%;
+			padding-bottom: 1%;
 }
 .below-left{
 	float: left;
@@ -86,6 +99,7 @@ width: 2.9%;
 .banner-main-color{
 width: 100%;
 background-color: #f3f3f3;
+overflow: auto;
 
 }
 .banner-secondary{
@@ -94,9 +108,56 @@ float: left;
 
 
 }
+.banner-main{
+	padding-bottom: 3%;
+}
+.banner-secondary {
+	padding-bottom: 5%;
+}
+.slider-secondary{
+	position: relative;
+}
+.slider-secondary-small{
+	position: relative;
+}
 .banner-secondary-small{
   width:23.3%;
   float: right;
+
+}
+.slider-refernce{
+	margin: 0 auto;
+
+	overflow: auto;
+	width: 30%;
+
+}
+.slider{
+	position: relative;
+}
+.left-btn{
+	position: absolute;
+	top:40%;
+	left: 0;
+	width: 5%;
+}
+.right-btn{
+	position: absolute;
+	top: 40%;
+	right: 0;
+	width: 5%;
+}
+.slider-refernce-image{
+	width: 26%;
+	float: left;
+
+	background-image: url("../images/slider-reference.png");
+	padding-bottom: 5px;
+
+	margin: 2px;
+}
+.active{
+	background-image: url("../images/slider-reference-hover.png");
 
 }
 .sidebar-image-holder{
@@ -138,6 +199,13 @@ bottom: -10%;
   width: 74.07%;
 left: 13%;
 }
+.card-text{
+	position: absolute;
+	top: 40%;
+	padding-left: 10%;
+	padding-right: 10%;
+	text-align: center;
+}
 
 /* end of card css */
 
@@ -178,10 +246,196 @@ position: absolute;
 right: 1%;
   top: 30%;
 }
+.accordation-unhidden{
+  display: none;
+}
 
+/* end of accordation css */
+
+
+
+
+.tabs-left{
+	float: left;
+	width: 74%;
+}
+.tabs-right{
+	float:right;
+	width: 23%;
+}
+
+.gallery-wrapper{
+  width: 100%;
+  clear: both;
+
+}
+.gallery-wrapper-container{
+  width: 100%;
+
+
+}
+.gallery-container-left{
+    width: 47.51%;
+  	float: left;
+
+}
+.gallery-container-left-left{
+	float:left;
+	    width:46%;
+	    background:url(../images/empty-gallery.png) no-repeat center;
+	    background-size: contain;
+	    padding-bottom:13em;
+
+
+}
+
+.gallery-container-left-right{
+    width: 46%;
+  float: right;
+	background:url(../images/empty-gallery.png) no-repeat center;
+	background-size: contain;
+	padding-bottom:13em;
+
+}
+.gallery-container-right{
+    width: 47.51%;
+  float: right;
+
+}
+.gallery-container-right-left{
+  width: 46%;
+  float: left;
+
+	background:url(../images/empty-gallery.png) no-repeat center;
+	background-size: contain;
+	padding-bottom:13em;
+
+}
+.gallery-container-right-right{
+    width: 46%;
+  float: right;
+	background:url(../images/empty-gallery.png) no-repeat center;
+	background-size: contain;
+	padding-bottom:13em;
+
+}
+.gallery-large-left{
+	margin-top: 20px;
+	clear: both;
+	width: 100%;
+	background:url(../images/empty-gallery-large.png) no-repeat center;
+	background-size: contain;
+	padding-bottom:14em;
+	float: left;
+}
+.gallery-large-right{
+		margin-top: 20px;
+	width: 100%;
+	background:url(../images/empty-gallery-large.png) no-repeat center;
+	background-size: contain;
+	padding-bottom:14em;
+	float: right;
+
+}
+/* end of gallery css */
+
+.paragraph-container{
+	padding-top: 20px;
+	width: 100%;
+margin-top: 2%;
+}
+.paragraph-context{
+	width: 100%;
+
+}
+.paragraph-left{
+	width: 46%;
+	float: left;
+}
+.paragraph-right{
+	width: 46%;
+	float: right;
+}
+.paragraph-left-long{
+	width: 73%;
+	float: left;
+}
+.paragraph-right-short{
+	width: 26%;
+	float: right;
+}
+.paragraph-left h2{
+	font-size: 16px;
+}
+.paragraph-right h2{
+	font-size: 16px;
+}
+
+
+.pointer{
+	width: 5%;
+	float: left;
+	padding-right: 2px;
+}
+.main-headline{
+
+	overflow: auto;
+}
+.main-headline-paragraph{
+	width: 75%;
+	float: left;
+	padding: 2%;
+}
+.main-headline-btn{
+	width: 20%;
+	float: right;
+
+	padding-top: 4%;
+
+}
+.view-more-btn{
+	width: 70%;
+}
+
+table{
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 1%;
+
+}
+td,th{
+	border: 1px solid #e4e4e4;
+	padding: 1%;
+}
+th{
+	background-color: #ececec;
+}
+.tr-1{
+	width: 10%;
+}
+.table-50{
+	float: left;
+	width: 48%;
+	padding-bottom: 2%;
+
+}
+.table-50 th{
+	background-color: #62b9b1;
+	color: white;
+}
+.table-50-right{
+	float: right;
+	width: 48%;
+	padding-bottom: 2%;
+}
+.table-50-right th{
+	background-color: #e2534b;
+	color: white;
+}
 .footer-above-color{
 	background-color: #76c7c1;
 	overflow: auto;
+	clear: both;
 }
 
 
@@ -286,7 +540,7 @@ right: 1%;
 
 }
 .footer-lower-color{
-	background-color: #6bb4ad;
+background-color: #6bb4ad;
 	color: white;
 }
 .footer-lower{
@@ -299,4 +553,59 @@ right: 1%;
 }
 .footer-lower-right{
 	float: right;
+	width: 20%;
+}
+.icon{
+	float: left;
+}
+.accordation-title h3{
+	font-size: 1em;
+}
+
+
+
+
+
+@media screen and (max-width: 768px){
+	.banner-secondary{
+		display: none;
+	}
+	.banner-secondary-small{
+		display: none;
+
+	}
+	.hamburger{
+		width: 10%;
+		float: right;
+		display:block;
+		cursor: pointer;
+	}
+.table-50{
+	width: 100%;
+}
+.table-50-right{
+	width: 100%;
+}
+.navbar ul li{
+	display: none;
+}
+.hamburger:hover{
+	background-color: red;
+}
+.hamburger:hover .navbar ul li{
+	display: block;
+}
+
+.right-accordation{
+	display: none;
+
+}
+.left-accordation{
+	width: 100%;
+}
+.accordation-title h3{
+	font-size: 0.7em;
+}
+.card-text{
+	font-size: 10px;
 }
