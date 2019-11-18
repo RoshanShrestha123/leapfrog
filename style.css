@@ -1,7 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
-	
+
 }
 
 table{
@@ -9,6 +9,9 @@ table{
 	 border-collapse: collapse;
 
 
+}
+.align-center{
+		margin:25px auto;
 }
 #tableHeading{
 	background-color: green;
