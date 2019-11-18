@@ -246,9 +246,12 @@ position: absolute;
 right: 1%;
   top: 30%;
 }
+
 .accordation-unhidden{
   display: none;
 }
+
+
 
 /* end of accordation css */
 

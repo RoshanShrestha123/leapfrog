@@ -8,7 +8,7 @@ li{
 	list-style: none;
 }
 .wrapper{
-	width: 78%;
+	width: 1170px;;
 	margin:0 auto;
 }
 .flow-wrapper{
@@ -39,7 +39,7 @@ li{
 	background-color: #79c8c3;
 }
 .heading-wrapper{
-	width: 78%;
+	width: 1170px;
 	margin:0 auto;
 }
 
@@ -47,7 +47,7 @@ li{
 
 	overflow: auto;
 	clear: both;
-
+	line-height: 80px;
 }
 
 .logo{
@@ -131,15 +131,13 @@ li{
 }
 .col-3{
 	padding-top: 75px;
-	width: 100%;
 
 }
 .container-choose-us{
 	padding-top: 22px;
 }
 .l{
-	/* 276px */
-	width: 23.58%;
+	width: 276px;
 	float: left;
 }
 .l-list{
@@ -147,15 +145,13 @@ li{
 
 }
 .main-wrapper{
-	/* 894px */
-	width: 76.41%;
+	width: 894px;
 	float: right;
 
 }
 .main{
 	float: left;
-	width: 69.12%;
-	/* 618px */
+	width: 618px;
 }
 .main-top{
 	line-height: 1.6;
@@ -183,8 +179,7 @@ color: grey;
 }
 .right{
 	float: right;
-	width: 30%;
-	/* 276 */
+	width: 276px;
 
 }
 .right-what-client-say{
