@@ -12,6 +12,7 @@ table{
 }
 .align-center{
 		margin:25px auto;
+		width: 70%;
 }
 #tableHeading{
 	background-color: green;
