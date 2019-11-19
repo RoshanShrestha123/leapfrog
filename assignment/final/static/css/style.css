@@ -1,0 +1,23 @@
+.full-container-header{
+  /* background-color: yellow; */
+  background-image: url("../images/banner.png");
+
+
+}
+.header-upper-nav{
+
+  background-color: blue;
+
+}
+.header-bg{
+  background:rgba(255, 255, 255, 0.5);
+}
+.header-upper-ico-left a{
+
+  background-color: yellow;
+}
+.header-lower-ico{
+
+
+
+}

@@ -1,0 +1,60 @@
+.full-container-header{
+
+  overflow: auto;
+  width: 1920px;
+}
+.header-upper-nav{
+  width: 100%;
+
+
+}
+.header-upper-ico{
+  line-height: 40px;
+  overflow: auto;
+}
+.header-upper-ico-left{
+  float: left;
+
+}
+.header-upper-ico-right{
+  float: right;
+}
+.header-upper-ico-left li{
+  padding-right: 20px;
+  float: left;
+
+
+}
+.header-upper-ico-left a{
+  display: block;
+
+}
+.hotline{
+  padding-right: 16px;
+}
+.header-upper-nav-shadow{
+background-image: url("../images/line.png");
+background-repeat: repeat-x;
+  height: 1px;
+}
+/* end of the header -upper */
+
+.header-lower-ico{
+
+line-height: 69px;
+
+}
+
+.navigation{
+  float: right;
+
+}
+nav ul li{
+  display: inline-block;
+}
+nav ul li a{
+  text-decoration: none;
+  padding-left: 52px;
+  color: black;
+  display: block;
+}
