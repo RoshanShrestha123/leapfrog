@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
 }
 .container-wrapper{
   width: 1140px;
@@ -8,4 +9,7 @@
 }
 li{
   list-style: none;
+}
+.full-flow{
+  width: 100%
 }
