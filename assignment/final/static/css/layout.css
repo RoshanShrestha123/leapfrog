@@ -59,6 +59,7 @@ padding-top: 300px;
 
 width: 899px;
   text-align: center;
+  padding-bottom: 200px;
 
 }
 .banner-text{
@@ -70,10 +71,86 @@ width: 899px;
   font-size: 18px;
 line-height: 30px;
   padding: 0 250px;
+  padding-bottom: 20px;
+
 }
+
 .banner-btn{
-  padding: 20px;
+
   border-radius: 25px;
-  background-color: red;
+  background-color: white;
   width: 139px;
+  margin: 0 auto;
+
+  box-shadow: 0px 0px 10px #efefef;
+
+
+}
+.banner-btn a{
+display: block;
+
+  color: green;
+  padding: 16px;
+  font-weight: bold;
+  text-decoration: none;
+
+}
+
+.partner-text{
+  float: left;
+  width: 360px;
+  line-height: 20px;
+  padding-top: 20px;
+}
+.partner-text h3{
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+.partner-logo-wrapper{
+  float: right;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.partner-logo-wrapper img{
+  padding-left: 67px;
+}
+
+.full-services-wrapper{
+  clear: both;
+  overflow: auto;
+width: 1920px;
+padding-top: 200px;
+  background-color: red;
+}
+.services-title-wrapper{
+  width: 960px;
+  float: right;
+}
+.services-title{
+  padding-right: 265px;
+}
+.services-list{
+  
+}
+
+.services-title h3{
+  padding-bottom: 31px;
+}
+.project-completed{
+  float: left;
+
+  padding-top: 84px;
+  width: 165px;
+}
+.project-number{
+  font-size: 44px;
+  font-weight: 100;
+  padding-bottom: 20px;
+}
+.project-green{
+  color: #32d5ba;
+}
+.project-blue{
+  color: #6dc4f2;
 }
