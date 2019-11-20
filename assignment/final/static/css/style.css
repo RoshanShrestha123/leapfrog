@@ -9,7 +9,7 @@
 .full-services-wrapper{
   /* background-color: yellow; */
   background-image: url("../images/images/services-background_22.png");
-  background-size: cover;
+background-repeat: no-repeat;
 
 
 }
@@ -17,7 +17,7 @@
   background-image: url("../images/laptop-bg_02.png");
 background-repeat: no-repeat;
   overflow: auto;
-  
+
 }
 
 .full-flow{
@@ -34,4 +34,68 @@ background:rgba(255, 255, 255, 0.94);
 }
 .project-red{
   color: #f44336;
+}
+.facebook-icon{
+  background-image: url("../images/Facebook-icon.png");
+  background-repeat: no-repeat;
+
+}
+.facebook-icon:hover{
+  background-image: url("../images/Facebook-icon-h.png");
+  background-repeat: no-repeat;
+
+}
+
+.twitter-icon{
+  background-image: url("../images/twitter-icon.png");
+  background-repeat: no-repeat;
+
+}
+.twitter-icon:hover{
+  background-image: url("../images/twitter-icon-h.png");
+  background-repeat: no-repeat;
+
+}
+.pintrest-icon{
+  background-image: url("../images/pintrest-icon.png");
+  background-repeat: no-repeat;
+
+}
+.pintrest-icon:hover{
+  background-image: url("../images/pintrest-icon-h.png");
+  background-repeat: no-repeat;
+
+}
+
+.insta-icon{
+  background-image: url("../images/insta-icon.png");
+  background-repeat: no-repeat;
+
+}
+.insta-icon:hover{
+  background-image: url("../images/insta-icon-h.png");
+  background-repeat: no-repeat;
+
+}
+
+.skype-icon{
+  background-image: url("../images/skype-icon.png");
+  background-repeat: no-repeat;
+
+}
+.skype-icon:hover{
+  background-image: url("../images/skype-icon-h.png");
+  background-repeat: no-repeat;
+
+}
+
+.basketball-icon{
+  background-image: url("../images/basktball-icon.png");
+  background-repeat: no-repeat;
+
+}
+.basketball-icon:hover{
+  background-image: url("../images/basktball-icon-h.png");
+  background-repeat: no-repeat;
+
 }
