@@ -121,7 +121,8 @@ display: block;
   overflow: auto;
 width: 1920px;
 padding-top: 200px;
-  background-color: red;
+padding-bottom: 232px;
+
 }
 .services-title-wrapper{
   width: 960px;
@@ -131,7 +132,8 @@ padding-top: 200px;
   padding-right: 265px;
 }
 .services-list{
-  
+  width: 500px;
+
 }
 
 .services-title h3{
@@ -140,8 +142,8 @@ padding-top: 200px;
 .project-completed{
   float: left;
 
-  padding-top: 84px;
-  width: 165px;
+  padding-top: 81px;
+  width: 195px;
 }
 .project-number{
   font-size: 44px;
@@ -153,4 +155,82 @@ padding-top: 200px;
 }
 .project-blue{
   color: #6dc4f2;
+}
+.contactus-full-wrapper{
+
+  overflow: auto;
+width: 1920px;
+background-image: url("../images/images/contactus-bg_23.png");
+}
+.contactus-form-wrapper{
+
+
+  padding-top: 300px;
+  padding-bottom: 145px;
+
+}
+.contactus-form{
+
+    margin: 0 auto;
+      width: 750px;
+      box-shadow: 0px 0px 10px #cfcfcf;
+      background-color: white;
+
+}
+.form-input{
+
+  width: 620px;
+margin: 0 auto;
+
+padding: 20px 0;
+overflow: auto;
+
+
+}
+.form-input div{
+
+}
+.form-input input{
+  background-color: #f5f5f5;
+  border:1px solid white;
+  border-radius: 15px;
+}
+
+.full-width-input input{
+  width: 620px;
+height: 64px;
+
+margin: 10px 0;
+
+
+
+}
+.half-width-input{
+  width: 300px;
+
+
+margin: 10px 0;
+
+
+
+}
+.input-left{
+  float: left;
+}
+.input-left input{
+  width: 295px;
+  height: 64px;
+}
+.input-right{
+  float: right;
+}
+.input-right input{
+  width: 295px;
+  height: 64px;
+}
+.input-message input{
+  height: 100px;
+}
+.input-padding{
+  padding-top: 100px;
 }
