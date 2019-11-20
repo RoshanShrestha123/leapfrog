@@ -13,6 +13,12 @@
 
 
 }
+.full-special-field{
+  background-image: url("../images/laptop-bg_02.png");
+background-repeat: no-repeat;
+  overflow: auto;
+  
+}
 
 .full-flow{
 background:rgba(255, 255, 255, 0.94);
