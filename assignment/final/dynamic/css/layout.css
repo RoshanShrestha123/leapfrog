@@ -1,0 +1,538 @@
+.full-container-header{
+
+  overflow: auto;
+width: 100%;;
+}
+.full-wrapper{
+  width: 100%;;
+  overflow: auto;
+}
+.header-upper-nav{
+  width: 100%;
+}
+.header-upper-ico{
+  line-height: 40px;
+  overflow: auto;
+}
+.header-upper-ico-left{
+  float: left;
+  padding-top: 15px;
+
+}
+.icon{
+  float: left;
+  padding-right: 20px;
+  width: 14px;
+  height: 14px;
+
+}
+
+
+.header-upper-ico-right{
+  float: right;
+}
+.header-upper-ico-left li{
+  padding-right: 20px;
+  float: left;
+}
+
+.hotline{
+  padding-right: 16px;
+}
+.header-upper-nav-shadow{
+
+background-image: url("../images/line.png");
+background-repeat: repeat-x;
+  height: 1px;
+}
+/* end of the header -upper */
+.mainlogo{
+  width: 15%;
+  float: left;
+}
+.header-lower-ico{
+
+line-height: 69px;
+
+}
+.header-lower-ico-left img{
+  padding-top: 10px;
+}
+.hamburgerlogo{
+  width: 5%;
+  float: right;
+  display: none;
+}
+
+.navigation{
+  float: right;
+  width: 70%;
+
+}
+nav ul li{
+  display: inline-block;
+
+}
+nav ul li a{
+  text-decoration: none;
+  padding: 0 10px;
+  display: block;
+  color: black;
+
+  font-size: 14px;
+  border-top: 2px solid white;
+}
+nav ul li a:hover{
+  border-top: 2px solid green;
+}
+.hero-image-container{
+padding-top: 300px;
+
+  text-align: center;
+  padding-bottom: 200px;
+
+}
+.banner-text{
+  padding: 0 100px;
+  font-size: 56px;
+  padding-bottom: 44px;
+}
+.banner-paragraph{
+  font-size: 18px;
+line-height: 30px;
+  padding: 0 250px;
+  padding-bottom: 20px;
+
+}
+
+.banner-btn{
+
+  border-radius: 25px;
+  background-color: white;
+  width: 139px;
+  margin: 0 auto;
+
+  box-shadow: 0px 0px 10px #d1d1d1;
+
+
+}
+.banner-btn a{
+display: block;
+
+  color: green;
+  padding: 16px;
+  font-weight: bold;
+  text-decoration: none;
+
+}
+.banner-btn :hover{
+  color: white;
+  background-color: green;
+  border-radius: 25px;
+    box-shadow: 5px 5px 10px #d1d1d1;
+
+}
+
+.partner-text{
+  float: left;
+  width: 31.57%;
+  line-height: 20px;
+  padding-top: 20px;
+}
+.partner-text h3{
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+.parner-logo-left{
+
+  float: right;
+  width: 68%;
+  padding-top: 3px;
+}
+.partner-logo-wrapper{
+  width: 17%;
+  float: left;
+}
+
+.partner-logo-wrapper img{
+  padding-left: 67px;
+}
+.full-special-field{
+  width: 100%;
+  margin: 0 auto;
+}
+.special-field-wrapper{
+  padding-top: 164px;
+width: 750px;
+  float: right;
+
+
+
+}
+.special-field-title{
+  padding-top: 58px;
+
+  padding-bottom: 110px;
+}
+.special-field-title h2{
+  padding-bottom: 29px;
+  font-size: 34px;
+}
+.special-field-title p{
+  font-size: 14px;
+}
+.special-field-items{
+  float: left;
+cursor: pointer;
+  width: 355px;
+}
+.special-logo{
+  width: 35px;
+  height: 35px;
+
+  background-repeat: no-repeat;
+  float: left;
+
+}
+.special-text{
+  padding-bottom: 70px;
+}
+.special-text h3{
+  padding-bottom: 25px;
+}
+.cycle-logo{
+  background-image: url("../images/cycle.png");
+}
+.light-logo{
+    background-image: url("../images/light.png");
+}
+.paper-logo{
+    background-image: url("../images/paperclip.png");
+}
+.checked-logo{
+    background-image: url("../images/checked.png");
+}
+
+.cycle-hover:hover .cycle-logo{
+  background-image: url("../images/g-cycle.png");
+}
+
+.light-hover:hover .light-logo{
+  background-image: url("../images/g-light.png");
+}
+.paper-hover:hover .paper-logo{
+  background-image: url("../images/g-paperclip.png");
+}
+.checked-hover:hover .checked-logo{
+  background-image: url("../images/g-checked.png");
+}
+.special-text{
+  float: right;
+  width: 305px;
+}
+.full-services-wrapper{
+  clear: both;
+  overflow: auto;
+width: 100%;
+padding-top: 267px;
+
+
+
+}
+.services-title-wrapper{
+  width: 960px;
+  float: right;
+
+    padding-bottom: 232px;;
+}
+.services-title{
+  padding-right: 265px;
+}
+.services-list{
+  width: 500px;
+  padding-top: 114px;
+
+
+}
+
+.services-title h3{
+  padding-bottom: 32px;
+}
+.project-completed{
+  float: left;
+  padding-bottom: 83px;
+  width: 195px;
+}
+.project-number{
+  font-size: 44px;
+  font-weight: 100;
+  padding-bottom: 20px;
+}
+.project-green{
+  color: #32d5ba;
+}
+.project-blue{
+  color: #6dc4f2;
+}
+.contactus-full-wrapper{
+
+  overflow: auto;
+width: 100%;
+background-image: url("../images/images/contactus-bg_23.png");
+background-repeat: no-repeat;
+
+
+}
+.contactus-text{
+padding-bottom: 50px;
+}
+.aligncenter-contactus{
+  text-align: center;
+padding: 50px 300px;
+}
+.aligncenter-contactus h2{
+  padding-bottom: 10px;
+}
+.contactus-form-wrapper{
+
+
+
+  padding-bottom: 145px;
+
+
+}
+.contactus-form{
+
+    margin: 0 auto;
+      width: 65.78%;
+      box-shadow: 0px 0px 10px #cfcfcf;
+      overflow: auto;
+
+      padding-bottom: 70px;
+      background-color: white;
+
+
+
+
+}
+input{
+  border-radius: 15px;
+  border: 1px solid white;
+  background-color: #f5f5f5;
+font-size: 30px;
+}
+textarea{
+  border-radius: 15px;
+  border: 1px solid white;
+  background-color: #f5f5f5;
+font-size: 30px;
+}
+.email-input {
+width: 90%;
+
+
+
+
+
+}
+.email-input input {
+height: 64px;
+width: 100%;
+
+
+}
+.firstname-input {
+padding-left: 65px;
+width: 40%;
+
+float: left;
+
+
+}
+.firstname-input input {
+height: 64px;
+width: 100%;
+
+
+}
+.lastname-input {
+padding-right: 65px;
+width: 40%;
+
+float: right;
+
+
+}
+.lastname-input input {
+height: 64px;
+width: 100%;
+
+
+}
+
+.message-input {
+  clear: both;
+width: 90%;
+padding-left: 65px;
+
+
+}
+.message-input textarea {
+  clear: both;
+height: 178px;
+width: 100%;
+
+
+}
+.submit-input {
+  padding-top: 50px;
+width: 621px;
+padding-left: 65px;
+
+}
+.submit-input button {
+  height: 44px;
+  width: 139px;
+
+  border-radius: 25px;
+  box-shadow: 0 0 6px #d1d1d1;
+  color: green;
+  cursor: pointer;
+
+}
+.submit-input button:hover{
+  color: white;
+  background-color: green;
+  border-radius: 25px;
+  box-shadow: 5px 5px 10px #d1d1d1;
+
+}
+label{
+display: block;
+padding-bottom: 22px;
+padding-top: 33px;
+
+
+}
+.footer{
+  clear: both;
+  background-color: #fafafa;
+}
+.footer-left{
+  width:600px;
+  float: left;
+
+}
+.footer-right{
+  width: 400px;
+  float: right;
+
+}
+.footer-left-left{
+  width: 390px;
+  float: left;
+}
+.footer-left-right{
+width: 140px;
+float: right;
+}
+.footer-left-left p{
+  font-size: 14px;
+  font-weight: 100;
+}
+.footer-privacy-terms{
+  padding-top: 38px;
+
+}
+.footer-privacy-terms span{
+  padding-right: 30px;
+}
+.copyright{
+  font-size: 14px;
+  font-weight: 300;
+  padding-top: 22px;
+}
+.footer-left-right ul li a{
+  color: grey;
+  text-decoration: none;
+}
+.footer-left-right ul li a:hover{
+  color: black;
+  text-decoration: none;
+}
+.footer-right-left{
+  width: 140px;
+  float: left;
+
+}
+.footer-right-left ul li a{
+  color: grey;
+  text-decoration: none;
+
+}
+.footer-right-left ul li a:hover{
+  color: black;
+  text-decoration: none;
+
+}
+
+.footer-left-r{
+  float: right;
+}
+.footer-right-right{
+  width: 200px;
+  float: right;;
+
+}
+.footer-right-r{
+  float: right;
+}
+.footer-title{
+  display: block;
+
+  padding-bottom: 30px;
+
+}
+.footer-left-r ul li{
+  padding-top: 20px;
+}
+.footer-right-left ul li{
+  padding-top: 20px;
+}
+.follow-us-logo a{
+  text-decoration: none;
+  padding-left:10px;
+  padding-top: 20px;
+  display: block;
+  float: left;
+}
+/* ipad */
+@media screen and (max-width:768px){
+  .container-wrapper{
+    width: 100%;
+  
+
+  }
+  .header-upper-ico
+  {
+    display: none;
+  }
+  .mainlogo{
+    width: 30%;
+  }
+  nav{
+    display: none;
+  }
+  .banner-text{
+    font-size: 50px;
+    padding: 0 10px;
+  }
+  .banner-paragraph{
+      padding: 0 50px;
+  }
+  .full-special-field{
+    background-image: none;
+
+
+  }
+}
