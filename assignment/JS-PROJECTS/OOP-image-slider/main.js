@@ -77,7 +77,7 @@ this.slideLeft  =  function(){
 
       console.log(adder);
       if(adder>= 3000){
-        count = 6;
+        count = that.totalImage;
         clearInterval(id);
       }
     }
@@ -103,7 +103,7 @@ this.slideLeft  =  function(){
     adder = slider_wrapper[0].offsetLeft;
     var id  =  setInterval(function(){
 
-        if(count>= 6){   // go back
+        if(count>= that.totalImage){   // go back
           this.running = true;
           console.log("is running?:",this.running);
           adder+= 10;
