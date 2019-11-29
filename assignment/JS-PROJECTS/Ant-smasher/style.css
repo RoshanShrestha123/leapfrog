@@ -5,9 +5,28 @@
 body{
   background-color: black;
 }
+#gameHeader{
+  background-color: green;
+  height: 60px;
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  padding-top: 10px;
+  position: relative;
+}
 #gameScreen{
   margin: 0 auto;
   border: 1px solid black;
 
 
+}
+#timer{
+  width: 30%;
+
+  line-height: 70px;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

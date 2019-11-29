@@ -3,9 +3,10 @@
 
 //BOX class
 function Box(parentElement){
+  var that = this;
   this.x=10;
   this.y=10;
-  this.size = 50;
+  this.size = 64;
   this.width =this.size;
   this.height = this.size;
   this.element = null;
@@ -13,11 +14,13 @@ function Box(parentElement){
   this.speed = 5;
   this.imageSlider=0;
   this.imageSliderVertical=0;
+  this.isSmash= false;
 
   this.directionArr=[-1,1];
   this.boxDirectionX =this.directionArr[Math.floor(Math.random()*this.directionArr.length)];
   this.boxDirectionY =this.directionArr[Math.floor(Math.random()*this.directionArr.length)];
   this.imageSliderTimer=1;
+
   // console.log("directionX",this.boxDirectionX);
   // console.log("directionY",this.boxDirectionY);
 
@@ -34,13 +37,17 @@ function Box(parentElement){
     // box.style.background="blue";
     box.style.backgroundImage="url(images/spider01.png)";
 
+
     box.style.backgroundPosition = this.imageSlider+"px"+ 0+"px";
     box.style.cursor="pointer";
     this.element=box;
     this.parentElement.appendChild(box);
+    this.element.addEventListener("click",this.smashAnt);
+
 
 
   }
+
 
 
   this.setSpeed=function(x){
@@ -50,13 +57,26 @@ function Box(parentElement){
 
 
   this.animateAnt = function(){
-    console.log("called animate");
-    this.imageSliderTimer=1;
-    this.imageSlider+=64;
-    this.element.style.backgroundPosition = this.imageSlider+"px "+ -this.imageSliderVertical+"px";
+if(this.isSmash==false){
+  this.imageSliderTimer=1;
+  this.imageSlider+=64;
+  this.element.style.backgroundPosition = -this.imageSlider+"px "+ -this.imageSliderVertical+"px";
+}
+else{
+    this.element.style.backgroundPosition = -128+"px "+ -250+"px";
+}
+
   }
+
   this.smashAnt = function(){
-    this.element.style.backgroundPosition = this.imageSlider+"px 64px";
+    // this.element.style.backgroundPosition = this.imageSlider+"px 64px";
+
+//  that.element.style.backgroundPosition = 0+"px "+ -64+"px";
+    that.isSmash = true;
+    console.log("is smashed", that.isSmash);
+   //that.parentElement.removeChild(that.element);
+
+
   }
 
   //SETTING POSITION OF EACH BOX
@@ -65,12 +85,15 @@ function Box(parentElement){
     this.y = y;
   }
   this.update = function(){
+    if(this.isSmash==false){
+      this.x+=this.speed*this.boxDirectionX;
+      this.y+=this.speed*this.boxDirectionY;
 
-    this.x+=this.speed*this.boxDirectionX;
-    this.y+=this.speed*this.boxDirectionY;
+      this.element.style.left=this.x +"px";
+      this.element.style.top=this.y +"px";
+    }
 
-    this.element.style.left=this.x +"px";
-    this.element.style.top=this.y +"px";
+
 
 
   }
@@ -98,6 +121,13 @@ function Box(parentElement){
     }
   }
 }
+
+//GAME HEADER CLASS
+function Title(){
+
+}
+
+
 //GAME CLASS
 function Game(parentElement,boxCount){
   var boxes = [];
@@ -105,6 +135,7 @@ function Game(parentElement,boxCount){
   var yPosition;
   var overlap= false;
   var that = this;
+
   this.createGameScreen = function(){
 
     this.gameHeight= 600;
@@ -163,7 +194,9 @@ function Game(parentElement,boxCount){
 
   //looping here
     setInterval(function(){
+
       for (var i = 0; i < boxes.length; i++) {
+      //  console.log(boxes[i].isSmash);
         //collide on right wall
         if(boxes[i].x+boxes[i].width>=that.gameWidth){
           boxes[i].boxDirectionX=-1;
@@ -187,11 +220,18 @@ function Game(parentElement,boxCount){
           boxes[i].boxDirectionY=1;
           boxes[i].imageSliderVertical=120;
         }
-        boxes[i].checkCollision(boxes[i],boxes,i);
-       boxes[i].update();
-       boxes[i].imageSliderTimer++;
-       if(boxes[i].imageSliderTimer>=15){
-         boxes[i].animateAnt();
+
+
+
+            boxes[i].checkCollision(boxes[i],boxes,i);
+            boxes[i].update();
+            boxes[i].imageSliderTimer++;
+            if(boxes[i].imageSliderTimer>=15 ){
+              boxes[i].animateAnt();
+
+
+
+
        }
 
       // boxes[i].draw();
