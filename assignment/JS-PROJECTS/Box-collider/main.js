@@ -5,12 +5,15 @@
 function Box(parentElement){
   this.x=10;
   this.y=10;
-  this.width =20;
-  this.height = 20;
+  this.size = Math.floor(Math.random()*20)+10;
+  this.width =this.size;
+  this.height = this.size;
   this.element = null;
   this.parentElement = parentElement;
   this.speed = 5;
   this.directionArr=[-1,1];
+  this.color = ['red','yellow','blue'];
+  this.boxColor = this.color[Math.floor(Math.random()*this.color.length)];
   this.boxDirectionX =this.directionArr[Math.floor(Math.random()*this.directionArr.length)];
   this.boxDirectionY =this.directionArr[Math.floor(Math.random()*this.directionArr.length)];
   // console.log("directionX",this.boxDirectionX);
@@ -26,7 +29,7 @@ function Box(parentElement){
     box.style.width=this.width +"px";
     box.style.height= this.height+ "px";
     box.style.position="absolute";
-    box.style.background="blue";
+    box.style.background=this.boxColor;
     // box.style.backgroundImage="url('tick.png')";
 
     box.style.backgroundSize="cover";
@@ -34,15 +37,21 @@ function Box(parentElement){
     this.parentElement.appendChild(box);
 
   }
+
+  this.setSpeed=function(){
+    this.speed=Math.floor(Math.random()*2)+1;
+  }
+
+
   //SETTING POSITION OF EACH BOX
   this.setPosition = function(x,y){
     this.x = x;
     this.y = y;
   }
-  this.update = function(direction){
+  this.update = function(){
 
-    this.x+=direction*this.boxDirectionX;
-    this.y+=direction*this.boxDirectionY;
+    this.x+=this.speed*this.boxDirectionX;
+    this.y+=this.speed*this.boxDirectionY;
 
     this.element.style.left=this.x +"px";
     this.element.style.top=this.y +"px";
@@ -60,6 +69,7 @@ function Box(parentElement){
         if(Math.abs(currentBox.x-boxesArr[i].x)>Math.abs(currentBox.y-boxesArr[i].y)){
           console.log("side ");
           this.boxDirectionX*= -1;
+          this.boxColor = this.color[Math.floor(Math.random()*this.color.length)];
         }
         else{
           console.log("up,down");
@@ -92,11 +102,11 @@ function Game(parentElement,boxCount){
   var that = this;
   this.createGameScreen = function(){
 
-    this.gameHeight= 500;
-    this.gameWidth = 500;
+    this.gameHeight= 700;
+    this.gameWidth = 700;
     parentElement.style.height=this.gameHeight + "px";
     parentElement.style.width=this.gameWidth + "px";
-    parentElement.style.background="green";
+    parentElement.style.background="black";
     parentElement.style.position="relative";
 
 
@@ -109,7 +119,7 @@ console.log("j:",j);
     yPosition = Math.floor(Math.random()*(this.gameHeight-boxObj.height));
     //check if box overlap each other
     if(j!=0){
-console.log("array length", boxes.length);
+      console.log("array length", boxes.length);
       for (var i = 0; i < boxes.length; i++) {
         if(i!=j){
           if(xPosition+boxObj.width>= boxes[i].x &&
@@ -136,7 +146,7 @@ console.log("array length", boxes.length);
     for (var i = 0; i < boxCount; i++) {
       var boxObj = new Box(parentElement);
       this.generateRandomPosition(boxObj,i);
-
+      boxObj.setSpeed();
       boxObj.setPosition(xPosition,yPosition);
       boxObj.draw();
       boxes.push(boxObj)
@@ -160,7 +170,7 @@ console.log("array length", boxes.length);
           boxes[i].boxDirectionY=1;
         }
         boxes[i].checkCollision(boxes[i],boxes,i);
-       boxes[i].update(1);
+       boxes[i].update();
       // boxes[i].draw();
       }
     },10);
