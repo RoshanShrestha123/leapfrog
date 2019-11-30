@@ -1,7 +1,9 @@
 /**
  * This is the class for the player car,
- * it consist function like initilaization of car, drawing car,setting the postion of car and updating position
- * @param       {[type]} parentElement this is the parent element where all the object are instanciate
+ * it consist function like initilaization of car, drawing car,
+ * setting the postion of car and updating position
+ * @param       {dom element} parentElement this is the parent
+ * element where all the object are instanciate
  * @constructor
  */
 function Player(parentElement){
@@ -39,7 +41,13 @@ this.currentLane = 1;
 
 
 }
-
+/**
+ * This class helps to calculate the total width of the each lane,
+ * so that car can be exactly on the middle of the lane no matter how many lane is added
+ * or how big the road become.
+ * @param       {[type]} screenWidth [description]
+ * @constructor
+ */
 function Lane(screenWidth){
   this.TOTAL_LANE=3;
   this.carRunningPath =[];
@@ -66,7 +74,8 @@ function Lane(screenWidth){
 }
 /**
  * This class of Opponent Car comming through the opposite direction.
- * @param       {element} parentElement this is the parent element where all the object are instanciate
+ * @param       {element} parentElement this is the parent element
+ * where all the object are instanciate
  * @constructor
  */
 function Enemy(parentElement){
@@ -107,8 +116,10 @@ function Enemy(parentElement){
 
 
 /**
- * This is the main Game class which handle all the game loop and game init fucntion of the game
- * @param       {element} gameScreen his is the parent element where all the object are instanciate
+ * This is the main Game class which handle all the game loop and
+ * game init fucntion of the game
+ * @param       {dom element} gameScreen his is the parent element
+ *  where all the object are instanciate
 
  */
 function Game(gameScreen){
