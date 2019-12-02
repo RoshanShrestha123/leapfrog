@@ -11,7 +11,7 @@ this.x=0;
 this.y= 50;
 this.width = 63;
 this.carMidPoint =this.width/2;
-
+this.rotate =0;
 this.height = 135;
 this.parentElement = parentElement;
 this.element = null;
@@ -34,12 +34,14 @@ this.currentLane = 1;
  this.drawPlayerCar = function(){
    this.element.style.left =this.x-this.carMidPoint +"px";
    this.element.style.top = this.y+"px";
+   this.element.style.transform="rotate("+this.rotate+"deg)";
  }
 
- this.setPlayerCarPosition = function(x,y){
+ this.setPlayerCarPosition = function(x,y,rotate){
 
    this.x = x;
    this.y = y;
+   this.rotate = rotate;
  }
 
 
@@ -193,12 +195,7 @@ function Enemy(parentElement){
    this.element.style.height = this.height+ 'px';
    this.element.style.backgroundSize = "cover";
    this.element.style.backgroundRepeat="no-repeat";
-
    this.element.style.position = "absolute";
-
-
-
-
  }
  this.drawEnemyCar = function(){
    this.element.style.left = this.x-this.carMidPoint+"px";
@@ -232,6 +229,7 @@ function Game(gameScreen){
   this.enemyInitCounter=0;
   this.destinationLane=0;
   this.enemyInitTime = Math.floor((Math.random()*40)+20);
+  this.rotation=0;
   var playerCarObj = new Player(gameScreen);
   var scoreObj = new ScoreBoard(gameScreen);
   var buttonObj = new Button(gameScreen);
@@ -310,7 +308,9 @@ function Game(gameScreen){
       if(playerCarObj.currentLane!=0){
         playerCarObj.currentLane-=1;
         that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
-        that.direction=-8;
+        that.direction=-15;
+        that.rotation=10;
+
         console.log(that.destinationLane);
       //  var newPosition=laneObj.carRunningPath[playerCarObj.currentLane];
 
@@ -323,7 +323,8 @@ function Game(gameScreen){
       if(playerCarObj.currentLane<2){
         playerCarObj.currentLane+=1;
         that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
-        that.direction=8;
+        that.direction=15;
+        that.rotation=10;
         console.log(that.destinationLane);
       //  playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],that.PlayerCarYPosition);
       //  playerCarObj.drawPlayerCar();
@@ -365,19 +366,24 @@ console.log(buttonObj.canPlay);
 
         if(that.direction>0){
           if(playerCarObj.x<=that.destinationLane){
-            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
+
           }
           else{
             that.direction=0;
+            that.rotation=0;
+              playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
           }
 
         }
         else if(that.direction<0){
           if (playerCarObj.x>that.destinationLane) {
-            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,-that.rotation);
           }
             else{
               that.direction=0;
+              that.rotation=0;
+                playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
             }
         }
 
