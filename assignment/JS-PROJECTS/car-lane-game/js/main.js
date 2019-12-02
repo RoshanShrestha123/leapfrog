@@ -7,32 +7,37 @@
  * @constructor
  */
 function Player(parentElement){
-this.x=50;
+this.x=0;
 this.y= 50;
-this.width = 70;
+this.width = 63;
 this.carMidPoint =this.width/2;
 
-this.height = 100;
+this.height = 135;
 this.parentElement = parentElement;
 this.element = null;
 this.currentLane = 1;
+
 
  this.initCar = function(){
    var playerCar = document.createElement('div');
    this.parentElement.appendChild(playerCar);
    playerCar.style.width= this.width+ 'px';
    playerCar.style.height = this.height+ 'px';
-   playerCar.style.background = "yellow";
+   // playerCar.style.background = "yellow";
+   playerCar.style.background = "url('images/orange-car.png')";
+   playerCar.style.backgroundSize="100% 100%";
    this.element = playerCar;
    this.element.style.position = "absolute";
+
  }
 
  this.drawPlayerCar = function(){
-   this.element.style.left = this.x-this.carMidPoint+"px";
+   this.element.style.left =this.x-this.carMidPoint +"px";
    this.element.style.top = this.y+"px";
  }
 
  this.setPlayerCarPosition = function(x,y){
+
    this.x = x;
    this.y = y;
  }
@@ -71,6 +76,38 @@ function Lane(screenWidth){
 
 
 }
+
+function ScoreBoard(parentElement){
+  this.score = 0;
+  this.parentElement = parentElement;
+
+  this.initScore= function(){
+    var score = document.createElement('div');
+    this.parentElement.appendChild(score);
+    score.style.width=200+ 'px';
+    score.style.height = 30+ 'px';
+    score.style.background = "white";
+    // score.style.background = "url('images/orange-car.png')";
+    score.style.backgroundSize="100% 100%";
+    this.element = score;
+    this.element.style.position = "absolute";
+    this.element.style.left=30+"%";
+    this.element.style.top=0;
+    this.element.innerHTML="score: "+this.score;
+    this.element.style.zIndex="5";
+    this.element.style.textAlign="center";
+    this.element.style.fontSize=30+"px";
+  }
+
+  this.drawScore= function(){
+    this.element.innerHTML="score: "+this.score;
+  }
+
+  this.increaseScore = function(){
+    this.score+=10;
+  }
+
+}
 /**
  * This class of Opponent Car comming through the opposite direction.
  * @param       {DOM element} parentElement this is the parent element
@@ -79,9 +116,9 @@ function Lane(screenWidth){
 function Enemy(parentElement){
   this.x=50;
   this.y= 50;
-  this.width = 70;
+  this.width = 63;
   this.carMidPoint =this.width/2;
-  this.height = 100;
+  this.height = 135;
   this.parentElement = parentElement;
   this.element = null;
 
@@ -92,10 +129,12 @@ function Enemy(parentElement){
    var enemyCar = document.createElement('div');
    this.parentElement.appendChild(enemyCar);
    enemyCar.style.width= this.width+ 'px';
+
    enemyCar.style.height = this.height+ 'px';
    enemyCar.style.background = "red";
    this.element = enemyCar;
    this.element.style.position = "absolute";
+   enemyCar.style.background = "url('images/police-car.png')";
 
 
  }
@@ -124,12 +163,16 @@ function Enemy(parentElement){
  */
 function Game(gameScreen){
   var that = this;
+  this.collided=false;
   this.enemyArr=[];
   this.GAME_HEIGHT = 600;
   this.GAME_WIDTH = 400;
   this.enemyInitCounter=0;
+  this.destinationLane=0;
   this.enemyInitTime = Math.floor((Math.random()*40)+20);
   var playerCarObj = new Player(gameScreen);
+  var scoreObj = new ScoreBoard(gameScreen);
+  this.direction = 0;
   var enemyCarObj;
   this.gameScreen= gameScreen;
   this.roadMoveSpeed =5;
@@ -143,20 +186,18 @@ function Game(gameScreen){
     this.gameScreen.style.width= this.GAME_WIDTH+"px";
     //this.gameScreen.style.background= "green";
     this.gameScreen.style.position="relative";
-    this.gameScreen.style.background="url('images/road.png')";
+    this.gameScreen.style.background="url('images/road2.png')";
     this.gameScreen.style.backgroundSize ="cover";
-    this.gameScreen.style.backgroundRepeat ="no-repeate";
+    //this.gameScreen.style.backgroundRepeat ="no-repeat";
+    scoreObj.initScore();
     playerCarObj.initCar();
+
+
     playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],this.PlayerCarYPosition);
     playerCarObj.drawPlayerCar();
-    playerCarObj.drawPlayerCar();
-    // enemyCarObj.initEnemyCar();
-    // // console.log(enemyCarObj);
-    // this.enemyArr.push(enemyCarObj);
-    // console.log(this.enemyArr);
+    this.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
+    console.log("offset", this.destinationLane);
 
-    // enemyCarObj.setEnemyCarPosition(laneObj.carRunningPath[enemyCarObj.currentLane],enemyCarObj.y);
-    // enemyCarObj.drawEnemyCar();
   }
   this.init = function(){
     this.createGameScreen();
@@ -166,9 +207,9 @@ function Game(gameScreen){
   this.initEnemyCarArr = function(){
     enemyCarObj = new Enemy(gameScreen);
     enemyCarObj.initEnemyCar();
-    enemyCarObj.setEnemyCarPosition(laneObj.carRunningPath[2],0);
+    enemyCarObj.setEnemyCarPosition(laneObj.carRunningPath[2],-enemyCarObj.height);
     this.enemyArr.push(enemyCarObj);
-    console.log(this.enemyArr);
+
   }
 
   this.updateEnemyCar = function(){
@@ -177,24 +218,53 @@ function Game(gameScreen){
       // this.enemyArr[i].setEnemyCarPosition(laneObj.carRunningPath[this.enemyArr[i].currentLane],this.enemyArr[i].y);
       this.enemyArr[i].y+=5;
       this.enemyArr[i].drawEnemyCar();
+      if(this.enemyArr[i].y>this.GAME_HEIGHT){
+        scoreObj.increaseScore();
+        //that.scoreObj.displayScore();
+        this.enemyArr.shift();
+      }
     }
   }
+
+  this.checkCollision = function(){
+    for (var i = 0; i < this.enemyArr.length; i++) {
+      if(playerCarObj.x+playerCarObj.width>= this.enemyArr[i].x &&
+        playerCarObj.y+playerCarObj.height>=this.enemyArr[i].y &&
+      playerCarObj.x<= this.enemyArr[i].x+ this.enemyArr[i].width &&
+      playerCarObj.y<=this.enemyArr[i].y+this.enemyArr[i].height){
+        this.collided=true;
+        console.log("collided");
+
+      }
+    }
+
+  }
+
+
   //event listener for the key press
   window.addEventListener('keydown',function(event){
     if(event.keyCode == 37){
       if(playerCarObj.currentLane!=0){
-        console.log("key pressed left ");
-        playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane-1],this.PlayerCarYPosition);
-        playerCarObj.drawPlayerCar();
         playerCarObj.currentLane-=1;
+        that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
+        that.direction=-8;
+        console.log(that.destinationLane);
+      //  var newPosition=laneObj.carRunningPath[playerCarObj.currentLane];
+
+      //  playerCarObj.setPlayerCarPosition(newPosition,that.PlayerCarYPosition);
+      //  playerCarObj.drawPlayerCar();
+
       }
     }
     if(event.keyCode == 39){
       if(playerCarObj.currentLane<2){
-      console.log("key pressed right");
-        playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane+1],this.PlayerCarYPosition);
-        playerCarObj.drawPlayerCar();
-          playerCarObj.currentLane+=1;
+        playerCarObj.currentLane+=1;
+        that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
+        that.direction=8;
+        console.log(that.destinationLane);
+      //  playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],that.PlayerCarYPosition);
+      //  playerCarObj.drawPlayerCar();
+
       }
     }
   });
@@ -203,25 +273,55 @@ function Game(gameScreen){
    * GAME LOOP
    */
   setInterval(function(){
-    //road animation here
-    that.gameScreen.style.backgroundPosition = 0+"px "+ that.roadMoveSpeed+"px";
-    that.roadMoveSpeed+=5;
+    scoreObj.drawScore();
+    if(that.collided==false){
+
+      that.gameScreen.style.backgroundPosition = 0+"px "+ that.roadMoveSpeed+"px";
+      that.roadMoveSpeed+=7;
+
+      /*
+        enemy spaning and animation here
+       */
+      if(that.enemyInitCounter==that.enemyInitTime){
+        that.initEnemyCarArr();
+        that.enemyInitTime= Math.floor((Math.random()*40)+40);
+        that.enemyInitCounter=0;
+      }
+      if(that.enemyArr.length>0){
+        that.checkCollision();
+        that.updateEnemyCar();
+      }
+      console.log("currentLane", Math.ceil(playerCarObj.x));
+      console.log("destinationLane",Math.ceil(that.destinationLane));
+      // if(Math.ceil(that.destinationLane)!=Math.ceil(playerCarObj.x-playerCarObj.carMidPoint)){
+      //   playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+      // }
+
+      if(that.direction>0){
+        if(playerCarObj.x<=that.destinationLane){
+          playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+        }
+        else{
+          that.direction=0;
+        }
+
+      }
+      else if(that.direction<0){
+        if (playerCarObj.x>that.destinationLane) {
+          playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+        }
+          else{
+            that.direction=0;
+          }
+      }
 
 
-    /*
-      enemy spaning and animation here
-     */
-    if(that.enemyInitCounter==that.enemyInitTime){
-      that.initEnemyCarArr();
-      that.enemyInitTime= Math.floor((Math.random()*40)+20);
-      that.enemyInitCounter=0;
+      playerCarObj.drawPlayerCar();
+      that.enemyInitCounter++;
     }
-    if(that.enemyArr.length>0){
-      that.updateEnemyCar();
-    }
-    that.enemyInitCounter++;
 
-  },60);
+
+  },30);
 }
 
 var gameScreen = document.getElementById('gameScreen');
