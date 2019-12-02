@@ -85,7 +85,7 @@ function ScoreBoard(parentElement){
     var score = document.createElement('div');
     this.parentElement.appendChild(score);
     score.style.width=200+ 'px';
-    score.style.height = 30+ 'px';
+    score.style.height = 50+ 'px';
     score.style.background = "white";
     // score.style.background = "url('images/orange-car.png')";
     score.style.backgroundSize="100% 100%";
@@ -108,6 +108,64 @@ function ScoreBoard(parentElement){
   }
 
 }
+
+function Button(parentElement){
+  var that = this;
+  this.canPlay = false;
+  this.parentElement = parentElement;
+  this.play= function(){
+    var playBtn = document.createElement('div');
+    this.parentElement.appendChild(playBtn);
+    playBtn.style.width=200+ 'px';
+    playBtn.style.height = 50+ 'px';
+    playBtn.style.background = "white";
+    // playBtn.style.background = "url('images/orange-car.png')";
+    playBtn.style.backgroundSize="100% 100%";
+    this.element = playBtn;
+    this.element.style.position = "absolute";
+    this.element.style.left=30+"%";
+    this.element.style.top=50+"%";
+    this.element.innerHTML="playBtn: ";
+    this.element.style.zIndex="5";
+    this.element.style.textAlign="center";
+    this.element.style.fontSize=30+"px";
+    this.element.style.cursor ="pointer";
+    this.element.addEventListener("click",this.playNow);
+  }
+  this.restart= function(){
+    var restartBtn = document.createElement('div');
+    this.parentElement.appendChild(restartBtn);
+    restartBtn.style.width=200+ 'px';
+    restartBtn.style.height = 50+ 'px';
+    restartBtn.style.background = "white";
+    // restartBtn.style.background = "url('images/orange-car.png')";
+    restartBtn.style.backgroundSize="100% 100%";
+    this.element = restartBtn;
+    this.element.style.position = "absolute";
+    this.element.style.left=30+"%";
+    this.element.style.top=50+"%";
+    this.element.innerHTML="restartBtn: ";
+    this.element.style.zIndex="5";
+    this.element.style.textAlign="center";
+    this.element.style.fontSize=30+"px";
+    this.element.style.cursor ="pointer";
+    this.element.addEventListener("click",this.restartNow);
+    this.element.style.display="block";
+    console.log('restart');
+  }
+
+  this.playNow = function(){
+    that.canPlay=true;
+    that.element.style.display ='none';
+    console.log("clicked",that.canPlay);
+
+  }
+  this.restartNow = function(){
+    that.canPlay=true;
+    that.element.style.display ='none';
+    console.log("clicked",that.canPlay);
+  }
+}
 /**
  * This class of Opponent Car comming through the opposite direction.
  * @param       {DOM element} parentElement this is the parent element
@@ -121,6 +179,7 @@ function Enemy(parentElement){
   this.height = 135;
   this.parentElement = parentElement;
   this.element = null;
+  this.carImage =["url('images/black-car.png')","url('images/orange-car.png')","url('images/police-car.png')"];
 
 
 
@@ -128,13 +187,16 @@ function Enemy(parentElement){
    this.currentLane = Math.floor(Math.random()*3);
    var enemyCar = document.createElement('div');
    this.parentElement.appendChild(enemyCar);
-   enemyCar.style.width= this.width+ 'px';
-
-   enemyCar.style.height = this.height+ 'px';
-   enemyCar.style.background = "red";
    this.element = enemyCar;
+   this.element.style.width= this.width+ 'px';
+   this.element.style.background = this.carImage[Math.floor(Math.random()*3)];
+   this.element.style.height = this.height+ 'px';
+   this.element.style.backgroundSize = "cover";
+   this.element.style.backgroundRepeat="no-repeat";
+
    this.element.style.position = "absolute";
-   enemyCar.style.background = "url('images/police-car.png')";
+
+
 
 
  }
@@ -172,6 +234,8 @@ function Game(gameScreen){
   this.enemyInitTime = Math.floor((Math.random()*40)+20);
   var playerCarObj = new Player(gameScreen);
   var scoreObj = new ScoreBoard(gameScreen);
+  var buttonObj = new Button(gameScreen);
+  console.log(buttonObj);
   this.direction = 0;
   var enemyCarObj;
   this.gameScreen= gameScreen;
@@ -191,12 +255,11 @@ function Game(gameScreen){
     //this.gameScreen.style.backgroundRepeat ="no-repeat";
     scoreObj.initScore();
     playerCarObj.initCar();
-
-
     playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],this.PlayerCarYPosition);
     playerCarObj.drawPlayerCar();
     this.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
     console.log("offset", this.destinationLane);
+    buttonObj.play();
 
   }
   this.init = function(){
@@ -273,52 +336,64 @@ function Game(gameScreen){
    * GAME LOOP
    */
   setInterval(function(){
-    scoreObj.drawScore();
-    if(that.collided==false){
+console.log(buttonObj.canPlay);
+    if(buttonObj.canPlay==true){
 
-      that.gameScreen.style.backgroundPosition = 0+"px "+ that.roadMoveSpeed+"px";
-      that.roadMoveSpeed+=7;
+      scoreObj.drawScore();
+      if(that.collided==false){
 
-      /*
-        enemy spaning and animation here
-       */
-      if(that.enemyInitCounter==that.enemyInitTime){
-        that.initEnemyCarArr();
-        that.enemyInitTime= Math.floor((Math.random()*40)+40);
-        that.enemyInitCounter=0;
-      }
-      if(that.enemyArr.length>0){
-        that.checkCollision();
-        that.updateEnemyCar();
-      }
-      console.log("currentLane", Math.ceil(playerCarObj.x));
-      console.log("destinationLane",Math.ceil(that.destinationLane));
-      // if(Math.ceil(that.destinationLane)!=Math.ceil(playerCarObj.x-playerCarObj.carMidPoint)){
-      //   playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
-      // }
+        that.gameScreen.style.backgroundPosition = 0+"px "+ that.roadMoveSpeed+"px";
+        that.roadMoveSpeed+=7;
 
-      if(that.direction>0){
-        if(playerCarObj.x<=that.destinationLane){
-          playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+        /*
+          enemy spaning and animation here
+         */
+        if(that.enemyInitCounter==that.enemyInitTime){
+          that.initEnemyCarArr();
+          that.enemyInitTime= Math.floor((Math.random()*40)+40);
+          that.enemyInitCounter=0;
         }
-        else{
-          that.direction=0;
+        if(that.enemyArr.length>0){
+          that.checkCollision();
+          that.updateEnemyCar();
         }
+        console.log("currentLane", Math.ceil(playerCarObj.x));
+        console.log("destinationLane",Math.ceil(that.destinationLane));
+        // if(Math.ceil(that.destinationLane)!=Math.ceil(playerCarObj.x-playerCarObj.carMidPoint)){
+        //   playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+        // }
 
-      }
-      else if(that.direction<0){
-        if (playerCarObj.x>that.destinationLane) {
-          playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
-        }
+        if(that.direction>0){
+          if(playerCarObj.x<=that.destinationLane){
+            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+          }
           else{
             that.direction=0;
           }
+
+        }
+        else if(that.direction<0){
+          if (playerCarObj.x>that.destinationLane) {
+            playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
+          }
+            else{
+              that.direction=0;
+            }
+        }
+
+
+        playerCarObj.drawPlayerCar();
+        that.enemyInitCounter++;
+      }
+      else{
+        buttonObj.canPlay=false;
       }
 
-
-      playerCarObj.drawPlayerCar();
-      that.enemyInitCounter++;
     }
+    else{
+      // buttonObj.restart();
+    }
+
 
 
   },30);
