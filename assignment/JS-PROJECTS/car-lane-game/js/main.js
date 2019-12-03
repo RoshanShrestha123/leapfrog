@@ -6,7 +6,7 @@
  * element where all the object are instanciate
  * @constructor
  */
-function Player(parentElement){
+function Player(parentElement,lane){
 this.x=0;
 this.y= 50;
 this.width = 63;
@@ -15,7 +15,7 @@ this.rotate =0;
 this.height = 135;
 this.parentElement = parentElement;
 this.element = null;
-this.currentLane = 1;
+this.currentLane = lane;
 
 
  this.initCar = function(){
@@ -79,7 +79,7 @@ function Lane(screenWidth){
 
 }
 
-function ScoreBoard(parentElement){
+function ScoreBoard(parentElement,x,y,i){
   this.score = 0;
   this.parentElement = parentElement;
 
@@ -93,8 +93,8 @@ function ScoreBoard(parentElement){
     score.style.backgroundSize="100% 100%";
     this.element = score;
     this.element.style.position = "absolute";
-    this.element.style.left=30+"%";
-    this.element.style.top=0;
+    this.element.style.left=x+"px";
+    this.element.style.top=y+"px";
     this.element.innerHTML="score: "+this.score;
     this.element.style.zIndex="5";
     this.element.style.textAlign="center";
@@ -102,7 +102,7 @@ function ScoreBoard(parentElement){
   }
 
   this.drawScore= function(){
-    this.element.innerHTML="score: "+this.score;
+    this.element.innerHTML="score "+i +": "+this.score;
   }
 
   this.increaseScore = function(){
@@ -168,6 +168,13 @@ function Button(parentElement){
     console.log("clicked",that.canPlay);
   }
 }
+
+
+
+
+
+
+
 /**
  * This class of Opponent Car comming through the opposite direction.
  * @param       {DOM element} parentElement this is the parent element
@@ -228,16 +235,33 @@ function Game(gameScreen){
   this.GAME_WIDTH = 400;
   this.enemyInitCounter=0;
   this.destinationLane=0;
+  this.destinationLane2=0;
   this.enemyInitTime = Math.floor((Math.random()*40)+20);
   this.rotation=0;
-  var playerCarObj = new Player(gameScreen);
-  var scoreObj = new ScoreBoard(gameScreen);
+  this.rotation2=0;
+  this.maxBullet=20;
+  this.currentBullet=20;
+  this.currentBullet2=20;
+  this.refillCounter =0;
+  var playerCarObj = new Player(gameScreen,0);
+  var playerCarObj2 = new Player(gameScreen,2);
+  var scoreObj = new ScoreBoard(gameScreen,0,100,1);
+  var scoreObj2 = new ScoreBoard(gameScreen,200,100,2);
+  var ammoObj = new Ammo(gameScreen,0,0);
+  var ammoObj2 = new Ammo(gameScreen,300,0);
   var buttonObj = new Button(gameScreen);
-  console.log(buttonObj);
   this.direction = 0;
+  this.direction2 = 0;
   var enemyCarObj;
+  var bulletObj;
+  var bulletObj2;
+  this.bulletArr=[];
+  this.bulletArr2=[];
   this.gameScreen= gameScreen;
-  this.roadMoveSpeed =5;
+  this.roadMoveSpeed =0;
+  this.roadSpeed=7;
+  this.increaseSpeed = false;
+
   var laneObj = new Lane(this.GAME_WIDTH);
   this.PlayerCarYPosition =(this.GAME_HEIGHT-(playerCarObj.height+10));
 
@@ -251,12 +275,21 @@ function Game(gameScreen){
     this.gameScreen.style.background="url('images/road2.png')";
     this.gameScreen.style.backgroundSize ="cover";
     //this.gameScreen.style.backgroundRepeat ="no-repeat";
+    ammoObj.drawAmmo(that.currentBullet);
+    ammoObj2.drawAmmo(that.currentBullet2);
     scoreObj.initScore();
+    scoreObj2.initScore();
+
     playerCarObj.initCar();
     playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],this.PlayerCarYPosition);
     playerCarObj.drawPlayerCar();
     this.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
-    console.log("offset", this.destinationLane);
+
+    playerCarObj2.initCar();
+    playerCarObj2.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj2.currentLane],this.PlayerCarYPosition);
+    playerCarObj2.drawPlayerCar();
+    this.destinationLane2=laneObj.carRunningPath[playerCarObj2.currentLane];
+
     buttonObj.play();
 
   }
@@ -281,6 +314,7 @@ function Game(gameScreen){
       this.enemyArr[i].drawEnemyCar();
       if(this.enemyArr[i].y>this.GAME_HEIGHT){
         scoreObj.increaseScore();
+        scoreObj2.increaseScore();
         //that.scoreObj.displayScore();
         this.enemyArr.shift();
       }
@@ -288,12 +322,31 @@ function Game(gameScreen){
   }
 
   this.checkCollision = function(){
+    /*
+    for player 1
+     */
     for (var i = 0; i < this.enemyArr.length; i++) {
       if(playerCarObj.x+playerCarObj.width>= this.enemyArr[i].x &&
         playerCarObj.y+playerCarObj.height>=this.enemyArr[i].y &&
       playerCarObj.x<= this.enemyArr[i].x+ this.enemyArr[i].width &&
       playerCarObj.y<=this.enemyArr[i].y+this.enemyArr[i].height){
         this.collided=true;
+        this.gameOverscreen();
+        console.log("collided");
+
+      }
+    }
+
+/*
+for player 2
+ */
+    for (var i = 0; i < this.enemyArr.length; i++) {
+      if(playerCarObj2.x+playerCarObj2.width>= this.enemyArr[i].x &&
+        playerCarObj2.y+playerCarObj2.height>=this.enemyArr[i].y &&
+      playerCarObj2.x<= this.enemyArr[i].x+ this.enemyArr[i].width &&
+      playerCarObj2.y<=this.enemyArr[i].y+this.enemyArr[i].height){
+        this.collided=true;
+        this.gameOverscreen();
         console.log("collided");
 
       }
@@ -301,51 +354,167 @@ function Game(gameScreen){
 
   }
 
+  this.checkCollisionWithBullet = function(bulletCheck,i){
+
+      for (var j = 0; j < this.enemyArr.length; j++) {
+        if(this.bulletArr[i].x+this.bulletArr[i].width>= this.enemyArr[j].x &&
+          this.bulletArr[i].y+this.bulletArr[i].height>=this.enemyArr[j].y &&
+        this.bulletArr[i].x<= this.enemyArr[j].x+ this.enemyArr[j].width &&
+        this.bulletArr[i].y<=this.enemyArr[j].y+this.enemyArr[j].height){
+
+          this.enemyArr[j].element.style.display="none";
+          this.bulletArr[i].element.style.display="none";
+          this.enemyArr.splice(j,1);
+          this.bulletArr.splice(i,1);
+          console.log("enemy array",this.enemyArr);
+          console.log("enemy dead");
+          scoreObj.increaseScore();
+        }
+      }
+  }
+
+  this.checkCollisionWithBullet2 = function(bulletCheck,i){
+
+      for (var j = 0; j < this.enemyArr.length; j++) {
+        if(this.bulletArr2[i].x+this.bulletArr2[i].width>= this.enemyArr[j].x &&
+          this.bulletArr2[i].y+this.bulletArr2[i].height>=this.enemyArr[j].y &&
+        this.bulletArr2[i].x<= this.enemyArr[j].x+ this.enemyArr[j].width &&
+        this.bulletArr2[i].y<=this.enemyArr[j].y+this.enemyArr[j].height){
+
+          this.enemyArr[j].element.style.display="none";
+          this.bulletArr2[i].element.style.display="none";
+          this.enemyArr.splice(j,1);
+          this.bulletArr2.splice(i,1);
+          console.log("enemy array",this.enemyArr);
+          console.log("enemy dead");
+          scoreObj2.increaseScore();
+        }
+      }
+  }
+
+
+  this.gameOverscreen =  function(){
+
+    var gameOver = document.createElement('div');
+    this.gameScreen.appendChild(gameOver);
+    this.element = gameOver;
+    this.element.style.Position= "absolute";
+    this.element.style.textAlign = "center";
+    this.element.innerHTML = "Game Over!!";
+    this.element.style.background = "rgb(0,0,0)";
+    this.element.style.color = "#fff";
+    this.element.style.fontSize="40px";
+    this.element.style.lineHeight="600px";
+    this.element.style.width = this.gameScreen.offsetWidth +"px";
+    this.element.style.zIndex = "10";
+    this.element.style.height= this.gameScreen.offsetHeight+"px";
+    this.element.classList.add('gameOverScreen');
+    var resetButton = document.createElement('Button');
+    resetButton.innerHTML = "Restart";
+    resetButton.style.position="absolute";
+    resetButton.style.background ="white";
+    resetButton.style.border = "none";
+    resetButton.style.top="60%";
+    resetButton.style.cursor="pointer";
+    resetButton.style.left="40%";
+    resetButton.style.padding="20px";
+    resetButton.addEventListener("click", this.restartGame);
+    this.element.appendChild(resetButton);
+    }
+
+    this.restartGame = function(){
+
+      // to do
+    }
 
   //event listener for the key press
   window.addEventListener('keydown',function(event){
+    //move left for player one
     if(event.keyCode == 37){
       if(playerCarObj.currentLane!=0){
         playerCarObj.currentLane-=1;
         that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
         that.direction=-15;
         that.rotation=10;
-
-        console.log(that.destinationLane);
-      //  var newPosition=laneObj.carRunningPath[playerCarObj.currentLane];
-
-      //  playerCarObj.setPlayerCarPosition(newPosition,that.PlayerCarYPosition);
-      //  playerCarObj.drawPlayerCar();
-
       }
     }
+    //move right for player one
     if(event.keyCode == 39){
       if(playerCarObj.currentLane<2){
         playerCarObj.currentLane+=1;
         that.destinationLane=laneObj.carRunningPath[playerCarObj.currentLane];
         that.direction=15;
         that.rotation=10;
-        console.log(that.destinationLane);
-      //  playerCarObj.setPlayerCarPosition(laneObj.carRunningPath[playerCarObj.currentLane],that.PlayerCarYPosition);
-      //  playerCarObj.drawPlayerCar();
-
       }
     }
+
+
+
+    if(event.keyCode == 38){
+      if (that.currentBullet>0) {
+        console.log("shoot bullet");
+        bulletObj = new Bullet(gameScreen);
+        bulletObj.initBullet(playerCarObj.x,playerCarObj.y);
+        bulletObj.drawBullet();
+        that.bulletArr.push(bulletObj);
+        that.currentBullet--;
+        ammoObj.drawAmmo(that.currentBullet);
+      }
+
+    }
+
+
+
+    //move left for player 2
+    if(event.keyCode == 65){
+      console.log("player 2");
+      if(playerCarObj2.currentLane!=0){
+        playerCarObj2.currentLane-=1;
+        that.destinationLane2=laneObj.carRunningPath[playerCarObj2.currentLane];
+        that.direction2=-15;
+        that.rotation2=10;
+      }
+    }
+    //move right for player 2
+    if(event.keyCode == 68){
+      if(playerCarObj2.currentLane<2){
+        playerCarObj2.currentLane+=1;
+        that.destinationLane2=laneObj.carRunningPath[playerCarObj2.currentLane];
+        that.direction2=15;
+        that.rotation2=10;
+      }
+    }
+    if(event.keyCode == 87){
+      if (that.currentBullet2>0) {
+        console.log("shoot bullet player 2");
+        bulletObj2 = new Bullet(gameScreen);
+        bulletObj2.initBullet(playerCarObj2.x,playerCarObj2.y);
+        bulletObj2.drawBullet();
+        that.bulletArr2.push(bulletObj2);
+        that.currentBullet2--;
+        ammoObj2.drawAmmo(that.currentBullet2);
+      }
+
+    }
+
   });
 
   /**
    * GAME LOOP
    */
   setInterval(function(){
-console.log(buttonObj.canPlay);
     if(buttonObj.canPlay==true){
-
       scoreObj.drawScore();
+      scoreObj2.drawScore();
+      if(that.refillCounter>(Math.floor(Math.random()*100)+50)){
+        ammoObj.refill(gameScreen,laneObj.carRunningPath[Math.floor(Math.random()*3)],10);
+      }
+      that.refillCounter+=10;
+      console.log(that.refillCounter);
       if(that.collided==false){
 
         that.gameScreen.style.backgroundPosition = 0+"px "+ that.roadMoveSpeed+"px";
-        that.roadMoveSpeed+=7;
-
+        that.roadMoveSpeed+=that.roadSpeed;
         /*
           enemy spaning and animation here
          */
@@ -358,23 +527,16 @@ console.log(buttonObj.canPlay);
           that.checkCollision();
           that.updateEnemyCar();
         }
-        console.log("currentLane", Math.ceil(playerCarObj.x));
-        console.log("destinationLane",Math.ceil(that.destinationLane));
-        // if(Math.ceil(that.destinationLane)!=Math.ceil(playerCarObj.x-playerCarObj.carMidPoint)){
-        //   playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition);
-        // }
 
         if(that.direction>0){
           if(playerCarObj.x<=that.destinationLane){
             playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
-
           }
           else{
             that.direction=0;
             that.rotation=0;
               playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
           }
-
         }
         else if(that.direction<0){
           if (playerCarObj.x>that.destinationLane) {
@@ -386,15 +548,49 @@ console.log(buttonObj.canPlay);
                 playerCarObj.setPlayerCarPosition(playerCarObj.x+(that.direction),that.PlayerCarYPosition,that.rotation);
             }
         }
-
-
+        //player 2
+        if(that.direction2>0){
+          console.log("this is the right");
+          if(playerCarObj2.x<=that.destinationLane2){
+            playerCarObj2.setPlayerCarPosition(playerCarObj2.x+(that.direction2),that.PlayerCarYPosition,that.rotation2);
+          }
+          else{
+            that.direction2=0;
+            that.rotation2=0;
+              playerCarObj2.setPlayerCarPosition(playerCarObj2.x+(that.direction2),that.PlayerCarYPosition,that.rotation2);
+          }
+        }
+        else if(that.direction2<0){
+          console.log("this is the left");
+          if (playerCarObj2.x>that.destinationLane2) {
+            playerCarObj2.setPlayerCarPosition(playerCarObj2.x+(that.direction2),that.PlayerCarYPosition,-that.rotation2);
+          }
+            else{
+              that.direction2=0;
+              that.rotation2=0;
+                playerCarObj2.setPlayerCarPosition(playerCarObj2.x+(that.direction2),that.PlayerCarYPosition,that.rotation2);
+            }
+        }
+        for (var i = 0; i < that.bulletArr.length; i++) {
+          //that.bulletArr[i].y=10;
+          that.bulletArr[i].updateBulletPos();
+          that.bulletArr[i].drawBullet();
+          that.checkCollisionWithBullet(that.bulletArr[i],i);
+        }
+        for (var i = 0; i < that.bulletArr2.length; i++) {
+          //that.bulletArr2[i].y=10;
+          that.bulletArr2[i].updateBulletPos();
+          that.bulletArr2[i].drawBullet();
+          that.checkCollisionWithBullet2(that.bulletArr2[i],i);
+        }
         playerCarObj.drawPlayerCar();
+        playerCarObj2.drawPlayerCar();
+
         that.enemyInitCounter++;
       }
       else{
         buttonObj.canPlay=false;
       }
-
     }
     else{
       // buttonObj.restart();
