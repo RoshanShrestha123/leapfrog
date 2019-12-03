@@ -1,5 +1,7 @@
 function Bird(c,gameWidth,gameHeight){
-  this.x=0;
+  this.gameWidth=gameWidth;
+  this.gameHeight = gameHeight;
+  this.x=this.gameWidth/2;
   this.y=1;
   this.dy=1;
   this.c = c;
@@ -7,12 +9,11 @@ function Bird(c,gameWidth,gameHeight){
   this.height=30;
   this.gravity=0.2;
   this.isAlive = true;
-  this.gameWidth=gameWidth;
-  this.gameHeight = gameHeight;
+
 
   this.draw = function(){
     c.beginPath();
-    c.rect((this.x)+this.gameWidth/2,this.y,this.width,this.height);
+    c.rect(this.x,this.y,this.width,this.height);
     c.fill();
   }
   this.update = function(){

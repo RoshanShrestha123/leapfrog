@@ -17,15 +17,15 @@ function Obs(c,gameWidth,gameHeight){
     c.fill();
 
   }
-  // this.drawDownObs = function(){
-  //   c.beginPath();
-  //   c.rect(this.x2,this.y2,this.width,this.height);
-  //   c.fill();
-  // }
+  this.drawDownObs = function(){
+    c.beginPath();
+    c.rect(this.x2,this.y2,this.width,this.height);
+    c.fill();
+  }
   this.update = function(){
     this.x1-=1;
     this.x2-=1;
     this.drawUpObs();
-    // this.drawDownObs();
+    this.drawDownObs();
   }
 }

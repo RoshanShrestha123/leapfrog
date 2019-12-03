@@ -15,6 +15,26 @@ window.addEventListener('keydown',function(event){
   }
 });
 
+this.checkCollision = function(){
+
+  for (var i = 0; i < this.obsArr.length; i++) {
+    if (birdObj.x+birdObj.width>this.obsArr[i].x1&&
+        birdObj.x<this.obsArr[i].x1+this.obsArr[i].width&&
+        birdObj.y+birdObj.height>this.obsArr[i].y1&&
+        birdObj.y<this.obsArr[i].y1+this.obsArr[i].height) {
+        console.log("just passed");
+        birdObj.isAlive=false;
+    }
+    if (birdObj.x+birdObj.width>this.obsArr[i].x2&&
+        birdObj.x<this.obsArr[i].x2+this.obsArr[i].width&&
+        birdObj.y+birdObj.height>this.obsArr[i].y2&&
+        birdObj.y<this.obsArr[i].y2+this.obsArr[i].height) {
+        console.log("just passed");
+        birdObj.isAlive=false;
+    }
+  }
+}
+
 
 this.jump = function(){
   birdObj.dy=-5;
@@ -29,14 +49,7 @@ game main loop starts here
       if(that.obsArr.length>0){//if obs array is not empty
         for (var i = 0; i < that.obsArr.length; i++) {
           that.obsArr[i].update();
-          //console.log("obsX",that.obsArr[i].x1);
-          // if(birdObj.x+birdObj.width>=that.obsArr[i].x1&&
-          //     birdObj.x<=that.obsArr[i].x1+that.obsArr[i].width&&
-          //     birdObj.y+birdObj.height >=that.obsArr[i].y1&&
-          //     birdObj.y<=that.obsArr[i].y1+that.obsArr[i].height){
-          //     console.log("box collided");
-          //     birdObj.isAlive=false;
-          // }
+          that.checkCollision();
         }
       }
       if(that.obsInterval>250){// generate new Obs in --250-- time period
