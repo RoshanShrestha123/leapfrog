@@ -4,8 +4,10 @@
 }
 body{
   background-color: black;
+  display: flex;
+  padding-left: 100px;
 }
 #gameScreen{
 overflow: hidden;
-margin: 0 auto;
+margin-right: 30px;
 }

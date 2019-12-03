@@ -602,3 +602,6 @@ for player 2
 
 var gameScreen = document.getElementById('gameScreen');
 var gameObj = new Game(gameScreen).init();
+
+var gameScreen2 = document.getElementById('gameScreen2');
+var gameObj2 = new Game(gameScreen2).init();
