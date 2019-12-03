@@ -243,12 +243,12 @@ function Game(gameScreen){
   this.currentBullet=20;
   this.currentBullet2=20;
   this.refillCounter =0;
-  var playerCarObj = new Player(gameScreen,0);
-  var playerCarObj2 = new Player(gameScreen,2);
-  var scoreObj = new ScoreBoard(gameScreen,0,100,1);
-  var scoreObj2 = new ScoreBoard(gameScreen,200,100,2);
-  var ammoObj = new Ammo(gameScreen,0,0);
-  var ammoObj2 = new Ammo(gameScreen,300,0);
+  var playerCarObj = new Player(gameScreen,2);
+  var playerCarObj2 = new Player(gameScreen,0);
+  var scoreObj = new ScoreBoard(gameScreen,200,50,1);
+  var scoreObj2 = new ScoreBoard(gameScreen,0,50,2);
+  var ammoObj = new Ammo(gameScreen,300,0);
+  var ammoObj2 = new Ammo(gameScreen,0,0);
   var buttonObj = new Button(gameScreen);
   this.direction = 0;
   this.direction2 = 0;
@@ -322,9 +322,6 @@ function Game(gameScreen){
   }
 
   this.checkCollision = function(){
-    /*
-    for player 1
-     */
     for (var i = 0; i < this.enemyArr.length; i++) {
       if(playerCarObj.x+playerCarObj.width>= this.enemyArr[i].x &&
         playerCarObj.y+playerCarObj.height>=this.enemyArr[i].y &&
@@ -458,7 +455,7 @@ for player 2
         bulletObj.drawBullet();
         that.bulletArr.push(bulletObj);
         that.currentBullet--;
-        ammoObj.drawAmmo(that.currentBullet);
+      //  ammoObj.drawAmmo(that.currentBullet);
       }
 
     }

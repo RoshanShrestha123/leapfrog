@@ -13,15 +13,9 @@ function Ammo(parentElement,x,y){
   this.element.style.top=y+"px";
   this.element.style.lineHeight="50px";
   this.element.style.width="100px";
-  this.element.style.background="red";
-  //this.element.style.lineHeight="600px";
-//  this.element.style.width = this.gameScreen.offsetWidth +"px";
-//  this.element.style.zIndex = "10";
-  // this.element.style.height= this.gameScreen.offsetHeight+"px";
-
+  //this.element.style.background="red";
 
   this.drawAmmo= function(ammo){
-    console.log(ammo);
     this.element.innerHTML = "Ammo "+ammo;
   }
 
@@ -31,11 +25,7 @@ function Ammo(parentElement,x,y){
     this.parentElement.appendChild(ammoRefill);
     this.element = ammoRefill;
     this.element.style.Position= "absolute";
-    //this.element.style.textAlign = "center";
-
-  //  this.element.style.background = "rgb(0,0,0)";
     this.element.style.color = "blue";
-    //this.element.style.fontSize="20px";
     this.element.style.left =x+"px";
     this.element.style.top=y+"px";
     this.element.style.lineHeight="50px";
