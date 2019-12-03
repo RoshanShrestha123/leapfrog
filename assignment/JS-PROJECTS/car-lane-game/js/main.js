@@ -16,6 +16,8 @@ this.height = 135;
 this.parentElement = parentElement;
 this.element = null;
 this.currentLane = lane;
+this.carImage =["url('images/black-car.png')","url('images/orange-car.png')","url('images/police-car.png')"];
+
 
 
  this.initCar = function(){
@@ -24,7 +26,7 @@ this.currentLane = lane;
    playerCar.style.width= this.width+ 'px';
    playerCar.style.height = this.height+ 'px';
    // playerCar.style.background = "yellow";
-   playerCar.style.background = "url('images/orange-car.png')";
+   playerCar.style.background = this.carImage[Math.floor(Math.random()*3)];
    playerCar.style.backgroundSize="100% 100%";
    this.element = playerCar;
    this.element.style.position = "absolute";
@@ -119,15 +121,15 @@ function Button(parentElement){
     var playBtn = document.createElement('div');
     this.parentElement.appendChild(playBtn);
     playBtn.style.width=200+ 'px';
-    playBtn.style.height = 50+ 'px';
+    playBtn.style.height = 70+ 'px';
     playBtn.style.background = "white";
-    // playBtn.style.background = "url('images/orange-car.png')";
+    playBtn.style.background = "url('images/play.png')";
     playBtn.style.backgroundSize="100% 100%";
     this.element = playBtn;
     this.element.style.position = "absolute";
     this.element.style.left=30+"%";
     this.element.style.top=50+"%";
-    this.element.innerHTML="playBtn: ";
+
     this.element.style.zIndex="5";
     this.element.style.textAlign="center";
     this.element.style.fontSize=30+"px";
@@ -231,7 +233,7 @@ function Game(gameScreen){
   var that = this;
   this.collided=false;
   this.enemyArr=[];
-  this.GAME_HEIGHT = 600;
+  this.GAME_HEIGHT = 700;
   this.GAME_WIDTH = 400;
   this.enemyInitCounter=0;
   this.destinationLane=0;
@@ -455,7 +457,7 @@ for player 2
         bulletObj.drawBullet();
         that.bulletArr.push(bulletObj);
         that.currentBullet--;
-      //  ammoObj.drawAmmo(that.currentBullet);
+       ammoObj.drawAmmo(that.currentBullet);
       }
 
     }
@@ -503,9 +505,9 @@ for player 2
     if(buttonObj.canPlay==true){
       scoreObj.drawScore();
       scoreObj2.drawScore();
-      if(that.refillCounter>(Math.floor(Math.random()*100)+50)){
-        ammoObj.refill(gameScreen,laneObj.carRunningPath[Math.floor(Math.random()*3)],10);
-      }
+      // if(that.refillCounter>(Math.floor(Math.random()*100)+50)){
+      //   ammoObj.refill(gameScreen,laneObj.carRunningPath[Math.floor(Math.random()*3)],10);
+      // }
       that.refillCounter+=10;
       console.log(that.refillCounter);
       if(that.collided==false){
