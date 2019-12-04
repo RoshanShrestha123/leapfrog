@@ -9,10 +9,14 @@ function Game(){
   var c = canvas.getContext('2d');
   var birdObj = new Bird(c,canvas.width,canvas.height);
   var obsObj ;
+  var uiObj = new UiControl(c,canvas.width,canvas.height);
   this.obsInterval = 0;
   this.obsArr=[];
   this.startGame=false;
   this.restartGame=false;
+  this.score = 0;
+  this.highScore=localStorage.getItem("highScore");
+
 
 
 
@@ -21,6 +25,18 @@ function Game(){
 window.addEventListener('keydown',function(event){
   if (event.keyCode==32) {
     that.jump();
+    this.startGame=true;
+
+    if (this.restartGame==true) {
+      that.score=0;
+      birdObj.isAlive=true;
+      birdObj.y=200;
+      that.obsArr=[];
+      that.score=0;
+      this.restartGame=false;
+
+      console.log(that.obsArr);
+    }
   }
 });
 
@@ -36,7 +52,6 @@ this.drawBase = function(){
    this.xNext--;
   if(this.x+canvas.width<=0){
     this.x=canvas.width;
-    console.log("paxadi ja");
   }
   if(this.xNext+canvas.width<=0){
     this.xNext=canvas.width;
@@ -60,16 +75,29 @@ this.checkCollision = function(){
         birdObj.x<this.obsArr[i].x1+this.obsArr[i].width&&
         birdObj.y+birdObj.height>this.obsArr[i].y1&&
         birdObj.y<this.obsArr[i].y1+this.obsArr[i].height) {
-        console.log("just passed");
+
         birdObj.isAlive=false;
     }
     if (birdObj.x+birdObj.width>this.obsArr[i].x2&&
         birdObj.x<this.obsArr[i].x2+this.obsArr[i].width&&
         birdObj.y+birdObj.height>this.obsArr[i].y2&&
         birdObj.y<this.obsArr[i].y2+this.obsArr[i].height) {
-        console.log("just passed");
+
         birdObj.isAlive=false;
     }
+
+  }
+}
+
+this.increaseScore = function(){
+  //console.log("test");
+  for (var i = 0; i < this.obsArr.length; i++) {
+    if (birdObj.x+birdObj.width==this.obsArr[i].x1+this.obsArr[i].width) {
+      this.score++;
+      console.log("score",this.score);
+
+    }
+
 
   }
 }
@@ -83,30 +111,49 @@ this.jump = function(){
 game main loop starts here
  */
   setInterval(function(){
+  //  console.log(this.obsArr);
+    if (this.startGame==true) {
+      if(birdObj.isAlive==true){
 
+        c.clearRect(0,0,canvas.width,canvas.height);
+        that.drawBackground();
 
-    if(birdObj.isAlive==true){
-      c.clearRect(0,0,canvas.width,canvas.height);
-      that.drawBackground();
-
-      birdObj.update();
-      if(that.obsArr.length>0){//if obs array is not empty
-        for (var i = 0; i < that.obsArr.length; i++) {
-          that.obsArr[i].update();
-          that.checkCollision();
+        birdObj.update();
+        if(that.obsArr.length>0){//if obs array is not empty
+          that.increaseScore();
+          for (var i = 0; i < that.obsArr.length; i++) {
+            that.obsArr[i].update();
+            that.checkCollision();
+          }
         }
+        if(that.obsInterval>250){// generate new Obs in --250-- time period
+          obsObj= new Obs(c,canvas.width,canvas.height);
+          that.obsArr.push(obsObj);
+          that.obsInterval=0;
+        }
+        that.obsInterval++;
+        that.drawBase();
       }
-      if(that.obsInterval>250){// generate new Obs in --250-- time period
-        obsObj= new Obs(c,canvas.width,canvas.height);
-        that.obsArr.push(obsObj);
-        that.obsInterval=0;
+      else{
+        if(that.highScore<that.score){
+          that.highScore=that.score;
+        }
+      //  that.highScore= that.score;
+        localStorage.setItem("highScore",that.highScore);
+        console.log(localStorage.getItem("highScore"));
+        uiObj.drawGameOver();
+        this.restartGame=true;
       }
-      that.obsInterval++;
-      that.drawBase();
     }
     else{
-        that.checkCollision();
+      c.clearRect(0,0,canvas.width,canvas.height);
+      that.drawBackground();
+      birdObj.draw();
+      that.drawBase();
+      uiObj.drawWelcomeMesg();
     }
+
+
   },10);
 }
 var gameObj = new Game();

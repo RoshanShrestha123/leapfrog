@@ -1,7 +1,7 @@
 function Bird(c,gameWidth,gameHeight){
   this.gameWidth=gameWidth;
   this.gameHeight = gameHeight;
-  this.x=this.gameWidth/2;
+  this.x=this.gameWidth/2-20;
   this.y=200;
   this.dy=1;
   this.c = c;
@@ -51,4 +51,5 @@ function Bird(c,gameWidth,gameHeight){
       this.isAlive=false;
     }
   }
+
 }
