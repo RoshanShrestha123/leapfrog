@@ -13,7 +13,7 @@ function Bird(c,gameWidth,gameHeight){
   var img1 = document.getElementById('up-flap');
   var img2 = document.getElementById('middle-flap');
   var img3 = document.getElementById('down-flap');
-  this.imageCollection=[img1,img2,img3,img1];
+  this.imageCollection=[img1,img2,img3,img2];
   console.log(this.imageCollection);
   var counter=0;
   var i=0;
