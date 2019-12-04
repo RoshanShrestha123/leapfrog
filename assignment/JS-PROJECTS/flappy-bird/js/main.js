@@ -1,3 +1,9 @@
+/**
+ * This is the main class that control all the object in game,
+ * score, collison, highscore, event listener all are in this class
+ * @method      Game
+ */
+
 function Game(){
   var that = this;
   var canvas = document.getElementById('canvas');
@@ -15,13 +21,11 @@ function Game(){
   this.startGame=false;
   this.restartGame=false;
   this.score = 0;
-
   this.highScore=localStorage.getItem("highScore");
-
   this.rotate =10;
 
 
-window.addEventListener('keydown',function(event){
+window.addEventListener('keyup',function(event){
   if (event.keyCode==32) {
     that.jump();
     this.startGame=true;
@@ -41,6 +45,10 @@ window.addEventListener('click',function(){
   }
 });
 
+/**
+ * draw the base of the game(Ground) with scroll effect
+ * @method drawBase
+ */
 this.drawBase = function(){
   var baseImg = document.getElementById('base');
   var nextBase = document.getElementById('base');
@@ -84,8 +92,13 @@ this.drawHighScoreText = function(){
   c.fillText("High Score: "+this.highScore,100,140);
 
 }
-this.checkCollision = function(){
 
+/**
+ * check collision with each piller
+ * @method checkCollision
+ */
+
+this.checkCollision = function(){
   for (var i = 0; i < this.obsArr.length; i++) {
     if (birdObj.x+birdObj.width>this.obsArr[i].x1&&
         birdObj.x<this.obsArr[i].x1+this.obsArr[i].width&&
@@ -103,6 +116,11 @@ this.checkCollision = function(){
   }
 }
 
+/**
+ * Increase the score if bird pass the piller
+ * @method increaseScore
+ */
+
 this.increaseScore = function(){
   //console.log("test");
   for (var i = 0; i < this.obsArr.length; i++) {
@@ -114,6 +132,11 @@ this.increaseScore = function(){
   }
 }
 
+/**
+ * Add upforce to the  bird
+ * @method  jump
+ * @return {upforce}
+ */
 
 this.jump = function(){
   birdObj.dy=-3;

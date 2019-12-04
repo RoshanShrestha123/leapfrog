@@ -1,3 +1,14 @@
+/**
+ * This is the main class for the Bird,
+ * it defines, X position, Y position, Gravity,
+ * state like, DEAD OR ALIVE, array of image fo bird
+ * @method      Bird
+ * @param       {context} c          canvas context
+ * @param       {int} gameWidth  game screen width
+ * @param       {int} gameHeight game screen height
+ * @constructor
+ */
+
 function Bird(c,gameWidth,gameHeight){
   this.gameWidth=gameWidth;
   this.gameHeight = gameHeight;
@@ -17,16 +28,12 @@ function Bird(c,gameWidth,gameHeight){
   console.log(this.imageCollection);
   var counter=0;
   var i=0;
-
   var birdImageArr = [];
 
+//draw bird on the screen CANVAS
   this.draw = function(){
     c.beginPath();
-
-    // c.rect(this.x,this.y,this.width,this.height);
-    //c.rotate(20*Math.PI/180);
     c.drawImage(this.imageCollection[i],this.x,this.y,this.width,this.height);
-    //c.rotate(this.rotate);
     c.fill();
     if(counter>15){
       i++;
@@ -35,9 +42,10 @@ function Bird(c,gameWidth,gameHeight){
       }
       counter=0;
     }
-
     counter++;
   }
+
+  //update bird postion with gravity applided
   this.update = function(){
     this.checkBorderCollision();
     this.dy+=this.gravity;
@@ -46,6 +54,8 @@ function Bird(c,gameWidth,gameHeight){
     console.log("dy",this.dy);
 
   }
+
+  //check collision with the Canvas Border
   this.checkBorderCollision = function(){
     if(this.x<0|| this.x+this.width>this.gameWidth || this.y<0 || this.y+this.height>=this.gameHeight-100){
       this.y=(this.gameHeight-100)-this.height;
