@@ -14,4 +14,6 @@ function UiControl(c,gameWidth,gameHeight){
     c.drawImage(gameover,100,150);
   }
 
+  
+
 }

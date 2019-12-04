@@ -62,12 +62,26 @@ this.drawBase = function(){
 this.drawBackground = function(){
   var bgImg = document.getElementById('bgImage');
   c.beginPath();
+
   c.drawImage(bgImg,0,0,canvas.width,canvas.height);
 
 
   //c.fill();
 }
 
+
+this.drawScoreText = function(){
+  c.beginPath();
+  c.font = "50px Teko";
+  c.fillStyle="white"
+  c.fillText(this.score,190,100);
+}
+this.drawHighScoreText = function(){
+  c.beginPath();
+  c.font = "50px Teko";
+  c.fillStyle="white"
+  c.fillText(this.highScore,190,140);
+}
 this.checkCollision = function(){
 
   for (var i = 0; i < this.obsArr.length; i++) {
@@ -112,8 +126,11 @@ game main loop starts here
  */
   setInterval(function(){
   //  console.log(this.obsArr);
+
     if (this.startGame==true) {
+
       if(birdObj.isAlive==true){
+
 
         c.clearRect(0,0,canvas.width,canvas.height);
         that.drawBackground();
@@ -133,6 +150,7 @@ game main loop starts here
         }
         that.obsInterval++;
         that.drawBase();
+        that.drawScoreText();
       }
       else{
         if(that.highScore<that.score){
@@ -140,7 +158,7 @@ game main loop starts here
         }
       //  that.highScore= that.score;
         localStorage.setItem("highScore",that.highScore);
-        console.log(localStorage.getItem("highScore"));
+        that.drawHighScoreText();
         uiObj.drawGameOver();
         this.restartGame=true;
       }
