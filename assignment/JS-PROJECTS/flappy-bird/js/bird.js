@@ -26,6 +26,7 @@ function Bird(c,gameWidth,gameHeight){
     // c.rect(this.x,this.y,this.width,this.height);
     //c.rotate(20*Math.PI/180);
     c.drawImage(this.imageCollection[i],this.x,this.y,this.width,this.height);
+    //c.rotate(this.rotate);
     c.fill();
     if(counter>15){
       i++;

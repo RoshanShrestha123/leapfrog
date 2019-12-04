@@ -21,27 +21,24 @@ function Game(){
   this.rotate =10;
 
 
-if(this.highScore==null){
-  this.highScore=0;
-}
-
-
-
 window.addEventListener('keydown',function(event){
   if (event.keyCode==32) {
     that.jump();
     this.startGame=true;
 
-    if (this.restartGame==true) {
-      that.score=0;
-      birdObj.isAlive=true;
-      birdObj.y=200;
-      that.obsArr=[];
-      that.score=0;
-      this.restartGame=false;
 
-      console.log(that.obsArr);
-    }
+  }
+});
+window.addEventListener('click',function(){
+  if (this.restartGame==true) {
+    that.score=0;
+    birdObj.isAlive=true;
+    birdObj.y=200;
+    that.obsArr=[];
+    that.score=0;
+    this.restartGame=false;
+
+    console.log(that.obsArr);
   }
 });
 
@@ -169,6 +166,7 @@ game main loop starts here
 
         uiObj.drawGameOver();
         that.drawHighScoreText();
+        uiObj.clickToStart();
         this.restartGame=true;
       }
     }

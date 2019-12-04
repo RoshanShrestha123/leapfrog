@@ -14,6 +14,14 @@ function UiControl(c,gameWidth,gameHeight){
     c.drawImage(gameover,100,150);
   }
 
-  
+  this.clickToStart = function(){
+
+    c.beginPath();
+    c.font = "50px Teko";
+    c.fillStyle="white"
+    c.fillText("click to restart",100,300);
+  }
+
+
 
 }
