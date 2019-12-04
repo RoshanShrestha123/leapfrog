@@ -80,10 +80,8 @@ this.drawScoreText = function(){
 }
 this.drawHighScoreText = function(){
   c.beginPath();
-
   c.font = "50px Teko";
   c.fillStyle="white"
-
   c.fillText("High Score: "+this.highScore,100,140);
 
 }
@@ -94,14 +92,12 @@ this.checkCollision = function(){
         birdObj.x<this.obsArr[i].x1+this.obsArr[i].width&&
         birdObj.y+birdObj.height>this.obsArr[i].y1&&
         birdObj.y<this.obsArr[i].y1+this.obsArr[i].height) {
-
         birdObj.isAlive=false;
     }
     if (birdObj.x+birdObj.width>this.obsArr[i].x2&&
         birdObj.x<this.obsArr[i].x2+this.obsArr[i].width&&
         birdObj.y+birdObj.height>this.obsArr[i].y2&&
         birdObj.y<this.obsArr[i].y2+this.obsArr[i].height) {
-
         birdObj.isAlive=false;
     }
 
@@ -133,13 +129,9 @@ game main loop starts here
   //  console.log(this.obsArr);
 
     if (this.startGame==true) {
-
       if(birdObj.isAlive==true){
-
-
         c.clearRect(0,0,canvas.width,canvas.height);
         that.drawBackground();
-
         birdObj.update();
         if(that.obsArr.length>0){//if obs array is not empty
           that.increaseScore();
@@ -158,12 +150,16 @@ game main loop starts here
         that.drawScoreText();
       }
       else{
+        if(that.highScore=='null'){
+
+          that.highScore=0;
+        }
         if(that.highScore<that.score){
           that.highScore=that.score;
+          console.log(that.highScore);
         }
       //  that.highScore= that.score;
         localStorage.setItem("highScore",that.highScore);
-
         uiObj.drawGameOver();
         that.drawHighScoreText();
         uiObj.clickToStart();
