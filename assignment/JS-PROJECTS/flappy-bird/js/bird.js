@@ -43,6 +43,7 @@ function Bird(c,gameWidth,gameHeight){
     this.dy+=this.gravity;
     this.y+=this.dy;
     this.draw();
+    console.log("dy",this.dy);
 
   }
   this.checkBorderCollision = function(){

@@ -34,10 +34,9 @@ window.addEventListener('click',function(){
     that.score=0;
     birdObj.isAlive=true;
     birdObj.y=200;
+    birdObj.dy=0;
     that.obsArr=[];
-    that.score=0;
     this.restartGame=false;
-
     console.log(that.obsArr);
   }
 });
@@ -109,8 +108,6 @@ this.increaseScore = function(){
   for (var i = 0; i < this.obsArr.length; i++) {
     if (birdObj.x+birdObj.width==this.obsArr[i].x1+this.obsArr[i].width) {
       this.score++;
-      console.log("score",this.score);
-
     }
 
 
@@ -122,6 +119,8 @@ this.jump = function(){
   birdObj.dy=-3;
 
 }
+
+
 /*
 game main loop starts here
  */
