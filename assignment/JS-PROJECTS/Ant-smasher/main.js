@@ -240,6 +240,7 @@ function Game(parentElement,boxCount){
   }
 }
 
+
 var gameScreen = document.getElementById('gameScreen');
 var gameObj = new Game(gameScreen,10);
 gameObj.startGame();

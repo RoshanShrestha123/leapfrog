@@ -14,8 +14,6 @@ var adder =  slider_wrapper[0].offsetLeft;
 function Slider(time_interval){
 
   this.timeInterval =time_interval;
-
-
   //generating the button
 //Left button
   var leftButton  =  document.createElement('div');
@@ -110,13 +108,13 @@ this.slideLeft  =  function(){
         if(count>= that.totalImage){   // go back
           console.log(that.totalImage);
           this.running = true;
-          console.log("is running?:",this.running);
+
           adder+= 10;
           slider_wrapper[0].style.left =  (adder)+"px";
           console.log(adder);
         if(adder>= 0){
           this.running = false;
-          console.log("is running?:",this.running);
+
           count = 1;
           clearInterval(id);
         }
@@ -124,12 +122,12 @@ this.slideLeft  =  function(){
       else{ //forwARD
         console.log(that.totalImage);
         this.running = true;
-        console.log("is running?:",this.running);
+
         slider_wrapper[0].style.left =  -(i-adder)+"px";
         i+= 3;
         if(i>container_width){
           this.running = false;
-          console.log("is running?:",this.running);
+
           i = 0;
           count++;
           adder = slider_wrapper[0].offsetLeft;
@@ -165,16 +163,16 @@ this.slideLeft  =  function(){
     rightButton.style.right = 0;
     leftButton.style.left = 0;
     leftButton.addEventListener('click',function(){
-    console.log("left click");
+
     adder = slider_wrapper[0].offsetLeft;
     sliderObj.slideLeft();
     });
     rightButton.addEventListener('click',function(){
-        console.log(that.running);
+
         if(that.running == false){
-          console.log("right click");
+
           adder = slider_wrapper[0].offsetLeft;
-          console.log("adder when clicked: ",adder);
+
           that.slideRight();
         }
     });
@@ -183,10 +181,22 @@ this.slideLeft  =  function(){
     this.indicatorButton();
 
   }
-  setInterval(function(){
-    
-    that.slideRight();
-  },that.timeInterval);
+  this.animate = function(){
+  this.animation= setInterval(function(){
+      console.log("screen in focus");
+      that.slideRight();
+    },that.timeInterval);
+  }
+  this.stopAnimate = function(){
+    console.log("outside the screen");
+  //  clearInterval(animation);
+  }
+  window.addEventListener('focus',that.animate());
+  window.addEventListener('blur',that.stopAnimate());
+
+
+
+
 
 
 

@@ -16,10 +16,7 @@ var input = {
 };
 
 function checkChildren(){
-  for (var key in input) {
-    console.log("key >> ",key);
-  
-    }
+
   }
 
 checkChildren();
