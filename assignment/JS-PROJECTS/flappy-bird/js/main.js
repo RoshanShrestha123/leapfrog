@@ -139,7 +139,7 @@ this.increaseScore = function(){
  */
 
 this.jump = function(){
-  birdObj.dy=-3;
+  birdObj.dy=-2;
 
 }
 
