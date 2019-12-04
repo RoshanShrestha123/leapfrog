@@ -15,10 +15,15 @@ function Game(){
   this.startGame=false;
   this.restartGame=false;
   this.score = 0;
+
   this.highScore=localStorage.getItem("highScore");
 
+  this.rotate =10;
 
 
+if(this.highScore==null){
+  this.highScore=0;
+}
 
 
 
@@ -78,9 +83,12 @@ this.drawScoreText = function(){
 }
 this.drawHighScoreText = function(){
   c.beginPath();
+
   c.font = "50px Teko";
   c.fillStyle="white"
+
   c.fillText("High Score: "+this.highScore,100,140);
+
 }
 this.checkCollision = function(){
 
@@ -158,8 +166,9 @@ game main loop starts here
         }
       //  that.highScore= that.score;
         localStorage.setItem("highScore",that.highScore);
-        that.drawHighScoreText();
+
         uiObj.drawGameOver();
+        that.drawHighScoreText();
         this.restartGame=true;
       }
     }
