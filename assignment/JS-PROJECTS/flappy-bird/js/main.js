@@ -80,7 +80,7 @@ this.drawHighScoreText = function(){
   c.beginPath();
   c.font = "50px Teko";
   c.fillStyle="white"
-  c.fillText(this.highScore,190,140);
+  c.fillText("High Score: "+this.highScore,100,140);
 }
 this.checkCollision = function(){
 
