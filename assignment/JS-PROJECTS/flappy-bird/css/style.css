@@ -6,8 +6,14 @@
 body{
   width: 100%;
   background-color: #4d4d4d;
+  display: flex;
 }
 #canvas{
+  display: block;
+  padding-top: 50px;
+  margin: 0 auto;
+}
+#canvas2{
   display: block;
   padding-top: 50px;
   margin: 0 auto;

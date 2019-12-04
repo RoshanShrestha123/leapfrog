@@ -4,9 +4,9 @@
  * @method      Game
  */
 
-function Game(){
+function Game(canvas){
   var that = this;
-  var canvas = document.getElementById('canvas');
+  var canvas = canvas;
   canvas.height=615;
   canvas.width=388;
   this.x=0;
@@ -199,4 +199,7 @@ game main loop starts here
 
   },10);
 }
-var gameObj = new Game();
+var canvas1 = document.getElementById('canvas');
+var canvas2 = document.getElementById('canvas2');
+var gameObj = new Game(canvas1);
+var gameObj = new Game(canvas2);
