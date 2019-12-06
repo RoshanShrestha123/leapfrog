@@ -5,7 +5,7 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=200;
   this.y=100;
-  this.speed =3;
+  this.speed =2;
   this.width=50;
   this.height=50;
   this.moveup= false;
@@ -26,7 +26,7 @@ function Player(c,width,height){
     this.c.rotate(this.angle);
     this.c.translate(-this.x,-this.y);
     //this.c.tra
-     this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+    this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
     // this.c.beginPath();
     // this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
     // this.c.fill();
@@ -43,26 +43,28 @@ function Player(c,width,height){
     this.c.stroke();
   }
 
-  this.drawLineFromOrigin = function(){
-    this.c.beginPath();
-    this.c.moveTo(0,0);
-  //  console.log(this.mouseX);
-    this.c.strokeStyle="yellow";
-    this.c.lineTo(this.x,this.y);
-    this.c.stroke();
-  }
+  // this.drawLineFromOrigin = function(){
+  //   this.c.beginPath();
+  //   this.c.moveTo(0,0);
+  // //  console.log(this.mouseX);
+  //   this.c.strokeStyle="green";
+  //   this.c.lineTo(this.x,this.y);
+  //   this.c.stroke();
+  // }
 
   this.drawText = function(){
 
-    c.font = "20px Arial";
+    c.font = "10px Arial";
     c.fillText(this.angle*180/ Math.PI, this.x+this.width/2, this.y+this.height/2);
   }
 
   this.movementUp = function(){ //move up
-    this.y -=this.speed;
+    this.y -=this.speed * Math.cos(this.angle*180/Math.PI);
+    this.x +=this.speed *Math.sin(this.angle*180/Math.PI);
   }
   this.movementDown = function(){// move down
-    this.y +=this.speed;
+    this.y +=this.speed * Math.cos(this.angle*180/Math.PI);
+    this.x +=this.speed *Math.sin(this.angle*180/Math.PI);
   }
   this.movementLeft = function(){// move left
     this.x -=this.speed;
@@ -72,37 +74,37 @@ function Player(c,width,height){
   }
 
   window.addEventListener('keydown',function(event){
-    if(event.keyCode==37){
+    if(event.keyCode==37||event.keyCode==65){
       console.log("pressed left");
       that.moveleft=true;
     }
-    if(event.keyCode==39){
+    if(event.keyCode==39||event.keyCode==68){
       console.log("pressed right");
       that.moveright=true;
     }
-    if(event.keyCode==38){
+    if(event.keyCode==38||event.keyCode==87){
       console.log("pressed up");
       that.moveup=true;
     }
-    if(event.keyCode==40){
+    if(event.keyCode==40 || event.keyCode==83){
       console.log("pressed down");
       that.movedown=true;
     }
   });
   window.addEventListener('keyup',function(event){
-    if(event.keyCode==37){
+    if(event.keyCode==37 ||event.keyCode==65){
       console.log("pressed left release");
       that.moveleft=false;
     }
-    if(event.keyCode==39){
+    if(event.keyCode==39||event.keyCode==68){
       console.log("pressed right release");
       that.moveright=false;
     }
-    if(event.keyCode==38){
+    if(event.keyCode==38 ||event.keyCode==87){
       console.log("pressed up release");
       that.moveup=false;
     }
-    if(event.keyCode==40){
+    if(event.keyCode==40 || event.keyCode==83){
       console.log("pressed down release");
       that.movedown=false;
     }

@@ -14,7 +14,7 @@ function Game(canvas){
     that.c.clearRect(0,0,this.canvas.width,this.canvas.height);
     that.playerObj.drawLine();
     that.playerObj.draw();
-    that.playerObj.drawLineFromOrigin();
+  //  that.playerObj.drawLineFromOrigin();
     that.playerObj.drawText();
     //console.log("frame");
     if(that.playerObj.moveup==true){
