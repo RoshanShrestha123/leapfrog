@@ -26,10 +26,10 @@ function Player(c,width,height){
     this.c.rotate(this.angle);
     this.c.translate(-this.x,-this.y);
     //this.c.tra
-    // this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
-    this.c.beginPath();
-    this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
-    this.c.fill();
+     this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+    // this.c.beginPath();
+    // this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+    // this.c.fill();
     this.c.restore();
 
   }
