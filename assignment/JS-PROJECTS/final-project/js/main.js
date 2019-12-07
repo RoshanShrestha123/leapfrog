@@ -5,17 +5,21 @@ function Game(canvas){
   this.canvas.height = 500;
   this.canvas.width = 500;
   this.playerObj = new Player(this.c,this.canvas.width,this.canvas.height);
-
-  //this.playerObj.draw();
-
-
+  this.gunObj = new Gun(this.c);
+  this.isShooting=false;
+  this.playerX;
+  this.playerY;
+  this.shootingAngle=0;
+  window.addEventListener('click',function(){
+    that.isShooting=true;
+    that.shootingAngle=that.playerObj.angle;
+    that.playerX = that.playerObj.x;
+    that.playerY= that.playerObj.y;
+  });
 
   setInterval(function(){
     that.c.clearRect(0,0,this.canvas.width,this.canvas.height);
-    that.playerObj.drawLine();
-    that.playerObj.draw();
-  //  that.playerObj.drawLineFromOrigin();
-    that.playerObj.drawText();
+
     //console.log("frame");
     if(that.playerObj.moveup==true){
       that.playerObj.movementUp();
@@ -30,7 +34,15 @@ function Game(canvas){
       that.playerObj.movementRight();
     }
 
-  },10);
+    if(that.isShooting==true){
+      that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);
+    }
+    that.playerObj.drawLine();
+    that.playerObj.draw();
+   that.playerObj.drawLineFromOrigin();
+   that.playerObj.drawText();
+
+  },1);
 
 
 }
