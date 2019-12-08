@@ -5,21 +5,28 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=200;
   this.y=100;
-  this.speed =1;
+  this.speed =0.4;
   this.width=50;
   this.height=50;
   this.moveup= false;
   this.movedown = false;
   this.moveleft=false;
   this.moveright=false;
-  this.mouseX=null;
-  this.mouseY=null;
+
+  this.midPointPlayerX=this.width/2;
+  this.midPointPlayerY = this.height/2;
   this.angle = 0;
   this.lookAngle=0;
   this.img = document.getElementById('player');
-  this.mouseObj = new Mouse(this.c,this.mouseX,this.mouseY);
+  this.mouseObj = new Mouse(this.c);
+  this.mouseX=this.mouseObj.x;
+  this.mouseY=this.mouseObj.y;
+
+
   this.draw = function(){
-    this.mouseObj.draw(this.mouseX,this.mouseY);
+    this.mouseObj.draw();
+    this.mouseX=this.mouseObj.x;
+    this.mouseY=this.mouseObj.y;
     this.lookAngle = Math.atan2(this.mouseY-this.y,this.mouseX-this.x);
     this.c.save();
     this.c.translate(this.x,this.y);
@@ -53,14 +60,15 @@ function Player(c,width,height){
 
   this.movementUp = function(){ //move up
 
-    this.angle=Math.floor(this.lookAngle);
-    console.log("angle:", this.y);
-    this.y +=this.speed*Math.sin(this.angle) ;
-    this.x +=this.speed*Math.cos(this.angle);
+
+    //console.log("angle:", this.y);
+    this.y +=this.speed*Math.sin(this.lookAngle) ;
+    this.x +=this.speed*Math.cos(this.lookAngle);
   }
   this.movementDown = function(){// move down
-    this.y -=this.speed * Math.sin(this.angle*180/Math.PI);
-    this.x -=this.speed *Math.cos(this.angle*180/Math.PI);
+    //console.log("angle:", this.y);
+    this.y -=this.speed*Math.sin(this.lookAngle) ;
+    this.x -=this.speed*Math.cos(this.lookAngle);
   }
   this.movementLeft = function(){// move left
     // this.y -=this.speed * Math.cos(this.angle*180/Math.PI);
@@ -99,13 +107,5 @@ function Player(c,width,height){
       that.movedown=false;
     }
   });
-  document.addEventListener('mousemove',function(event){
-    that.mouseX= event.pageX;
-    that.mouseY = event.pageY;
 
-    //that.movementUp();
-    //that.angle = Math.atan2(that.mouseY-that.y,that.mouseX-that.x);
-   that.draw();
-  //  console.log("x:",that.mouseX);
-  });
 }

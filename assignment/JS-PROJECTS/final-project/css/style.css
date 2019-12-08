@@ -5,6 +5,7 @@
 #canvas{
   border: 1px solid black;
   cursor: none;
+  background-color: #ada9a8;
 }
 img{
   display: none;
