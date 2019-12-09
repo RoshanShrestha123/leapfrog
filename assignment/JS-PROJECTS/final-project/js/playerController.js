@@ -3,16 +3,15 @@ function Player(c,width,height){
   this.c = c;
   this.gameWidth=width;
   this.gameHeight=height;
-  this.x=200;
-  this.y=100;
-  this.speed =0.4;
+  this.x=this.gameWidth/2;
+  this.y=this.gameHeight/2;
+  this.speed =1;
   this.width=50;
   this.height=50;
   this.moveup= false;
   this.movedown = false;
   this.moveleft=false;
   this.moveright=false;
-
   this.midPointPlayerX=this.width/2;
   this.midPointPlayerY = this.height/2;
   this.angle = 0;
@@ -21,9 +20,17 @@ function Player(c,width,height){
   this.mouseObj = new Mouse(this.c);
   this.mouseX=this.mouseObj.x;
   this.mouseY=this.mouseObj.y;
+  this.rayArr = [];
+  this.moveX=0;
+  this.moveY=0;
+
+
+
 
 
   this.draw = function(){
+  //  this.drawRays();
+
     this.mouseObj.draw();
     this.mouseX=this.mouseObj.x;
     this.mouseY=this.mouseObj.y;
@@ -35,7 +42,31 @@ function Player(c,width,height){
     this.c.translate(-this.x,-this.y);
     this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
     this.c.restore();
+
   }
+
+  // this.drawRays = function(){
+  //   for (var i = 0; i < this.rayArr.length; i++) {
+  //     if(i==0){
+  //       this.rayArr[i].updateAngle(this.x,this.y,this.lookAngle*180/Math.PI-this.rayArr.length);
+  //     }
+  //     else{
+  //       this.rayArr[i].updateAngle(this.x,this.y,(this.rayArr[0].angle)+i);
+  //     }
+  //     this.rayArr[i].checkRayCollision(this.rayArr[i].startPosition.x,this.rayArr[i].startPosition.y,this.rayArr[i].x,this.rayArr[i].y,100,40,100,400);
+  //
+  //
+  //   }
+  //
+  // }
+
+  // this.initRay = function(){
+  //   for(var i=0; i<1;i++){
+  //     this.rayAngle = this.lookAngle*180/Math.PI;
+  //     this.rayObj = new Ray(this.c,this.rayAngle);
+  //     this.rayArr.push(this.rayObj);
+  //   }
+  // }
 
   this.drawLine = function(){
     this.c.beginPath();
@@ -55,20 +86,20 @@ function Player(c,width,height){
 
   this.drawText = function(){
     c.font = "10px Arial";
-    c.fillText(Math.floor(this.angle*180/ Math.PI), this.x+this.width/2, this.y+this.height/2);
+    c.fillText(Math.floor(this.lookAngle*180/ Math.PI), this.x+this.width/2, this.y+this.height/2);
   }
 
   this.movementUp = function(){ //move up
 
 
     //console.log("angle:", this.y);
-    this.y +=this.speed*Math.sin(this.lookAngle) ;
-    this.x +=this.speed*Math.cos(this.lookAngle);
+    this.moveY =this.speed*Math.sin(this.lookAngle);
+    this.moveX =this.speed*Math.cos(this.lookAngle);
   }
   this.movementDown = function(){// move down
     //console.log("angle:", this.y);
-    this.y -=this.speed*Math.sin(this.lookAngle) ;
-    this.x -=this.speed*Math.cos(this.lookAngle);
+    this.moveY =this.speed*Math.sin(this.lookAngle) ;
+    this.moveX =this.speed*Math.cos(this.lookAngle);
   }
   this.movementLeft = function(){// move left
     // this.y -=this.speed * Math.cos(this.angle*180/Math.PI);
