@@ -1,22 +1,39 @@
-function Room(c,x,y,width,height) {
+function Room(c,x,y,width,height,t,r,d,l,color,name) {
   this.c = c;
-  this.x=x;
-  this.y=y;
-  this.width =width;
-  this.height=height;
+  this.room = {
+    x:x,
+    y:y,
+    width:width,
+    height:height,
+    color:color,
+    name:name,
+    img : null
+  }
+  console.log(this.room);
 
-
+  this.borderObj = new RoomBorder(this.c,0,0,t,r,d,l,this.room);
 
   this.draw = function(){
-
     this.c.beginPath();
-    this.c.rect(this.x,this.y,this.width,this.height);
-    this.c.fill();
+    this.c.fillStyle=this.room.color;
+    // this.c.rect(this.room.x,this.room.y,this.room.width,this.room.height);
+    // this.c.fill();
+    this.c.drawImage(this.room.img,this.room.x,this.room.y,this.room.width,this.room.height);
+    this.borderObj.renderBorder();
   }
-  this.update = function(x,y){
 
-    this.x-=x;
-    this.y-=y;
+  this.setBgImage = function(img){
+    this.room.img = img;
+
+  }
+  this.update = function(player){
+
+    this.room.x-=player.moveX;
+    this.room.y-=player.moveY;
+    this.borderObj.verticalBorder.x-=player.moveX;
+    this.borderObj.verticalBorder.y-=player.moveY;
+    this.borderObj.horizontalBorder.x-=player.moveX;
+    this.borderObj.horizontalBorder.y-=player.moveY;
     this.draw();
   }
 

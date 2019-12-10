@@ -5,9 +5,9 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
-  this.speed =1;
-  this.width=50;
-  this.height=50;
+  this.speed =0.7;
+  this.width=75;
+  this.height=75;
   this.moveup= false;
   this.movedown = false;
   this.moveleft=false;
@@ -41,6 +41,9 @@ function Player(c,width,height){
     this.c.rotate(this.lookAngle);
     this.c.translate(-this.x,-this.y);
     this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+    // this.c.fillStyle="black";
+    // this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+    // this.c.fill();
     this.c.restore();
 
   }
@@ -98,8 +101,8 @@ function Player(c,width,height){
   }
   this.movementDown = function(){// move down
     //console.log("angle:", this.y);
-    this.moveY =this.speed*Math.sin(this.lookAngle) ;
-    this.moveX =this.speed*Math.cos(this.lookAngle);
+    this.moveY =-this.speed*Math.sin(this.lookAngle) ;
+    this.moveX =-this.speed*Math.cos(this.lookAngle);
   }
   this.movementLeft = function(){// move left
     // this.y -=this.speed * Math.cos(this.angle*180/Math.PI);

@@ -2,15 +2,38 @@ function ManageRoom(c){
   this.c =c;
   this.roomArr = [];
 
+/**
+ * here you can create the room ,
+ * for the paramerter of the object
+ * (context,x,y,width,height,borderTOP,borderRIGHT,borderBOTTOM,borderLEFT)
+ * for border, 0 = No border/wall, 1 = 100% border/wall, 2 = border/wall with door
+ * color of the room and name of the room
+ */
 
-    this.room1 = new Room(this.c,0,0,200,200);
-    this.roomArr.push(this.room1);
+  this.entrance1 = new Room(this.c,770,100,359,168,0,1,0,1,'#949494',"entrance1");//top left room
+  this.img = document.getElementById('entrance1');
+  this.entrance1.setBgImage(this.img);
+  this.roomArr.push(this.entrance1);
 
-    this.room2 = new Room(this.c,0,202,200,400);
-    this.roomArr.push(this.room2);
+  this.entrance = new Room(this.c,770,-94,168,194,1,0,0,0,'#949494',"entrance2");//top left room
+  this.img = document.getElementById('entrance2');
+  this.entrance.setBgImage(this.img);
+  this.roomArr.push(this.entrance);
 
-    this.room3 = new Room(this.c,201,0,400,300);
-    this.roomArr.push(this.room3);
+  this.livingroom = new Room(this.c,380,-124,361,387,0,0,1,1,'#949494',"livingroom1");
+  this.img = document.getElementById('livingroom');
+  this.livingroom.setBgImage(this.img);
+  this.roomArr.push(this.livingroom);
+
+  this.livingroom = new Room(this.c,380,-487,747,363,0,0,0,1,'#949494',"livingroom2");
+  this.img = document.getElementById('livingroom2');
+  this.livingroom.setBgImage(this.img);
+  this.roomArr.push(this.livingroom);
+
+  this.livingroom = new Room(this.c,380,-848,553,361,1,1,0,1,'#949494',"meetingHall");
+  this.img = document.getElementById('meetingHall');
+  this.livingroom.setBgImage(this.img);
+  this.roomArr.push(this.livingroom);
 
 
 

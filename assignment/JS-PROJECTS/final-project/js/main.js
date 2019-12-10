@@ -2,8 +2,8 @@ function Game(canvas){
   var that = this;
   this.canvas = canvas;
   this.c= this.canvas.getContext('2d');
-  this.canvas.height = 600;
-  this.canvas.width = 700;
+  this.canvas.height = 700;
+  this.canvas.width = 1290;
   this.playerObj = new Player(this.c,this.canvas.width,this.canvas.height);
   // this.playerObj.initRay();
   this.gunObj;
@@ -46,16 +46,19 @@ function Game(canvas){
 
   this.controlPlayerMovement = function(){
     if(this.playerObj.moveup==true){
-      this.playerObj.movementUp();
+     this.playerObj.movementUp();
       for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
         //console.log();
-        this.manageRoomObj.roomArr[i].update(this.playerObj.moveX,this.playerObj.moveY)
+        this.manageRoomObj.roomArr[i].update(this.playerObj);
       }
 
     }
     if(this.playerObj.movedown==true){
       this.playerObj.movementDown();
-        this.obsObj.update(this.playerObj.moveX,this.playerObj.moveY);
+      for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
+        //console.log();
+        this.manageRoomObj.roomArr[i].update(this.playerObj)
+      }
     }
     if(this.playerObj.moveleft==true){
       this.playerObj.movementLeft();
@@ -68,22 +71,17 @@ function Game(canvas){
   }
 
   setInterval(function(){
-
     that.c.clearRect(0,0,this.canvas.width,this.canvas.height);
     for (var i = 0; i < that.manageRoomObj.roomArr.length; i++) {
       that.manageRoomObj.roomArr[i].draw();
+      that.manageRoomObj.roomArr[i].borderObj.checkBorderCollision(that.playerObj);
     }
-    // that.obsObj.draw();
-    //console.log("frame");
     that.controlPlayerMovement();
 
     if(that.isShooting==true){
       that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);
     }
-  //  that.playerObj.drawLine();
     that.playerObj.draw();
-  // that.playerObj.drawLineFromOrigin();
-  // / that.playerObj.drawText();
    that.fireBullet();
   },1);
 
