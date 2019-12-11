@@ -32,6 +32,10 @@ function Room(c,x,y,width,height,t,r,d,l,color,name) {
     this.room.y-=player.moveY;
     this.borderObj.verticalBorder.x-=player.moveX;
     this.borderObj.verticalBorder.y-=player.moveY;
+    this.borderObj.doorVertical.topX-=player.moveX;
+    this.borderObj.doorVertical.topY-=player.moveY;
+    this.borderObj.doorVertical.bottomX-=player.moveX;
+    this.borderObj.doorVertical.bottomY-=player.moveY;
     this.borderObj.horizontalBorder.x-=player.moveX;
     this.borderObj.horizontalBorder.y-=player.moveY;
     this.draw();

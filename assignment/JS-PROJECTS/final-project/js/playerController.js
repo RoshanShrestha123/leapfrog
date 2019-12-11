@@ -5,9 +5,9 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
-  this.speed =0.7;
-  this.width=75;
-  this.height=75;
+  this.speed =1;
+  this.width=70;
+  this.height=70;
   this.moveup= false;
   this.movedown = false;
   this.moveleft=false;

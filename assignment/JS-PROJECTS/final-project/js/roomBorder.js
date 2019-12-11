@@ -1,15 +1,25 @@
 function RoomBorder(c,x,y,t,r,b,l,room){
   this.c = c;
+  this.doorGap=70;
   this.roomInfo = room;
   this.horiBorderImage = document.getElementById('horiBorder');
   this.vertiBorderImage = document.getElementById('vertiBorder');
-  console.log("room",this.roomInfo);
   this.sides = {
     top :t,
     right :r,
     bottom :b,
     left :l
   }
+  this.doorVertical = {
+    topX:this.roomInfo.x,
+    topY:this.roomInfo.y,
+    topHeight:this.roomInfo.height/2-10,
+    bottomHeight:this.roomInfo.height/2-10,
+    bottomX:this.roomInfo.x,
+    bottomY:this.roomInfo.y+this.doorGap,
+    width:30
+  }
+
   this.verticalBorder = {
     x:this.roomInfo.x,
     y:this.roomInfo.y,
@@ -22,6 +32,7 @@ function RoomBorder(c,x,y,t,r,b,l,room){
     width:this.roomInfo.width,
     height:30
   }
+
 
   this.renderBorder = function(){
     if(this.sides.top==1){
@@ -60,8 +71,30 @@ function RoomBorder(c,x,y,t,r,b,l,room){
       // this.verticalBorder.width,this.verticalBorder.height);
       // this.c.fill();
     }
+
+    // //render door
+    // if(this.sides.left==2){
+    //   this.c.beginPath();
+    //   this.c.drawImage(this.vertiBorderImage,this.doorVertical.topX-this.doorVertical.width,this.doorVertical.topY,
+    //   this.doorVertical.width,this.doorVertical.topHeight);
+    // //  console.log("roomx",this.roomInfo.x, "doorX",this.doorVertical.topX);
+    //
+    //   this.c.beginPath();
+    //   this.c.drawImage(this.vertiBorderImage,this.doorVertical.bottomX-this.doorVertical.width,this.doorVertical.bottomY+this.doorGap,
+    //   this.doorVertical.width,this.doorVertical.bottomHeight);
+    //   //console.log("roomx",this.roomInfo.x, "doorX",this.doorVertical.bottomY);
+    //   // this.c.fillStyle="brown";
+    //   // this.c.rect(this.verticalBorder.x-this.verticalBorder.width,this.verticalBorder.y,
+    //   // this.verticalBorder.width,this.verticalBorder.height);
+    //   // this.c.fill();
+    // }
   }
 
+  this.initDoor = function(){
+
+  }
+
+//check collision here
   this.checkBorderCollision = function(player){
     this.player = player;
 
@@ -151,25 +184,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         }
     }
 
-    // //collsion test on the top wall
-    // if(this.sides.bottom ==1){
-    //   if(this.horizontalBorder.y+ this.horizontalBorder.height+(this.roomInfo.height-10)>= this.player.y-(this.player.height/2) &&
-    //     this.horizontalBorder.x+(this.roomInfo.width-10)<= this.player.width +this.player.x-(this.player.width/2) &&
-    //     this.horizontalBorder.y+this.horizontalBorder.height>= this.player.y &&
-    //     this.horizontalBorder.y<=this.player.y+this.player.height){
-    //       //check right side of collision
-    //       if(this.horizontalBorder.x+(this.roomInfo.width-10)>this.player.x ){
-    //         console.log("collided from bottom side");
-    //         this.player.moveup=false;
-    //         this.player.x-=0.5;
-    //       }
-    //       //check left side of collision
-    //       if(this.horizontalBorder.x+(this.roomInfo.width-10)<=this.player.x ){
-    //         console.log("collided from left side");
-    //         this.player.moveup=false;
-    //         this.player.x+=0.5;
-    //       }
-    //     }
-    // }
+
   }
 }
