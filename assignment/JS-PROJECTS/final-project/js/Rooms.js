@@ -38,6 +38,7 @@ function Room(c,x,y,width,height,t,r,d,l,color,name) {
     this.borderObj.doorVertical.bottomY-=player.moveY;
     this.borderObj.horizontalBorder.x-=player.moveX;
     this.borderObj.horizontalBorder.y-=player.moveY;
+
     this.draw();
   }
 

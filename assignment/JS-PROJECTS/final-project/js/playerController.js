@@ -20,7 +20,7 @@ function Player(c,width,height){
   this.mouseObj = new Mouse(this.c);
   this.mouseX=this.mouseObj.x;
   this.mouseY=this.mouseObj.y;
-  this.rayArr = [];
+
   this.moveX=0;
   this.moveY=0;
 
@@ -40,7 +40,7 @@ function Player(c,width,height){
     this.c.rotate(-Math.PI/2);
     this.c.rotate(this.lookAngle);
     this.c.translate(-this.x,-this.y);
-    this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
+   this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
     // this.c.fillStyle="black";
     // this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
     // this.c.fill();
@@ -48,28 +48,7 @@ function Player(c,width,height){
 
   }
 
-  // this.drawRays = function(){
-  //   for (var i = 0; i < this.rayArr.length; i++) {
-  //     if(i==0){
-  //       this.rayArr[i].updateAngle(this.x,this.y,this.lookAngle*180/Math.PI-this.rayArr.length);
-  //     }
-  //     else{
-  //       this.rayArr[i].updateAngle(this.x,this.y,(this.rayArr[0].angle)+i);
-  //     }
-  //     this.rayArr[i].checkRayCollision(this.rayArr[i].startPosition.x,this.rayArr[i].startPosition.y,this.rayArr[i].x,this.rayArr[i].y,100,40,100,400);
-  //
-  //
-  //   }
-  //
-  // }
 
-  // this.initRay = function(){
-  //   for(var i=0; i<1;i++){
-  //     this.rayAngle = this.lookAngle*180/Math.PI;
-  //     this.rayObj = new Ray(this.c,this.rayAngle);
-  //     this.rayArr.push(this.rayObj);
-  //   }
-  // }
 
   this.drawLine = function(){
     this.c.beginPath();
