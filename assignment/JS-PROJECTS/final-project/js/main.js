@@ -82,8 +82,9 @@ function Game(canvas){
       that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyObj);
     }
     that.playerObj.draw();
-    that.enemyObj.draw();
     that.enemyObj.drawRays();
+    that.enemyObj.draw();
+
     that.fireBullet();
   },1);
 

@@ -9,7 +9,7 @@ function Room(c,x,y,width,height,t,r,d,l,color,name) {
     name:name,
     img : null
   }
-  console.log(this.room);
+
 
   this.borderObj = new RoomBorder(this.c,0,0,t,r,d,l,this.room);
 
