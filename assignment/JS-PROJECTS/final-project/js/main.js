@@ -11,10 +11,11 @@ function Game(canvas){
   this.isShooting=false;
   this.shootingAngle=0;
   this.obsArr =[];
-  this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj);
+  this.manageRoomObj = new ManageRoom(this.c);
+  this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
   this.enemyObj.initRay();
   this.enemyObj.initEnemy(500,0);
-  this.manageRoomObj = new ManageRoom(this.c);
+
   window.addEventListener('click',function(){
     that.isShooting=true;
     that.playerX = that.playerObj.x;

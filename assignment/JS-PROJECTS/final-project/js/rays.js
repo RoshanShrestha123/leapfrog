@@ -34,7 +34,7 @@ function Ray(c,angle){
 
 //experiment
   this.checkRayCollision= function(player){
-
+  //  console.log(player);
     var deno = ((this.startPosition.x-this.x)*(player.y3-player.y4))-((this.startPosition.y-this.y)*(player.x3-player.x4));
     var t = ((this.startPosition.x-player.x3)*(player.y3-player.y4)-((this.startPosition.y-player.y3)*(player.x3-player.x4)))/deno;
     var u = -((((this.startPosition.x-this.x)*(this.startPosition.y-player.y3))-((this.startPosition.y-this.y)*(this.startPosition.x-player.x3)))/deno);

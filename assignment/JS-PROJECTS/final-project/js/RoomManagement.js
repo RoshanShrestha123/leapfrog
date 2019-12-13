@@ -17,14 +17,14 @@ function ManageRoom(c){
   this.entrance1.setBgImage(this.img);
   this.roomArr.push(this.entrance1);
 
-  this.entrance = new Room(this.c,770,-94,168,194,1,0,0,2,'#949494',"entrance2");//top left room
+  this.entrance = new Room(this.c,770,-94,168,194,1,0,0,1,'#949494',"entrance2");//top left room
   this.img = document.getElementById('entrance2');
   this.entrance.setBgImage(this.img);
   this.roomArr.push(this.entrance);
 
 
 
-  this.bathroom1 = new Room(this.c,968,-94,362,169,0,1,1,1,'#949494',"bathroom1");//top left room
+  this.bathroom1 = new Room(this.c,968,-94,362,169,1,1,1,1,'#949494',"bathroom1");//top left room
   this.img = document.getElementById('bathroom1');
   this.bathroom1.setBgImage(this.img);
   this.roomArr.push(this.bathroom1);

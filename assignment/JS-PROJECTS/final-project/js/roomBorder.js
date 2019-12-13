@@ -33,14 +33,43 @@ function RoomBorder(c,x,y,t,r,b,l,room){
     height:30
   }
 
-
-
+  this.sideCordinateForRayCasting = {
+    x3:null,
+    x4:null,
+    y3:null,
+    y4:null
+  }
+  this.sideArr =[];
+this.initBorder = function(){
+  if(this.sides.top==1){
+      this.sideCordinateForRayCasting.x3=this.horizontalBorder.x;
+      this.sideCordinateForRayCasting.y3=this.horizontalBorder.y;
+      this.sideCordinateForRayCasting.x4=this.horizontalBorder.x+this.horizontalBorder.width;
+      this.sideCordinateForRayCasting.y4=this.horizontalBorder.y;
+      this.sideArr.push(this.sideCordinateForRayCasting);
+  }
+  if(this.sides.left==1){
+      this.sideCordinateForRayCasting.x3=this.verticalBorder.x;
+      this.sideCordinateForRayCasting.y3=this.verticalBorder.y;
+      this.sideCordinateForRayCasting.x4=this.verticalBorder.x;
+      this.sideCordinateForRayCasting.y4=this.verticalBorder.y+this.verticalBorder.height;
+      this.sideArr.push(this.sideCordinateForRayCasting);
+  }
+  console.log("side:",this.sideArr);
+  // if(this.sides.right==1){
+  //     this.sideCordinateForRayCasting.x3=this.verticalBorder.x+this.roomInfo.width;
+  //     this.sideCordinateForRayCasting.y3=this.verticalBorder.y;
+  //     this.sideCordinateForRayCasting.x4=this.verticalBorder.x+this.roomInfo.width;
+  //     this.sideCordinateForRayCasting.y4=this.verticalBorder.y+this.verticalBorder.height;
+  //     this.sideArr.push(this.sideCordinateForRayCasting);
+  // }
+}
 
   this.renderBorder = function(){
     if(this.sides.top==1){
       this.c.beginPath();
       this.c.drawImage(this.horiBorderImage,this.horizontalBorder.x,this.horizontalBorder.y-this.horizontalBorder.height,
-        this.horizontalBorder.width,this.horizontalBorder.height)
+        this.horizontalBorder.width,this.horizontalBorder.height);
     }
     if(this.sides.right==1){
       this.c.beginPath();

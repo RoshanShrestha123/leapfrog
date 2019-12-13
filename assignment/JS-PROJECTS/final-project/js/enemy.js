@@ -1,5 +1,6 @@
-function Enemy(c,x,y,player){
+function Enemy(c,x,y,player,room){
   this.c = c;
+  this.room = room;
   this.player = player;
   this.width = 50;
   this.height = 50;
@@ -9,6 +10,7 @@ function Enemy(c,x,y,player){
   this.rayArr = [];
   this.rayAngle =0;
   this.visualStatus = false;
+
 
 
   this.leftSideOfPlayer ={
@@ -35,7 +37,14 @@ function Enemy(c,x,y,player){
     x4:(this.player.x-(this.player.width/2))+this.player.width,
     y4:this.player.y-(this.player.height/2)
   }
+//  console.log(this.room.roomArr[1].borderObj.sideArr);
   this.lineArr = [this.leftSideOfPlayer,this.rightSideOfPlayer,this.topSideOfPlayer,this.bottomSideOfPlayer];
+  for (var i = 0; i < this.room.roomArr.length; i++) {
+    for(var j = 0;j<this.room.roomArr[i].borderObj.sideArr.length;j++){
+      this.lineArr.push(this.room.roomArr[i].borderObj.sideArr[j]);
+    }
+  }
+
 
   this.initEnemy = function(x,y){
     this.x = x;
@@ -75,11 +84,6 @@ function Enemy(c,x,y,player){
     }
 
     this.visualStatus=false;
-    // if(this.visualStatus==true){
-    //   console.log("saw");
-    //   this.color='red';
-    //
-    // }
   }
 
   this.initObsForRay = function(player){
@@ -88,7 +92,7 @@ function Enemy(c,x,y,player){
   }
 
   this.initRay = function(){
-    for(var i=0; i<60;i++){
+    for(var i=0; i<50;i++){
       this.rayAngle =i;
       this.rayObj = new Ray(this.c,this.rayAngle);
       this.rayArr.push(this.rayObj);

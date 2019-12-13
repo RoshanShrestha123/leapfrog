@@ -9,9 +9,15 @@ function Room(c,x,y,width,height,t,r,d,l,color,name) {
     name:name,
     img : null
   }
+this.sideOfRoom ={
+  l:l,
+  r:r,
+  t:t,
+  d:d
+}
 
-
-  this.borderObj = new RoomBorder(this.c,0,0,t,r,d,l,this.room);
+  this.borderObj = new RoomBorder(this.c,0,0,this.sideOfRoom.t,this.sideOfRoom.r,this.sideOfRoom.d,this.sideOfRoom.l,this.room);
+  this.borderObj.initBorder();
 
   this.draw = function(){
     this.c.beginPath();
@@ -38,6 +44,10 @@ function Room(c,x,y,width,height,t,r,d,l,color,name) {
     this.borderObj.doorVertical.bottomY-=player.moveY;
     this.borderObj.horizontalBorder.x-=player.moveX;
     this.borderObj.horizontalBorder.y-=player.moveY;
+    this.borderObj.sideCordinateForRayCasting.x3-=player.moveX;
+    this.borderObj.sideCordinateForRayCasting.y3-=player.moveY;
+    this.borderObj.sideCordinateForRayCasting.x4-=player.moveX;
+    this.borderObj.sideCordinateForRayCasting.y4-=player.moveY;
 
     this.draw();
   }
