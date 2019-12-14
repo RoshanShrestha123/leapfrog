@@ -44,10 +44,9 @@ this.sideOfRoom ={
     this.borderObj.doorVertical.bottomY-=player.moveY;
     this.borderObj.horizontalBorder.x-=player.moveX;
     this.borderObj.horizontalBorder.y-=player.moveY;
-    this.borderObj.sideCordinateForRayCasting.x3-=player.moveX;
-    this.borderObj.sideCordinateForRayCasting.y3-=player.moveY;
-    this.borderObj.sideCordinateForRayCasting.x4-=player.moveX;
-    this.borderObj.sideCordinateForRayCasting.y4-=player.moveY;
+  
+
+
 
     this.draw();
   }

@@ -1,5 +1,6 @@
-function Ray(c,angle){
+function Ray(c,angle,player){
   this.c = c;
+  this.player = player;
   this.startPosition = {
     x :100,
     y :100
@@ -15,6 +16,7 @@ function Ray(c,angle){
   this.x+=this.xUnit;
   this.y+=this.yUnit;
   this.sawPlayer = false;
+  this.visualPlayer = false;
 
   this.draw = function(){
     this.c.beginPath();
@@ -41,11 +43,16 @@ function Ray(c,angle){
     if(t>=0 && t<=1 && u>=0 && u<=1){
       this.x = this.startPosition.x+(t*(this.x-this.startPosition.x));
       this.y = this.startPosition.y+(t*(this.y-this.startPosition.y));
-      this.sawPlayer=true;
-    }
-  else {
-      this.sawPlayer=false;
-    }
-  }
+      if(player.tag=='player'){
+        this.sawPlayer=true;
+      }
+      else{
+        this.sawPlayer=false;
+      }
 
+
+
+    }
+
+  }
 }

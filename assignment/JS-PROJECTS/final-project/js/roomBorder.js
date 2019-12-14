@@ -1,5 +1,15 @@
+function SideCordinate(x3,y3,x4,y4,side){
+  this.x3= x3;
+  this.y3 =y3;
+  this.x4 = x4;
+  this.y4 = y4;
+  this.side = side;
+  this.tag ='wall';
+}
+
 function RoomBorder(c,x,y,t,r,b,l,room){
   this.c = c;
+  this.sideLine;
   this.doorGap=70;
   this.roomInfo = room;
   this.horiBorderImage = document.getElementById('horiBorder');
@@ -33,36 +43,29 @@ function RoomBorder(c,x,y,t,r,b,l,room){
     height:30
   }
 
-  this.sideCordinateForRayCasting = {
-    x3:null,
-    x4:null,
-    y3:null,
-    y4:null
-  }
+
   this.sideArr =[];
-this.initBorder = function(){
+  this.initBorder = function(){
   if(this.sides.top==1){
-      this.sideCordinateForRayCasting.x3=this.horizontalBorder.x;
-      this.sideCordinateForRayCasting.y3=this.horizontalBorder.y;
-      this.sideCordinateForRayCasting.x4=this.horizontalBorder.x+this.horizontalBorder.width;
-      this.sideCordinateForRayCasting.y4=this.horizontalBorder.y;
-      this.sideArr.push(this.sideCordinateForRayCasting);
+      this.sideLine = new SideCordinate(this.horizontalBorder.x-this.verticalBorder.width,this.horizontalBorder.y,this.horizontalBorder.x+this.roomInfo.width+this.verticalBorder.width,this.horizontalBorder.y,'top','wall');
+      this.sideArr.push(this.sideLine);
   }
   if(this.sides.left==1){
-      this.sideCordinateForRayCasting.x3=this.verticalBorder.x;
-      this.sideCordinateForRayCasting.y3=this.verticalBorder.y;
-      this.sideCordinateForRayCasting.x4=this.verticalBorder.x;
-      this.sideCordinateForRayCasting.y4=this.verticalBorder.y+this.verticalBorder.height;
-      this.sideArr.push(this.sideCordinateForRayCasting);
+      this.sideLine = new SideCordinate(this.verticalBorder.x,this.verticalBorder.y-this.horizontalBorder.height,this.verticalBorder.x,this.verticalBorder.y+this.roomInfo.height+this.horizontalBorder.height,'left','wall');
+      this.sideArr.push(this.sideLine);
+  }
+  if(this.sides.right==1){
+      this.sideLine = new SideCordinate(this.verticalBorder.x+this.roomInfo.width,this.verticalBorder.y-this.horizontalBorder.height,this.verticalBorder.x+this.roomInfo.width,this.verticalBorder.y+this.roomInfo.height+this.horizontalBorder.height,'right','wall');
+      this.sideArr.push(this.sideLine);
+  }
+  if(this.sides.bottom==1){
+      this.sideLine = new SideCordinate(this.horizontalBorder.x-this.verticalBorder.width,
+        this.horizontalBorder.y+this.roomInfo.height,
+        this.horizontalBorder.x+this.roomInfo.width+this.verticalBorder.width,
+        this.horizontalBorder.y+this.roomInfo.height,'bottom','wall');
+      this.sideArr.push(this.sideLine);
   }
   console.log("side:",this.sideArr);
-  // if(this.sides.right==1){
-  //     this.sideCordinateForRayCasting.x3=this.verticalBorder.x+this.roomInfo.width;
-  //     this.sideCordinateForRayCasting.y3=this.verticalBorder.y;
-  //     this.sideCordinateForRayCasting.x4=this.verticalBorder.x+this.roomInfo.width;
-  //     this.sideCordinateForRayCasting.y4=this.verticalBorder.y+this.verticalBorder.height;
-  //     this.sideArr.push(this.sideCordinateForRayCasting);
-  // }
 }
 
   this.renderBorder = function(){
@@ -70,21 +73,53 @@ this.initBorder = function(){
       this.c.beginPath();
       this.c.drawImage(this.horiBorderImage,this.horizontalBorder.x,this.horizontalBorder.y-this.horizontalBorder.height,
         this.horizontalBorder.width,this.horizontalBorder.height);
+        for (var i = 0; i < this.sideArr.length; i++) {
+          if (this.sideArr[i].side=='top') {
+              this.sideArr[i].x3 = this.horizontalBorder.x-this.verticalBorder.width;
+              this.sideArr[i].y3 = this.horizontalBorder.y;
+              this.sideArr[i].x4 = this.horizontalBorder.x+this.roomInfo.width+this.verticalBorder.width;
+              this.sideArr[i].y4 = this.horizontalBorder.y;
+          }
+        }
     }
     if(this.sides.right==1){
       this.c.beginPath();
       this.c.drawImage(this.vertiBorderImage,this.verticalBorder.x+this.roomInfo.width,this.verticalBorder.y,
       this.verticalBorder.width,this.verticalBorder.height);
+      for (var i = 0; i < this.sideArr.length; i++) {
+        if (this.sideArr[i].side=='right') {
+            this.sideArr[i].x3 = this.verticalBorder.x+this.roomInfo.width;
+            this.sideArr[i].y3 = this.verticalBorder.y;
+            this.sideArr[i].x4 = this.verticalBorder.x+this.roomInfo.width;
+            this.sideArr[i].y4 = this.verticalBorder.y+this.roomInfo.height;
+        }
+      }
     }
     if(this.sides.bottom==1){
       this.c.beginPath();
       this.c.drawImage(this.horiBorderImage,this.horizontalBorder.x,this.horizontalBorder.y+this.roomInfo.height,
       this.horizontalBorder.width,this.horizontalBorder.height);
+      for (var i = 0; i < this.sideArr.length; i++) {
+        if (this.sideArr[i].side=='bottom') {
+            this.sideArr[i].x3 = this.horizontalBorder.x-this.verticalBorder.width;
+            this.sideArr[i].y3 = this.horizontalBorder.y+this.roomInfo.height;
+            this.sideArr[i].x4 = this.horizontalBorder.x+this.roomInfo.width+this.verticalBorder.width;
+            this.sideArr[i].y4 = this.horizontalBorder.y+this.roomInfo.height;
+        }
+      }
     }
     if(this.sides.left==1){
       this.c.beginPath();
       this.c.drawImage(this.vertiBorderImage,this.verticalBorder.x-this.verticalBorder.width,this.verticalBorder.y,
       this.verticalBorder.width,this.verticalBorder.height);
+      for (var i = 0; i < this.sideArr.length; i++) {
+        if (this.sideArr[i].side=='left') {
+            this.sideArr[i].x3 = this.verticalBorder.x;
+            this.sideArr[i].y3 = this.verticalBorder.y-this.horizontalBorder.height;
+            this.sideArr[i].x4 = this.verticalBorder.x;
+            this.sideArr[i].y4 = this.verticalBorder.y+this.roomInfo.height+this.horizontalBorder.height;
+        }
+      }
     }
   }
 

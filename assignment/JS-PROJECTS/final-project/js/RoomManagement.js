@@ -17,7 +17,7 @@ function ManageRoom(c){
   this.entrance1.setBgImage(this.img);
   this.roomArr.push(this.entrance1);
 
-  this.entrance = new Room(this.c,770,-94,168,194,1,0,0,1,'#949494',"entrance2");//top left room
+  this.entrance = new Room(this.c,770,-94,168,194,1,0,0,0,'#949494',"entrance2");//top left room
   this.img = document.getElementById('entrance2');
   this.entrance.setBgImage(this.img);
   this.roomArr.push(this.entrance);

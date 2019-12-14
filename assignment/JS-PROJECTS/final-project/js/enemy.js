@@ -17,25 +17,29 @@ function Enemy(c,x,y,player,room){
     x3:this.player.x-(this.player.width/2),
     y3:this.player.y-(this.player.height/2),
     x4:this.player.x-(this.player.width/2),
-    y4:(this.player.y-(this.player.height/2))+this.player.height
+    y4:(this.player.y-(this.player.height/2))+this.player.height,
+    tag:'player'
   }
   this.rightSideOfPlayer ={
     x3:(this.player.x-(this.player.width/2))+this.player.width,
     y3:(this.player.y-(this.player.height/2)),
     x4:(this.player.x-(this.player.width/2))+this.player.width,
-    y4:(this.player.y-(this.player.height/2))+this.player.height
+    y4:(this.player.y-(this.player.height/2))+this.player.height,
+    tag:'player'
   }
   this.bottomSideOfPlayer ={
     x3:this.player.x-(this.player.width/2),
     y3:(this.player.y-(this.player.height/2))+this.player.height,
     x4:(this.player.x-(this.player.width/2))+this.player.width,
-    y4:(this.player.y-(this.player.height/2))+this.player.height
+    y4:(this.player.y-(this.player.height/2))+this.player.height,
+    tag:'player'
   }
   this.topSideOfPlayer ={
     x3:this.player.x-(this.player.width/2),
     y3:this.player.y-(this.player.height/2),
     x4:(this.player.x-(this.player.width/2))+this.player.width,
-    y4:this.player.y-(this.player.height/2)
+    y4:this.player.y-(this.player.height/2),
+    tag:'player'
   }
 //  console.log(this.room.roomArr[1].borderObj.sideArr);
   this.lineArr = [this.leftSideOfPlayer,this.rightSideOfPlayer,this.topSideOfPlayer,this.bottomSideOfPlayer];
@@ -70,6 +74,7 @@ function Enemy(c,x,y,player,room){
       this.rayArr[i].checkRayCollision(this.lineArr[j]);
       if(this.rayArr[i].sawPlayer==true){
         this.visualStatus=true;
+      //  this.color='red';
       }
       }
       this.rayArr[i].updateAngle(this.x,this.y);
@@ -78,7 +83,8 @@ function Enemy(c,x,y,player,room){
 
     }
     if(this.visualStatus==true){
-      this.color='red';
+     this.color='red';
+     this.checkState();
     }else{
       this.color='green';
     }
@@ -86,16 +92,16 @@ function Enemy(c,x,y,player,room){
     this.visualStatus=false;
   }
 
-  this.initObsForRay = function(player){
-
-
-  }
 
   this.initRay = function(){
-    for(var i=0; i<50;i++){
+    for(var i=0; i<360;i++){
       this.rayAngle =i;
-      this.rayObj = new Ray(this.c,this.rayAngle);
+      this.rayObj = new Ray(this.c,this.rayAngle,this.player);
       this.rayArr.push(this.rayObj);
     }
+  }
+
+  this.checkState = function(){
+    
   }
 }
