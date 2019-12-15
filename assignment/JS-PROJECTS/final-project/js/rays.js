@@ -37,7 +37,7 @@ function Ray(c,angle,player){
     this.yUnit=Math.sin(this.radian)*this.speed;
     this.x+=this.xUnit;
     this.y+=this.yUnit;
-  //  this.draw();
+    this.draw();
   }
 
   //-----------------------------------------function-to check ray collision to objects-----------------------------------------------------//

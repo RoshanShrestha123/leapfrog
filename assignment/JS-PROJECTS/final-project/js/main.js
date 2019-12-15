@@ -20,9 +20,8 @@ function Game(canvas){
   this.shootingAngle=0;
   this.obsArr =[];
   this.manageRoomObj = new ManageRoom(this.c);
-  this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
-  this.enemyObj.initEnemy(500,-70);
-  this.enemyObj.initRay();
+  this.enemyManagementObj = new EnemyManagement(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
+  this.enemyManagementObj.initRays();
 
   //-----------------------------------------event-listener-MOUSECLICK------------------------------------------------------//
 /**
@@ -61,7 +60,10 @@ function Game(canvas){
     //if move up is active -> move upward
     if(this.playerObj.moveup==true){
      this.playerObj.movementUp();
-     this.enemyObj.updatePos();
+     for (var i = 0; i < this.enemyManagementObj.enemyArr.length; i++) {
+       this.enemyManagementObj.enemyArr[i].updatePos();
+     }
+    // this.enemyObj.updatePos();
       for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
         this.manageRoomObj.roomArr[i].update(this.playerObj);
       }
@@ -100,11 +102,19 @@ function Game(canvas){
     for (var i = 0; i < that.manageRoomObj.roomArr.length; i++) { // render room based on the player position
       that.manageRoomObj.roomArr[i].draw();
       that.manageRoomObj.roomArr[i].borderObj.checkBorderCollision(that.playerObj);
-      that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyObj);
+      for (var j = 0; j < that.enemyManagementObj.enemyArr.length; j++) {
+        //that.enemyManagementObj[i].render();
+        that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyManagementObj.enemyArr[j]);
+      }
+
     }
     that.playerObj.draw(); //render player
-    that.enemyObj.render(); // render the enemy
-    that.enemyObj.drawRays(); // calculate the rays collision from enemy field of view
+    for (var i = 0; i < that.enemyManagementObj.enemyArr.length; i++) {
+      that.enemyManagementObj.enemyArr[i].render();
+      that.enemyManagementObj.enemyArr[i].drawRays();
+    }
+    //that.enemyObj.render(); // render the enemy
+  //  that.enemyObj.drawRays(); // calculate the rays collision from enemy field of view
 
     that.fireBullet();
   },1);

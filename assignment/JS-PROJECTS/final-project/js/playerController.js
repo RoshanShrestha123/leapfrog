@@ -91,7 +91,7 @@ function Player(c,width,height){
       that.counter++;
       if (that.counter>=2) {
         console.log(that.imageFrame);
-  that.imageFrame+= that.dFrame;
+        that.imageFrame+= that.dFrame;
         if(that.imageFrame>=3){
           that.dFrame=-1;
         }
