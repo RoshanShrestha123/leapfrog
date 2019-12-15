@@ -65,7 +65,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.horizontalBorder.y+this.roomInfo.height,'bottom','wall');
       this.sideArr.push(this.sideLine);
   }
-  console.log("side:",this.sideArr);
 }
 
   this.renderBorder = function(){

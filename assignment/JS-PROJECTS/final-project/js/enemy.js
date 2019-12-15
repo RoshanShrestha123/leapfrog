@@ -4,15 +4,24 @@ function Enemy(c,x,y,player,room){
   this.player = player;
   this.width = 50;
   this.height = 50;
+  this.lookAngle = 0;
   this.color = 'rgba(100,255,255,1)';
   this.x = x;
   this.y = y;
   this.rayArr = [];
   this.rayAngle =0;
   this.visualStatus = false;
+  this.stateArr = [];
+  this.bulletArr = [];
+  this._SHOOT_INTERVAL = 0;
 
 
 
+  //-----------------------------------------objects to store player sides cordinate STARTS------------------------------------------------------//
+  // this is for raycasting purpose,
+  // line- line intersection formula is applide to the every side player,
+  // each side is the line itself , by calculating the side -line fo the player
+  // we can easily apply the raycasting
   this.leftSideOfPlayer ={
     x3:this.player.x-(this.player.width/2),
     y3:this.player.y-(this.player.height/2),
@@ -41,32 +50,65 @@ function Enemy(c,x,y,player,room){
     y4:this.player.y-(this.player.height/2),
     tag:'player'
   }
-//  console.log(this.room.roomArr[1].borderObj.sideArr);
+
+
+//array to store all the lines in the game for raycasting
   this.lineArr = [this.leftSideOfPlayer,this.rightSideOfPlayer,this.topSideOfPlayer,this.bottomSideOfPlayer];
   for (var i = 0; i < this.room.roomArr.length; i++) {
     for(var j = 0;j<this.room.roomArr[i].borderObj.sideArr.length;j++){
       this.lineArr.push(this.room.roomArr[i].borderObj.sideArr[j]);
     }
   }
+  //-----------------------------------------object to store the lines -ENDS------------------------------------------------------//
+
+  //-----------------------------------------function-to- init enemy------------------------------------------------------//
 
 
   this.initEnemy = function(x,y){
     this.x = x;
     this.y =y ;
+    this.enemyState = new EnemyState(this.player,this.x,this.y);
   }
 
-  this.draw = function(){
+  //-----------------------------------------function-to render player every frame------------------------------------------------------//
 
+  this.render = function(){
+    this.c.save();
+    this.enemyState.update(this.x,this.y);
     this.c.beginPath();
+    this.rotateEnemy(this.enemyState.angle);
     this.c.fillStyle=this.color;
     this.c.rect(this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
     this.c.fill();
+    this.c.restore();
+    if(this.enemyState.shootActivate==true){
+      if(this._SHOOT_INTERVAL>=200){
+        this.initBullet();
+        this._SHOOT_INTERVAL=0;
+      }
+      this._SHOOT_INTERVAL++;
+    }
+    this.updateBulletPos();
+
   }
-  this.update = function(){
+  this.initBullet = function(){
+      console.log("shoot ");
+      this.bulletObj = new EnemyBullet(this.c,this.x,this.y,this.enemyState.angle);
+      this.bulletArr.push(this.bulletObj);
+  }
+  this.updateBulletPos = function(){
+    if(this.bulletArr.length!=0){
+      for (var i = 0; i < this.bulletArr.length; i++) {
+        this.bulletArr[i].updatePosition();
+      }
+    }
+  }
+  this.updatePos = function(){
     this.x -=this.player.moveX;
     this.y -=this.player.moveY;
-    //this.draw();
   }
+
+  //-----------------------------------------RAYCATING from the enemy the cordinate ------------------------------------------------------//
 
   this.drawRays = function(){
     for (var i = 0; i < this.rayArr.length; i++) {
@@ -74,34 +116,49 @@ function Enemy(c,x,y,player,room){
       this.rayArr[i].checkRayCollision(this.lineArr[j]);
       if(this.rayArr[i].sawPlayer==true){
         this.visualStatus=true;
-      //  this.color='red';
       }
-      }
-      this.rayArr[i].updateAngle(this.x,this.y);
+    }
+    this.lookAngle = this.enemyState.angle*(180/Math.PI);
+    this.rayArr[i].updateAngle(this.x,this.y,this.lookAngle+i);
 
 
 
     }
     if(this.visualStatus==true){
-     this.color='red';
-     this.checkState();
+     this.color=this.enemyState.color;
+     this.enemyState.initState(1);//change state
     }else{
-      this.color='green';
+      this.enemyState.initState(0);
+      this.color=this.enemyState.color;
     }
 
     this.visualStatus=false;
   }
 
+  //-----------------------------------------init ray ------------------------------------------------------//
 
   this.initRay = function(){
-    for(var i=0; i<360;i++){
-      this.rayAngle =i;
+    for(var i=0; i<45;i++){
+      this.rayAngle =i+this.enemyState.angle;// init rays with this angle
       this.rayObj = new Ray(this.c,this.rayAngle,this.player);
       this.rayArr.push(this.rayObj);
     }
   }
 
-  this.checkState = function(){
-    
+
+  //-----------------------------------------function to rotate the enemy------------------------------------------------------//
+/**
+ * rotate the enemy to the angle
+ * @method
+ * @param  {float} angle angle in the degree
+ */
+
+  this.rotateEnemy = function(angle){
+    //this.angleInRadi = angle *180/Math.PI;
+    this.angle = angle;
+    this.c.translate(this.x,this.y);
+    this.c.rotate(-Math.PI/2);
+    this.c.rotate(this.angle);
+    this.c.translate(-this.x,-this.y);
   }
 }

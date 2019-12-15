@@ -24,7 +24,7 @@ function ManageRoom(c){
 
 
 
-  this.bathroom1 = new Room(this.c,968,-94,362,169,1,1,1,1,'#949494',"bathroom1");//top left room
+  this.bathroom1 = new Room(this.c,968,-94,362,169,0,1,1,1,'#949494',"bathroom1");//top left room
   this.img = document.getElementById('bathroom1');
   this.bathroom1.setBgImage(this.img);
   this.roomArr.push(this.bathroom1);

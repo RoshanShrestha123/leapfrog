@@ -6,8 +6,12 @@ function Player(c,width,height){
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
   this.speed =1;
-  this.width=70;
-  this.height=70;
+  this.width=50;
+  this.height=78;
+  this.sx=0;
+  this.sy=0;
+  this.sWidth =72;
+  this.sHeight =100;
   this.moveup= false;
   this.movedown = false;
   this.moveleft=false;
@@ -20,78 +24,61 @@ function Player(c,width,height){
   this.mouseObj = new Mouse(this.c);
   this.mouseX=this.mouseObj.x;
   this.mouseY=this.mouseObj.y;
-
   this.moveX=0;
   this.moveY=0;
+  this.imageFrame =0;
+  this.counter =0;
+  this.dFrame = 1;
 
 
 
-
-
+//-----------------------------------------function------------------------------------------------------//
+//render the player sprite every frame
   this.draw = function(){
-  //  this.drawRays();
-
     this.mouseObj.draw();
     this.mouseX=this.mouseObj.x;
     this.mouseY=this.mouseObj.y;
-    this.lookAngle = Math.atan2(this.mouseY-this.y,this.mouseX-this.x);
+    this.sx = this.sWidth * this.imageFrame;
+    this.lookAngle = Math.atan2(this.mouseY-this.y,this.mouseX-this.x);// in radian
     this.c.save();
     this.c.translate(this.x,this.y);
     this.c.rotate(-Math.PI/2);
-    this.c.rotate(this.lookAngle);
+    this.c.rotate(this.lookAngle);// in radian
     this.c.translate(-this.x,-this.y);
-   this.c.drawImage(this.img,this.x-this.width/2,this.y-this.height/2,this.width,this.height);
-    // this.c.fillStyle="black";
-    // this.c.rect(this.x-this.width/2,this.y-this.height/2,this.width,this.height);
-    // this.c.fill();
+    this.c.drawImage(this.img,this.sx,this.sy,this.sWidth,this.sHeight,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
     this.c.restore();
 
+
+
+
+
   }
-
-
-
-  this.drawLine = function(){
-    this.c.beginPath();
-    this.c.moveTo(this.x,this.y);
-    this.c.strokeStyle="red";
-    this.c.lineTo(this.mouseX,this.mouseY);
-    this.c.stroke();
-  }
-
-  this.drawLineFromOrigin = function(){
-    this.c.beginPath();
-    this.c.moveTo(0,0);
-    this.c.strokeStyle="green";
-    this.c.lineTo(this.x,this.y);
-    this.c.stroke();
-  }
-
-  this.drawText = function(){
-    c.font = "10px Arial";
-    c.fillText(Math.floor(this.lookAngle*180/ Math.PI), this.x+this.width/2, this.y+this.height/2);
-  }
-
+//-----------------------------------------function------------------------------------------------------//
+//player to move forward respective to the mouse position
   this.movementUp = function(){ //move up
-
-
-    //console.log("angle:", this.y);
     this.moveY =this.speed*Math.sin(this.lookAngle);
     this.moveX =this.speed*Math.cos(this.lookAngle);
   }
+  //player to move forward respective to mouse position
   this.movementDown = function(){// move down
-    //console.log("angle:", this.y);
     this.moveY =-this.speed*Math.sin(this.lookAngle) ;
     this.moveX =-this.speed*Math.cos(this.lookAngle);
   }
+  //player to move left respective to mouse position
   this.movementLeft = function(){// move left
-    // this.y -=this.speed * Math.cos(this.angle*180/Math.PI);
-    // this.x -=this.speed *Math.sin(this.angle*180/Math.PI);
+    //// TODO:
   }
+  //player to move right respective to mouse position
   this.movementRight = function(){//move right
-    // this.y +=this.speed * Math.cos(this.angle*180/Math.PI);
-    // this.x +=this.speed *Math.sin(this.angle*180/Math.PI);
+    // TODO:
   }
 
+
+
+  //-----------------------------------------event listener------------------------------------------------------//
+/**
+ * Event listener to detect the KEY DOWN event
+ */
   document.addEventListener('keydown',function(event){
     if(event.keyCode==37||event.keyCode==65){
       that.moveleft=true;
@@ -101,11 +88,28 @@ function Player(c,width,height){
     }
     if(event.keyCode==38||event.keyCode==87){
       that.moveup=true;
+      that.counter++;
+      if (that.counter>=2) {
+        console.log(that.imageFrame);
+  that.imageFrame+= that.dFrame;
+        if(that.imageFrame>=3){
+          that.dFrame=-1;
+        }
+        if(that.imageFrame<=0){
+          that.dFrame= 1;
+        }
+
+
+        that.counter=0;
+      }
     }
     if(event.keyCode==40 || event.keyCode==83){
       that.movedown=true;
     }
   });
+  /**
+   * Event to listener to detect the KEY UP event
+   */
   document.addEventListener('keyup',function(event){
     if(event.keyCode==37 ||event.keyCode==65){
       that.moveleft=false;
