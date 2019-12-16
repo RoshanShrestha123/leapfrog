@@ -75,10 +75,10 @@ function Game(canvas){
     }
     // if move down is active
     if(this.playerObj.movedown==true){
-      this.playerObj.movementDown();
-      for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
-        this.manageRoomObj.roomArr[i].update(this.playerObj)
-      }
+      // this.playerObj.movementDown();
+      // for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
+      //   this.manageRoomObj.roomArr[i].update(this.playerObj)
+      // }
     }
     //if move left is active
     if(this.playerObj.moveleft==true){
