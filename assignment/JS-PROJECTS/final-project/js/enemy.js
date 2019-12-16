@@ -96,13 +96,13 @@ function Enemy(c,x,y,player,room){
   }
   this.initBullet = function(){
       console.log("shoot ");
-      this.bulletObj = new EnemyBullet(this.c,this.x,this.y,this.enemyState.angle);
+      this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y);
       this.bulletArr.push(this.bulletObj);
   }
   this.updateBulletPos = function(){
     if(this.bulletArr.length!=0){
       for (var i = 0; i < this.bulletArr.length; i++) {
-        this.bulletArr[i].updatePosition();
+        this.bulletArr[i].update();
       }
     }
   }
