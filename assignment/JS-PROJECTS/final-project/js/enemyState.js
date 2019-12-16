@@ -1,9 +1,9 @@
-function EnemyState(player){
+function EnemyState(player,angle){
   this.player = player;
 
   this.currentState = 0;
   this.shootActivate = false;
-  this.angle = 0;
+  this.angle = angle;
   this.color = 'green';
   this.state ={
     IDLE:0,

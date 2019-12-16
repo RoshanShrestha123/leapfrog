@@ -19,9 +19,13 @@ function Game(canvas){
   this.isShooting=false;
   this.shootingAngle=0;
   this.obsArr =[];
+
   this.manageRoomObj = new ManageRoom(this.c);
   this.enemyManagementObj = new EnemyManagement(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
   this.enemyManagementObj.initRays();
+  this.gridObj = new Grid(this.c,this.canvas.width,this.canvas.height,this.manageRoomObj);
+  this.gridObj.initGrid();
+  this.gridObj.checkGridCollision();
 
   //-----------------------------------------event-listener-MOUSECLICK------------------------------------------------------//
 /**
@@ -60,6 +64,7 @@ function Game(canvas){
     //if move up is active -> move upward
     if(this.playerObj.moveup==true){
      this.playerObj.movementUp();
+       that.gridObj.updateGridPos(this.playerObj.moveX,this.playerObj.moveY);
      for (var i = 0; i < this.enemyManagementObj.enemyArr.length; i++) {
        this.enemyManagementObj.enemyArr[i].updatePos();
      }
@@ -94,6 +99,7 @@ function Game(canvas){
 
   setInterval(function(){
     that.c.clearRect(0,0,this.canvas.width,this.canvas.height);
+
     that.controlPlayerMovement();// check user input and move the player accordingly
     if(that.isShooting==true){
       that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);// initate the bullet in the player position
@@ -108,6 +114,7 @@ function Game(canvas){
       }
 
     }
+      that.gridObj.renderGrid();
     that.playerObj.draw(); //render player
     for (var i = 0; i < that.enemyManagementObj.enemyArr.length; i++) {
       that.enemyManagementObj.enemyArr[i].render();

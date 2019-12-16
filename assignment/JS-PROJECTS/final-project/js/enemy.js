@@ -2,8 +2,8 @@ function Enemy(c,x,y,player,room){
   this.c = c;
   this.room = room;
   this.player = player;
-  this.width = 50;
-  this.height = 50;
+  this.width = 70;
+  this.height = 30;
   this.lookAngle = 0;
   this.color = 'rgba(100,255,255,1)';
   this.x = x;
@@ -13,6 +13,7 @@ function Enemy(c,x,y,player,room){
   this.visualStatus = false;
   this.stateArr = [];
   this.bulletArr = [];
+  this.image = document.getElementById('enemy');
   this._SHOOT_INTERVAL = 0;
 
 
@@ -64,10 +65,11 @@ function Enemy(c,x,y,player,room){
   //-----------------------------------------function-to- init enemy------------------------------------------------------//
 
 
-  this.initEnemy = function(x,y){
+  this.initEnemy = function(x,y,angle){
     this.x = x;
     this.y =y ;
-    this.enemyState = new EnemyState(this.player,this.x,this.y);
+    this.angle = angle;
+    this.enemyState = new EnemyState(this.player,this.angle);
   }
 
   //-----------------------------------------function-to render player every frame------------------------------------------------------//
@@ -78,8 +80,9 @@ function Enemy(c,x,y,player,room){
     this.c.beginPath();
     this.rotateEnemy(this.enemyState.angle);
     this.c.fillStyle=this.color;
-    this.c.rect(this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
-    this.c.fill();
+    // this.c.rect(this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
+    // this.c.fill();
+    this.c.drawImage(this.image,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
     this.c.restore();
     if(this.enemyState.shootActivate==true){
       if(this._SHOOT_INTERVAL>=200){
