@@ -22,7 +22,7 @@ function Ray(c,angle,player){
 
   this.draw = function(){
     this.c.beginPath();
-    this.c.strokeStyle="white";
+    this.c.strokeStyle= 'rgba(189, 189, 189,0.2)';
     this.c.moveTo(this.startPosition.x,this.startPosition.y);
     this.c.lineTo(this.x,this.y);
     this.c.stroke();
@@ -37,7 +37,7 @@ function Ray(c,angle,player){
     this.yUnit=Math.sin(this.radian)*this.speed;
     this.x+=this.xUnit;
     this.y+=this.yUnit;
-    this.draw();
+  //  this.draw();
   }
 
   //-----------------------------------------function-to check ray collision to objects-----------------------------------------------------//
