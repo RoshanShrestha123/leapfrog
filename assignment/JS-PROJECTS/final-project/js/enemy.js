@@ -1,10 +1,11 @@
-function Enemy(c,x,y,player,room,index){
+function Enemy(c,x,y,player,room,index,collisionObj){
   this.c = c;
   this.room = room;
   this.player = player;
-  this.width = 70;
-  this.height = 30;
+  this.width = 100;
+  this.height = 100;
   this.lookAngle = 0;
+
   this.color = 'rgba(100,255,255,1)';
   this.x = x;
   this.y = y;
@@ -19,6 +20,10 @@ function Enemy(c,x,y,player,room,index){
   this.lineArr=[];
   this.lineArrAll=[];
   this.index = index;
+  this.hasGun = true;
+  this.isVisible = false;
+  this.enemyState=null;
+  this.collided = true;
 
 
 
@@ -66,36 +71,44 @@ function Enemy(c,x,y,player,room,index){
       this.lineArrAll.push(this.room.roomArr[i].borderObj.sideArr[j]);
     }
   }
-  console.log(this.lineArrAll);
   //-----------------------------------------object to store the lines -ENDS------------------------------------------------------//
 
   //-----------------------------------------function-to- init enemy------------------------------------------------------//
 
 
   this.initEnemy = function(x,y,angle){
+    var temp = Math.floor(Math.random()*2);
+    if(temp ==0){
+      this.hasGun = false;
+    }
+    else{
+      this.hasGun = true;
+    }
     this.x = x;
     this.y =y ;
     this.angle = angle;
     this.enemyState = new EnemyState(this.player,this.angle);
+    this.enemyState.initState(0);
+    // this.height = this.enemyState.height;
+    // this.width = this.enemyState.width;
+
   }
 
   //-----------------------------------------function-to render player every frame------------------------------------------------------//
 this.enemyDraw = function(){
   this.c.save();
-
   this.c.beginPath();
   this.rotateEnemy(this.enemyState.angle);
   this.c.fillStyle=this.color;
   this.c.drawImage(this.image,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
   this.c.restore();
 }
-  this.update = function(sawEnemy){
-    if(sawEnemy==true){
-      this.enemyDraw();
-    }
 
-    //  console.log("display enemy");
-    this.enemyState.update(this.x,this.y);
+  this.update = function(sawEnemy){
+    if(this.enemyState.freezeLoop==false){
+      this.enemyState.update(this.x,this.y);
+      this.updateValueFromState();
+
     if(this.enemyState.shootActivate==true){
       if(this._SHOOT_INTERVAL>=300){
         this.initBullet();
@@ -103,11 +116,30 @@ this.enemyDraw = function(){
       }
       this._SHOOT_INTERVAL++;
     }
-    this.updateBulletPos();
 
+    if(this.x+this.width>this.player.x && this.x < this.player.x+this.player.width &&
+        this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==3){
+          //console.log(this.enemyState.currentState);
+            this.enemyState.initState(4);
+        }
+    if(this.enemyState.currentState!=4){
+          this.drawRays();
+        }
+        //console.log(this.enemyState.currentState);
+
+    }else{
+      this.isVisible=true;
+    }
+
+
+
+    this.updateBulletPos();
+    if(this.isVisible==true){
+      this.enemyDraw();
+    }
   }
+
   this.initBullet = function(){
-      console.log("shoot ");
       this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y);
       this.bulletArr.push(this.bulletObj);
   }
@@ -135,20 +167,18 @@ this.enemyDraw = function(){
     }
     this.lookAngle = this.enemyState.angle*(180/Math.PI);
     this.rayArr[i].updateAngle(this.x,this.y,this.lookAngle+i);
-  //  this.rayArr[i].draw();
-
-
+   //this.rayArr[i].draw();
     }
+
     if(this.visualStatus==true){
      this.color=this.enemyState.color;
-     this.enemyState.initState(1);//change state
-
-    }else{
-      this.enemyState.initState(0);
-      this.color=this.enemyState.color;
+     if(this.hasGun==true){
+       this.enemyState.initState(1);//attack
+     }
+     else{
+       this.enemyState.initState(3);//surrender
+     }
     }
-
-    this.visualStatus=false;
   }
 
   //-----------------------------------------init ray ------------------------------------------------------//
@@ -163,18 +193,22 @@ this.enemyDraw = function(){
 
 
   //-----------------------------------------function to rotate the enemy------------------------------------------------------//
-/**
- * rotate the enemy to the angle
- * @method
- * @param  {float} angle angle in the degree
- */
 
   this.rotateEnemy = function(angle){
-    //this.angleInRadi = angle *180/Math.PI;
     this.angle = angle;
     this.c.translate(this.x,this.y);
     this.c.rotate(-Math.PI/2);
     this.c.rotate(this.angle);
     this.c.translate(-this.x,-this.y);
+  }
+
+  this.updateValueFromState = function(){
+    this.height = this.enemyState.height;
+    this.width = this.enemyState.width;
+    this.image = this.enemyState.image;
+    if(this.enemyState.currentState==3 || this.enemyState.currentState==4){
+        this.isVisible = this.enemyState.isVisible;
+    }
+
   }
 }

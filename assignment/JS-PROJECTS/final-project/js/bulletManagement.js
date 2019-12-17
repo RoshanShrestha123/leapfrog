@@ -1,4 +1,5 @@
-function Gun(c,playerX,playerY,mouseX,mouseY){
+function Gun(c,playerX,playerY,mouseX,mouseY,manageRoom){
+
   this.angle=0;
   this.c = c;
   this.mouseX=mouseX;

@@ -25,7 +25,6 @@ function Game(canvas){
   this.playerObj.initArrayObs(this.enemyManagementObj.enemyArr[0].lineArr);
   this.playerObj.sideOfEnemy(this.enemyManagementObj.enemyArr);
   this.playerObj.initRay();
-
   this.gridObj = new Grid(this.c,this.canvas.width,this.canvas.height,this.manageRoomObj);
   this.gridObj.initGrid();
   this.gridObj.checkGridCollision();
@@ -41,13 +40,13 @@ function Game(canvas){
  * @method
  */
 
-  window.addEventListener('click',function(){
+  document.addEventListener('click',function(){
     that.isShooting=true;
     that.playerX = that.playerObj.x;
     that.playerY= that.playerObj.y;
     that.mouseX = that.playerObj.mouseX;
     that.mouseY = that.playerObj.mouseY;
-    that.gunObj = new Gun(that.c,that.playerX,that.playerY,that.mouseX,that.mouseY);
+    that.gunObj = new Gun(that.c,that.playerX,that.playerY,that.mouseX,that.mouseY,that.manageRoomObj);
     that.bulletArr.push(that.gunObj);
   });
   //-----------------------------------------function-to-move-bullet-forward------------------------------------------------------//
@@ -103,12 +102,10 @@ function Game(canvas){
 
   setInterval(function(){
     that.c.clearRect(0,0,this.canvas.width,this.canvas.height);
-
     that.controlPlayerMovement();// check user input and move the player accordingly
     if(that.isShooting==true){
       that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);
     }
-
     for (var i = 0; i < that.manageRoomObj.roomArr.length; i++) {
       that.manageRoomObj.roomArr[i].draw();
       that.manageRoomObj.roomArr[i].borderObj.checkBorderCollision(that.playerObj,'player');
@@ -116,13 +113,13 @@ function Game(canvas){
         that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyManagementObj.enemyArr[j]);
       }
     }
-    that.gridObj.renderGrid();
+    //that.gridObj.renderGrid();
     that.playerObj.drawRays();
     that.playerObj.draw();
 
     for (var i = 0; i < that.enemyManagementObj.enemyArr.length; i++) {
       that.enemyManagementObj.enemyArr[i].update(that.playerObj.sawEnemy);
-      that.enemyManagementObj.enemyArr[i].drawRays();
+    //  that.enemyManagementObj.enemyArr[i].drawRays();
     }
     that.fireBullet();
   },1);
