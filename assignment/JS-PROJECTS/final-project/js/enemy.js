@@ -104,7 +104,7 @@ this.enemyDraw = function(){
   this.c.restore();
 }
 
-  this.update = function(sawEnemy){
+  this.update = function(scoreObj){
     if(this.enemyState.freezeLoop==false){
       this.enemyState.update(this.x,this.y);
       this.updateValueFromState();
@@ -121,6 +121,8 @@ this.enemyDraw = function(){
         this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==3){
           //console.log(this.enemyState.currentState);
             this.enemyState.initState(4);
+            scoreObj.increaseScore(750);
+            scoreObj.displayScore();
         }
     if(this.enemyState.currentState!=4){
           this.drawRays();

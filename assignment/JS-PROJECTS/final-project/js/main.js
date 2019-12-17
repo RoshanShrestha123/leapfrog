@@ -18,6 +18,7 @@ function Game(canvas){
   this.bulletArr=[];
   this.isShooting=false;
   this.shootingAngle=0;
+  this.scoreObj = new Score();
   this.obsArr =[];
   this.manageRoomObj = new ManageRoom(this.c,this.canvas);
   this.enemyManagementObj = new EnemyManagement(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
@@ -28,6 +29,7 @@ function Game(canvas){
   this.gridObj = new Grid(this.c,this.canvas.width,this.canvas.height,this.manageRoomObj);
   this.gridObj.initGrid();
   this.gridObj.checkGridCollision();
+  this.uiObj = new Ui(this.c);
 
   for (var i = 0; i < this.enemyManagementObj.enemyObj.length; i++) {
     this.gridObj.getEnemyPosition(this.enemyManagementObj.enemyObj.x,this.enemyManagementObj.enemyObj.y)
@@ -118,10 +120,15 @@ function Game(canvas){
     that.playerObj.draw();
 
     for (var i = 0; i < that.enemyManagementObj.enemyArr.length; i++) {
-      that.enemyManagementObj.enemyArr[i].update(that.playerObj.sawEnemy);
+    //  console.log(that.scoreObj);
+      that.enemyManagementObj.enemyArr[i].update(that.scoreObj);
     //  that.enemyManagementObj.enemyArr[i].drawRays();
     }
     that.fireBullet();
+    that.uiObj.updateScore(that.scoreObj.score);
+    that.uiObj.renderUi();
+
+
   },1);
 
 
