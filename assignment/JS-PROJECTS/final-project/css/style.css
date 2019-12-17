@@ -1,11 +1,17 @@
+@font-face {
+  font-family: gameFont;
+  src: url(../font/visitor1.ttf);
+}
 *{
   margin:0;
   padding: 0;
+
 }
 #canvas{
   border: 1px solid black;
   cursor: none;
     background-color: #595959;
+    font-family: gameFont;
 }
 img{
   display: none;
