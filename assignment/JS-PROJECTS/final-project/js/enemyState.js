@@ -8,7 +8,8 @@ function EnemyState(player,angle){
   this.state ={
     IDLE:0,
     ATTACK:1,
-    DEAD:2
+    DEAD:2,
+    SURENDER:3
   }
 
   this.initState = function(state){
@@ -28,6 +29,9 @@ function EnemyState(player,angle){
       case 2:
         this.deadState();
         break;
+      case 3:
+        this.surrender();
+        break;
 
     }
   }
@@ -38,10 +42,14 @@ function EnemyState(player,angle){
     this.shootActivate = false;
   }
   this.attackState = function(){
-  //  console.log("attack motherFU@@**");
     this.color ='red';
-  //  console.log(this.enemyX);
    this.angle = Math.atan2(this.player.y-this.enemyY,this.player.x-this.enemyX);
+    //console.log(this.angle);
+    this.shootActivate = true;
+  }
+  this.surrender = function(){
+    this.color ='red';
+   this.angle =this.angle;
     //console.log(this.angle);
     this.shootActivate = true;
   }

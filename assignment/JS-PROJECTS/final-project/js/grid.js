@@ -8,6 +8,8 @@ function Grid(c,width,height,manageRoomObj){
   this.rows = this.width/this.size;
   this.cols = this.height/this.size;
   this.manageRoomObj = manageRoomObj;
+  this.openSet = [];
+  this.closeSet = [];
 
 
   this.initGrid = function(){
@@ -30,9 +32,9 @@ function Grid(c,width,height,manageRoomObj){
         //  console.log(this.hori);
           if(this.nodeArr[i].x<this.hori.x+this.hori.width && this.nodeArr[i].x+this.nodeArr[i].width> this.hori.x&&
             this.nodeArr[i].y<(this.hori.y-this.hori.height)+this.hori.height && this.nodeArr[i].y+this.nodeArr[i].height>(this.hori.y-this.hori.height)){
-              console.log("grid collided");
+        
               this.nodeArr[i].color = 'red';
-              this.nodeArr[i].tag='_noCollide'
+              this.nodeArr[i].tag='_noCollide';
 
             }
         }
@@ -41,12 +43,13 @@ function Grid(c,width,height,manageRoomObj){
         //  console.log(this.hori);
           if(this.nodeArr[i].x<this.hori.x+this.hori.width && this.nodeArr[i].x+this.nodeArr[i].width> this.hori.x&&
             this.nodeArr[i].y<(this.hori.y+this.manageRoomObj.roomArr[j].room.height)+this.hori.height && this.nodeArr[i].y+this.nodeArr[i].height>(this.hori.y+this.manageRoomObj.roomArr[j].room.height)){
-              console.log("grid collided");
+
               this.nodeArr[i].color = 'red';
-              this.nodeArr[i].tag='_noCollide'
+              this.nodeArr[i].tag='_noCollide';
 
             }
         }
+
       }
     }
   }
@@ -63,6 +66,13 @@ function Grid(c,width,height,manageRoomObj){
     for (var i = 0; i < this.nodeArr.length; i++) {
       this.nodeArr[i].updateCellPos(this.moveX,this.moveY);
     }
+  }
+  this.getEnemyPosition = function(x,y){
+    //console.log(x,y);
+  }
+
+  this.updateSet = function(){
+
   }
 
 

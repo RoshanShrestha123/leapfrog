@@ -205,12 +205,14 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           if(this.horizontalBorder.y+(this.roomInfo.height)>this.player.y ){
             console.log("top side");
             this.player.moveup=false;
+            this.player.moveY-=0.5;
             this.player.y-=0.5;
           }
           //check bottom side of collision
           if(this.horizontalBorder.y+(this.roomInfo.height)<this.player.y ){
             console.log("bottom side");
             this.player.moveup=false;
+            this.player.moveY+=0.5;
             this.player.y+=0.5;
           }
         }

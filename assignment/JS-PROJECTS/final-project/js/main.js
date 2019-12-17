@@ -19,13 +19,20 @@ function Game(canvas){
   this.isShooting=false;
   this.shootingAngle=0;
   this.obsArr =[];
-
-  this.manageRoomObj = new ManageRoom(this.c);
+  this.manageRoomObj = new ManageRoom(this.c,this.canvas);
   this.enemyManagementObj = new EnemyManagement(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
   this.enemyManagementObj.initRays();
+  this.playerObj.initArrayObs(this.enemyManagementObj.enemyArr[0].lineArr);
+  this.playerObj.sideOfEnemy(this.enemyManagementObj.enemyArr);
+  this.playerObj.initRay();
+
   this.gridObj = new Grid(this.c,this.canvas.width,this.canvas.height,this.manageRoomObj);
   this.gridObj.initGrid();
   this.gridObj.checkGridCollision();
+
+  for (var i = 0; i < this.enemyManagementObj.enemyObj.length; i++) {
+    this.gridObj.getEnemyPosition(this.enemyManagementObj.enemyObj.x,this.enemyManagementObj.enemyObj.y)
+  }
 
   //-----------------------------------------event-listener-MOUSECLICK------------------------------------------------------//
 /**
@@ -52,6 +59,7 @@ function Game(canvas){
         if(this.bulletArr[i].x>this.canvas.width || this.bulletArr[i].x<0 || this.bulletArr[i].y>this.canvas.height ||
             this.bulletArr[i].y<0){ // remove the bullet from array if it goes out of the canvas
               this.bulletArr.shift();
+              console.log("bullet out");
             }
       }
     }
@@ -68,17 +76,13 @@ function Game(canvas){
      for (var i = 0; i < this.enemyManagementObj.enemyArr.length; i++) {
        this.enemyManagementObj.enemyArr[i].updatePos();
      }
-    // this.enemyObj.updatePos();
       for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
         this.manageRoomObj.roomArr[i].update(this.playerObj);
       }
     }
     // if move down is active
     if(this.playerObj.movedown==true){
-      // this.playerObj.movementDown();
-      // for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
-      //   this.manageRoomObj.roomArr[i].update(this.playerObj)
-      // }
+
     }
     //if move left is active
     if(this.playerObj.moveleft==true){
@@ -102,27 +106,24 @@ function Game(canvas){
 
     that.controlPlayerMovement();// check user input and move the player accordingly
     if(that.isShooting==true){
-      that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);// initate the bullet in the player position
+      that.gunObj.update(that.shootingAngle,that.playerX,that.playerY);
     }
 
-    for (var i = 0; i < that.manageRoomObj.roomArr.length; i++) { // render room based on the player position
+    for (var i = 0; i < that.manageRoomObj.roomArr.length; i++) {
       that.manageRoomObj.roomArr[i].draw();
-      that.manageRoomObj.roomArr[i].borderObj.checkBorderCollision(that.playerObj);
+      that.manageRoomObj.roomArr[i].borderObj.checkBorderCollision(that.playerObj,'player');
       for (var j = 0; j < that.enemyManagementObj.enemyArr.length; j++) {
-        //that.enemyManagementObj[i].render();
         that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyManagementObj.enemyArr[j]);
       }
-
     }
-      that.gridObj.renderGrid();
-    that.playerObj.draw(); //render player
+    that.gridObj.renderGrid();
+    that.playerObj.drawRays();
+    that.playerObj.draw();
+
     for (var i = 0; i < that.enemyManagementObj.enemyArr.length; i++) {
-      that.enemyManagementObj.enemyArr[i].render();
+      that.enemyManagementObj.enemyArr[i].update(that.playerObj.sawEnemy);
       that.enemyManagementObj.enemyArr[i].drawRays();
     }
-    //that.enemyObj.render(); // render the enemy
-  //  that.enemyObj.drawRays(); // calculate the rays collision from enemy field of view
-
     that.fireBullet();
   },1);
 

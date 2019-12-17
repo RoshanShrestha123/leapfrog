@@ -1,5 +1,7 @@
-function ManageRoom(c){
+function ManageRoom(c,canvas){
   this.c =c;
+  this.canvas =canvas;
+
   this.roomArr = [];
 
 /**
