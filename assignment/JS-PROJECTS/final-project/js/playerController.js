@@ -211,10 +211,11 @@ function Player(c,width,height){
           if(this.rayArr[i].sawPlayer==true){
             this.visibleEnemyArr=k;
             this.visualStatus=true;
-            break;
+            
           }else {
 
           }
+          this.rayArr[i].sawPlayer=false;
         }
     }
     this.rayAngle = this.lookAngle*(180/Math.PI);
