@@ -10,7 +10,7 @@
 #canvas{
   border: 1px solid black;
   cursor: none;
-    background-color: #595959;
+    background-color: black;
     font-family: gameFont;
 }
 img{
