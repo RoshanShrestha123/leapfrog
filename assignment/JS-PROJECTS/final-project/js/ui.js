@@ -11,7 +11,7 @@ function Ui(c){
     this.c.fillStyle='white';
     this.c.font='100px gameFont';
     this.c.fontStyle
-    this.c.fillText(10000,1000,70);
+    this.c.fillText(this.totalScore,1000,70);
     this.c.fill();
   }
   this.updateScore = function(score){
@@ -22,7 +22,6 @@ function Ui(c){
     this.c.beginPath();
     this.c.fillStyle='white';
     this.c.font='100px gameFont';
-    this.c.fontStyle
     this.c.fillText(this.currentBullet,20,70);
     this.c.fill();
   }
@@ -30,7 +29,6 @@ function Ui(c){
     this.c.beginPath();
     this.c.fillStyle='white';
     this.c.font='40px gameFont';
-    this.c.fontStyle
     this.c.fillText('/'+this.currentBullet,150,40);
     this.c.fill();
   }
@@ -38,7 +36,6 @@ function Ui(c){
     this.c.beginPath();
     this.c.fillStyle='white';
     this.c.font='40px gameFont';
-    this.c.fontStyle
     this.c.fillText('AUTO',150,70);
     this.c.fill();
   }

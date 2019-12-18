@@ -5,7 +5,6 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.width = 100;
   this.height = 100;
   this.lookAngle = 0;
-
   this.color = 'rgba(100,255,255,1)';
   this.x = x;
   this.y = y;
@@ -24,6 +23,8 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.isVisible = false;
   this.enemyState=null;
   this.collided = true;
+  this.listenCommand = false;
+  this.mesg = '';
 
 
 
@@ -98,10 +99,18 @@ function Enemy(c,x,y,player,room,index,collisionObj){
 this.enemyDraw = function(){
   this.c.save();
   this.c.beginPath();
+//  this.fillStyle='red';
+
   this.rotateEnemy(this.enemyState.angle);
-  this.c.fillStyle=this.color;
+this.c.fillStyle=this.color;
   this.c.drawImage(this.image,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
   this.c.restore();
+}
+this.drawEnemyText = function(){
+  this.c.fillStyle='white';
+  this.c.font='20px gameFont';
+  this.c.fillText(this.mesg,this.x-(this.width/2),this.y-this.height);
+  this.c.fill();
 }
 
   this.update = function(scoreObj){
@@ -117,27 +126,27 @@ this.enemyDraw = function(){
       this._SHOOT_INTERVAL++;
     }
 
+    //condition to arrest
     if(this.x+this.width>this.player.x && this.x < this.player.x+this.player.width &&
-        this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==3){
-          //console.log(this.enemyState.currentState);
-            this.enemyState.initState(4);
+        this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==2 && this.player.qPressed==true){
+            this.enemyState.initState(3);
             scoreObj.increaseScore(750);
             scoreObj.displayScore();
         }
-    if(this.enemyState.currentState!=4){
-          this.drawRays();
-        }
-        //console.log(this.enemyState.currentState);
-
+    if(this.enemyState.currentState!=3){
+        this.drawRays();
+    }
     }else{
       this.isVisible=true;
     }
 
-
-
     this.updateBulletPos();
     if(this.isVisible==true){
       this.enemyDraw();
+      this.drawEnemyText();
+      if(this.player.ePressed==true){
+        this.enemyState.initState(2);
+      }
     }
   }
 
@@ -173,12 +182,12 @@ this.enemyDraw = function(){
     }
 
     if(this.visualStatus==true){
-     this.color=this.enemyState.color;
+    // this.color=this.enemyState.color;
      if(this.hasGun==true){
        this.enemyState.initState(1);//attack
      }
      else{
-       this.enemyState.initState(3);//surrender
+       this.enemyState.initState(2);//surrender
      }
     }
   }
@@ -208,6 +217,7 @@ this.enemyDraw = function(){
     this.height = this.enemyState.height;
     this.width = this.enemyState.width;
     this.image = this.enemyState.image;
+    this.mesg = this.enemyState.mesg;
     if(this.enemyState.currentState==3 || this.enemyState.currentState==4){
         this.isVisible = this.enemyState.isVisible;
     }

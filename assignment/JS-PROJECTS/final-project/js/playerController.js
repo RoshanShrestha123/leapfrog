@@ -8,6 +8,8 @@ function Player(c,width,height){
   this.speed =1;
   this.width=50;
   this.height=78;
+  this.qPressed = false;
+  this.ePressed = false;
   this.sx=0;
   this.sy=0;
   this.sWidth =72;
@@ -76,7 +78,7 @@ function Player(c,width,height){
           index:i
         }
         this.lineArr.push(this.topSideOfPlayer);
-    
+
       }
     }
 
@@ -128,6 +130,9 @@ function Player(c,width,height){
     if(event.keyCode==37||event.keyCode==65){
       that.moveleft=true;
     }
+    if(event.keyCode==81){  //press q
+      that.qPressed = true;
+    }
     if(event.keyCode==39||event.keyCode==68){
       that.moveright=true;
     }
@@ -150,8 +155,9 @@ function Player(c,width,height){
       that.movedown=true;
     }
 
-    if(event.keyCode==69){
+    if(event.keyCode==69){  //press e
       console.log("hand in the air now!!!");
+      that.ePressed = true;
     }
   });
   /**
@@ -169,6 +175,12 @@ function Player(c,width,height){
     }
     if(event.keyCode==40 || event.keyCode==83){
       that.movedown=false;
+    }
+    if(event.keyCode==81){  //release q
+      that.qPressed = false;
+    }
+    if(event.keyCode==69){ // release e
+      that.ePressed = false;
     }
   });
   //-----------------------------------------RAYCATING from the enemy the cordinate ------------------------------------------------------//
@@ -199,6 +211,7 @@ function Player(c,width,height){
           if(this.rayArr[i].sawPlayer==true){
             this.visibleEnemyArr=k;
             this.visualStatus=true;
+            break;
           }else {
 
           }

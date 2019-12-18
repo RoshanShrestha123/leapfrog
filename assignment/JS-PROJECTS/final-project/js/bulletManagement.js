@@ -27,8 +27,6 @@ function Gun(c,playerX,playerY,mouseX,mouseY,manageRoom){
     this.c.restore();
   }
   this.update = function(){
-  //  console.log("angle for bullet",this.angle);
-  //  this.angle = Math.atan2(this.mouseY-this.y,this.mouseX-this.x);
     this.y +=this.yUnit;
     this.x +=this.xUnit;
     this.draw();

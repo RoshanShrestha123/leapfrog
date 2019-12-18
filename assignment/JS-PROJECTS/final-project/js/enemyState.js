@@ -9,6 +9,7 @@ function EnemyState(player,angle){
   this.height = 0;
   this.freezeLoop = false;
   this.afterArrestedAngle = 0;
+  this.mesg = '';
   //this.isVisible = false;
   this.state ={
     IDLE:0,
@@ -32,13 +33,13 @@ function EnemyState(player,angle){
         this.attackState();
         break;
       case 2:
-        this.deadState();
-        break;
-      case 3:
         this.surrender();
         break;
-      case 4:
+      case 3:
         this.arrested();
+        break;
+      case 4:
+        this.deadState();
         break;
 
     }
@@ -49,6 +50,7 @@ function EnemyState(player,angle){
     this.angle =  this.angle;
     this.width = 72;
     this.height = 34;
+    this.mesg ='idle';
     //this.isVisible = false;
 
     this.shootActivate = false;
@@ -57,6 +59,7 @@ function EnemyState(player,angle){
     this.image = document.getElementById('enemy');
     this.angle = Math.atan2(this.player.y-this.enemyY,this.player.x-this.enemyX);
     this.shootActivate = true;
+    this.mesg ='attack';
 
   }
   this.surrender = function(){
@@ -67,6 +70,7 @@ function EnemyState(player,angle){
     this.shootActivate = false;
     this.isVisible = true;
     this.afterArrestedAngle = -this.angle;
+    this.mesg ='surrender';
   //  console.log("i surrender");
   }
   this.arrested = function(){
@@ -74,11 +78,11 @@ function EnemyState(player,angle){
     this.angle = this.afterArrestedAngle;
     this.isVisible = true;
     this.freezeLoop = true;
-    console.log("arrested");
+    this.mesg ='arrested';
 
   }
   this.deadState = function(){
-
+    this.mesg ='Dead';
     this.isVisible = true;
   }
 

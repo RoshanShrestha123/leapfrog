@@ -32,7 +32,7 @@ function Grid(c,width,height,manageRoomObj){
         //  console.log(this.hori);
           if(this.nodeArr[i].x<this.hori.x+this.hori.width && this.nodeArr[i].x+this.nodeArr[i].width> this.hori.x&&
             this.nodeArr[i].y<(this.hori.y-this.hori.height)+this.hori.height && this.nodeArr[i].y+this.nodeArr[i].height>(this.hori.y-this.hori.height)){
-        
+
               this.nodeArr[i].color = 'red';
               this.nodeArr[i].tag='_noCollide';
 
