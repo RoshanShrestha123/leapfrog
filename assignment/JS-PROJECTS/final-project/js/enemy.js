@@ -158,7 +158,7 @@ this.drawEnemyText = function(){
         this.delay--;
       }
       else{
-        var randomState = Math.floor(Math.random()*3)+1
+        var randomState = Math.floor(Math.random()*2)+1
         this.enemyState.initState(randomState);
         console.log(randomState);
         this.activateCounter=false;
@@ -168,13 +168,18 @@ this.drawEnemyText = function(){
 
 
   this.initBullet = function(){
-      this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y);
+      this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y,this.room,this.player);
       this.bulletArr.push(this.bulletObj);
   }
   this.updateBulletPos = function(){
     if(this.bulletArr.length!=0){
       for (var i = 0; i < this.bulletArr.length; i++) {
         this.bulletArr[i].update();
+        var bulletCollided = this.bulletArr[i].checkBulletCollision(this.player);
+        if(bulletCollided){
+          this.bulletArr.splice(i,1);
+          console.log("player die");
+        }
       }
     }
   }

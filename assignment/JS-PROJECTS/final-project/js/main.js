@@ -7,12 +7,11 @@
  * @constructor
  */
 
-function Game(canvas){
+function Game(canvas,c){
   var that = this;
   this.canvas = canvas;
-  this.c= this.canvas.getContext('2d');
-  this.canvas.height = 700;
-  this.canvas.width = 1290;
+  this.c= c;
+  
   this.playerObj = new Player(this.c,this.canvas.width,this.canvas.height);
   this.gunObj;
   this.bulletArr=[];
@@ -48,7 +47,7 @@ function Game(canvas){
     that.playerY= that.playerObj.y;
     that.mouseX = that.playerObj.mouseX;
     that.mouseY = that.playerObj.mouseY;
-    that.gunObj = new Gun(that.c,that.playerX,that.playerY,that.mouseX,that.mouseY,that.manageRoomObj);
+    that.gunObj = new Gun(that.c,that.playerX,that.playerY,that.mouseX,that.mouseY,that.manageRoomObj,that.enemyManagementObj.enemyArr);
     that.bulletArr.push(that.gunObj);
   });
   //-----------------------------------------function-to-move-bullet-forward------------------------------------------------------//
@@ -135,6 +134,3 @@ function Game(canvas){
 }
 
 //-----------------------------------------GAME MAIN OBJECT------------------------------------------------------//
-
-var canvas = document.getElementById('canvas');
-var gameObj = new Game(canvas);// Main Game Object!!

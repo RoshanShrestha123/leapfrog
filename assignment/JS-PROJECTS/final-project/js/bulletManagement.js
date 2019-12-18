@@ -1,4 +1,5 @@
 function Gun(c,playerX,playerY,mouseX,mouseY,manageRoom){
+//  console.log(target);
 
   this.angle=0;
   this.c = c;
@@ -30,6 +31,14 @@ function Gun(c,playerX,playerY,mouseX,mouseY,manageRoom){
     this.y +=this.yUnit;
     this.x +=this.xUnit;
     this.draw();
+  }
+  this.checkBulletCollision = function(target){
+      this.target = target;
+    if(this.x+this.width>this.target.x && this.x < this.target.x + this.target.width&&
+        this.y+this.height > this.target.y && this.y<this.target.y+this.target.height){
+        //  console.log("collided");
+          return true;
+        }
   }
 
 }

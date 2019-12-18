@@ -75,5 +75,9 @@ function Grid(c,width,height,manageRoomObj){
 
   }
 
+  this.startNode = function(){
+    
+  }
+
 
 }
