@@ -6,7 +6,8 @@ function Node(c,x,y,size,color){
   this.width=this.size;
   this.height = this.size;
   this.color = color;
-  this.tag ='_collide';
+  this.tag ='path';
+  this.index = null;
   this.fn =0;
   this.gn =0;
   this.hn =0;
@@ -21,9 +22,11 @@ function Node(c,x,y,size,color){
     this.c.rect(this.x,this.y,this.width,this.height);
     this.c.stroke();
   }
-  
+
   this.updateCellPos = function(moveX,moveY){
     this.x -=moveX;
     this.y -=moveY;
   }
+
+
 }

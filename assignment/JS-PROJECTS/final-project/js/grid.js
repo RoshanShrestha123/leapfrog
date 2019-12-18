@@ -34,7 +34,7 @@ function Grid(c,width,height,manageRoomObj){
             this.nodeArr[i].y<(this.hori.y-this.hori.height)+this.hori.height && this.nodeArr[i].y+this.nodeArr[i].height>(this.hori.y-this.hori.height)){
 
               this.nodeArr[i].color = 'red';
-              this.nodeArr[i].tag='_noCollide';
+              this.nodeArr[i].tag='walls';
 
             }
         }
@@ -45,7 +45,7 @@ function Grid(c,width,height,manageRoomObj){
             this.nodeArr[i].y<(this.hori.y+this.manageRoomObj.roomArr[j].room.height)+this.hori.height && this.nodeArr[i].y+this.nodeArr[i].height>(this.hori.y+this.manageRoomObj.roomArr[j].room.height)){
 
               this.nodeArr[i].color = 'red';
-              this.nodeArr[i].tag='_noCollide';
+              this.nodeArr[i].tag='walls';
 
             }
         }

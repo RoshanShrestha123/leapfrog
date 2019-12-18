@@ -38,6 +38,7 @@ function Player(c,width,height){
   this.enemyArr=[];
   this.visualStatus = false;
   this.visibleEnemyArr = null;
+  this.textDelay = 0;
 
     this.sideOfEnemy = function(enemyArr){
     this.enemyArr = enemyArr;
@@ -101,6 +102,18 @@ function Player(c,width,height){
     this.c.translate(-this.x,-this.y);
     this.c.drawImage(this.img,this.sx,this.sy,this.sWidth,this.sHeight,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
     this.c.restore();
+    if(this.textDelay>0){
+      this.drawPlayerText();
+    }
+    this.textDelay--;
+
+  }
+
+  this.drawPlayerText = function(){
+    this.c.fillStyle='white';
+    this.c.font='20px gameFont';
+    this.c.fillText("hands up",this.x-(this.width/2),this.y-this.height);
+    this.c.fill();
   }
 //-----------------------------------------function to control player------------------------------------------------------//
 
@@ -158,6 +171,7 @@ function Player(c,width,height){
     if(event.keyCode==69){  //press e
       console.log("hand in the air now!!!");
       that.ePressed = true;
+      that.textDelay = 200;
     }
   });
   /**
@@ -211,7 +225,7 @@ function Player(c,width,height){
           if(this.rayArr[i].sawPlayer==true){
             this.visibleEnemyArr=k;
             this.visualStatus=true;
-            
+
           }else {
 
           }

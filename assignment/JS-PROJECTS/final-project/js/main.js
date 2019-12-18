@@ -115,7 +115,7 @@ function Game(canvas){
         that.manageRoomObj.roomArr[i].borderObj.checkBorderCollisionEnemy(that.enemyManagementObj.enemyArr[j]);
       }
     }
-    that.gridObj.renderGrid();
+    //that.gridObj.renderGrid();
     that.playerObj.drawRays();
     that.playerObj.draw();
 

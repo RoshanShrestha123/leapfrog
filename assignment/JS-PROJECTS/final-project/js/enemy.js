@@ -25,6 +25,9 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.collided = true;
   this.listenCommand = false;
   this.mesg = '';
+  this.currentState =null;
+  this.alreadyChanged = false;
+  this.activateCounter = false;
 
 
 
@@ -129,11 +132,11 @@ this.drawEnemyText = function(){
     //condition to arrest
     if(this.x+this.width>this.player.x && this.x < this.player.x+this.player.width &&
         this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==2 && this.player.qPressed==true){
-            this.enemyState.initState(3);
+            this.enemyState.initState(9);
             scoreObj.increaseScore(750);
             scoreObj.displayScore();
         }
-    if(this.enemyState.currentState!=3){
+    if(this.enemyState.currentState!=9){
         this.drawRays();
     }
     }else{
@@ -144,11 +147,25 @@ this.drawEnemyText = function(){
     if(this.isVisible==true){
       this.enemyDraw();
       this.drawEnemyText();
-      if(this.player.ePressed==true){
-        this.enemyState.initState(2);
+      if(this.player.ePressed==true && this.alreadyChanged==false){
+        this.delay = 200;
+        this.activateCounter=true;
+        this.alreadyChanged=true;
+      }
+    }
+    if(this.activateCounter==true){
+      if(this.delay>0){
+        this.delay--;
+      }
+      else{
+        var randomState = Math.floor(Math.random()*3)+1
+        this.enemyState.initState(randomState);
+        console.log(randomState);
+        this.activateCounter=false;
       }
     }
   }
+
 
   this.initBullet = function(){
       this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y);
@@ -181,7 +198,7 @@ this.drawEnemyText = function(){
    //this.rayArr[i].draw();
     }
 
-    if(this.visualStatus==true){
+    if(this.visualStatus==true && this.enemyState.currentState==0){
     // this.color=this.enemyState.color;
      if(this.hasGun==true){
        this.enemyState.initState(1);//attack

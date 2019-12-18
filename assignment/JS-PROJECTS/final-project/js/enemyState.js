@@ -36,9 +36,12 @@ function EnemyState(player,angle){
         this.surrender();
         break;
       case 3:
+        this.dntCare();
+        break;
+      case 9:
         this.arrested();
         break;
-      case 4:
+      case 10:
         this.deadState();
         break;
 
@@ -59,6 +62,8 @@ function EnemyState(player,angle){
     this.image = document.getElementById('enemy');
     this.angle = Math.atan2(this.player.y-this.enemyY,this.player.x-this.enemyX);
     this.shootActivate = true;
+    this.width = 72;
+    this.height = 34;
     this.mesg ='attack';
 
   }
@@ -73,6 +78,19 @@ function EnemyState(player,angle){
     this.mesg ='surrender';
   //  console.log("i surrender");
   }
+
+  this.dntCare = function(){
+  //  console.log("idle");
+   this.image = document.getElementById('enemy');
+    this.angle =  this.angle;
+    this.width = 72;
+    this.height = 34;
+    this.mesg ='I dnt care';
+    //this.isVisible = false;
+
+    this.shootActivate = false;
+  }
+
   this.arrested = function(){
     //console.log('you are arrested');
     this.angle = this.afterArrestedAngle;
