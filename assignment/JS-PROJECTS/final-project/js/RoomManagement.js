@@ -13,7 +13,7 @@ function ManageRoom(c,canvas){
  */
 
  //outside of the room
- this.outsideBottom = new Room(this.c,380,270,1193,290,0,1,1,0,'#949494',"outsideBottom");
+ this.outsideBottom = new Room(this.c,380,270,1193,300,0,1,1,0,'#949494',"outsideBottom");
  this.img = document.getElementById('outsideBottom');
  this.outsideBottom.setBgImage(this.img);
  this.roomArr.push(this.outsideBottom);

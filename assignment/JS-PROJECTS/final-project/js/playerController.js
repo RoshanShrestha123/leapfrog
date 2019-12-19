@@ -5,7 +5,7 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
-  this.speed =1;
+  this.speed =1.5;
   this.width=50;
   this.height=78;
   this.qPressed = false;
@@ -130,11 +130,19 @@ function Player(c,width,height){
   }
 
   this.movementLeft = function(){// move left
-    //// TODO:
+    this.lookAngleDegree = this.lookAngle*(Math.PI/180);
+    this.newLeftAngle = this.lookAngleDegree-45;
+    this.newLeftAngle *= 180/Math.PI;
+    this.moveY =this.speed*Math.sin(this.newLeftAngle) ;
+    this.moveX =this.speed*Math.cos(this.newLeftAngle);
   }
 
   this.movementRight = function(){//move right
-    // TODO:
+    this.lookAngleDegree = this.lookAngle*(Math.PI/180);
+    this.newRightAngle = this.lookAngleDegree-45;
+    this.newRightAngle *= 180/Math.PI;
+    this.moveY =-this.speed*Math.sin(this.newRightAngle) ;
+    this.moveX =-this.speed*Math.cos(this.newRightAngle);
   }
 
   //-----------------------------------------event listener------------------------------------------------------//
@@ -202,7 +210,7 @@ function Player(c,width,height){
   //-----------------------------------------RAYCATING from the enemy the cordinate ------------------------------------------------------//
 
   this.drawRays = function(){
-    if(this.moveup==true){
+    if(this.moveup==true || this.movedown==true || this.moveleft==true || this.moveright==true){
       for (var i = 0; i < this.enemyArr.length; i++) {
         for (var j = 0; j < this.lineArr.length; j++) {
           if(this.lineArr[j].tag=='enemy'+i){
@@ -216,6 +224,7 @@ function Player(c,width,height){
         }
       }
     }
+
 
     for (var i = 0; i < this.rayArr.length; i++) {
       for (var j = 0; j < this.lineArr.length; j++) {

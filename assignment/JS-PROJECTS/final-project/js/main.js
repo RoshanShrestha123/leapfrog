@@ -59,52 +59,52 @@ function Game(canvas,c){
         this.bulletArr[i].update();
         for (var j = 0; j < this.enemyManagementObj.enemyArr.length; j++) {
           var collision =this.bulletArr[i].checkBulletCollision(this.enemyManagementObj.enemyArr[j]);
-          if(collision==true){
-            //this.bulletArr.splice(i,1);
+          if(collision==true && this.enemyManagementObj.enemyArr[j].enemyState.currentState!=10 ){
+
             this.enemyManagementObj.enemyArr[j].isDead=true;
             console.log("bullet collided");
+            this.bulletArr.splice(i,1);
+
           }
+          if(this.bulletArr[i].x>this.canvas.width || this.bulletArr[i].x<0 || this.bulletArr[i].y>this.canvas.height|| this.bulletArr[i].y<0){
+                this.bulletArr.shift();
+                console.log("bullet out");
+              }
         }
 
-        if(this.bulletArr[i].x>this.canvas.width || this.bulletArr[i].x<0 || this.bulletArr[i].y>this.canvas.height|| this.bulletArr[i].y<0){
-              this.bulletArr.shift();
-              console.log("bullet out");
-            }
+
       }
     }
   }
 
 
   //-----------------------------------------function-to-control-the-player-movement-----------------------------------------------------//
-this.updateEnvironmentPosition = function(){
-    that.gridObj.updateGridPos(this.playerObj.moveX,this.playerObj.moveY);
-   for (var i = 0; i < this.enemyManagementObj.enemyArr.length; i++) {
-     this.enemyManagementObj.enemyArr[i].updatePos();
-   }
-    for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
-      this.manageRoomObj.roomArr[i].update(this.playerObj);
-    }
-}
+
   this.controlPlayerMovement = function(){
-    //if move up is active -> move upward
     if(this.playerObj.moveup==true){
       this.playerObj.movementUp();
 
     }
-    // if move down is active
     if(this.playerObj.movedown==true){
       this.playerObj.movementDown();
 
     }
-    //if move left is active
     if(this.playerObj.moveleft==true){
       this.playerObj.movementLeft();
     }
-    // if move right is active
     if(this.playerObj.moveright==true){
       this.playerObj.movementRight();
     }
 
+  }
+  this.updateEnvironmentPosition = function(){
+      that.gridObj.updateGridPos(this.playerObj.moveX,this.playerObj.moveY);
+     for (var i = 0; i < this.enemyManagementObj.enemyArr.length; i++) {
+       this.enemyManagementObj.enemyArr[i].updatePos();
+     }
+      for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
+        this.manageRoomObj.roomArr[i].update(this.playerObj);
+      }
   }
   //-----------------------------------------GAME LOOP------------------------------------------------------//
 

@@ -103,10 +103,8 @@ function Enemy(c,x,y,player,room,index,collisionObj){
 this.enemyDraw = function(){
   this.c.save();
   this.c.beginPath();
-//  this.fillStyle='red';
-
   this.rotateEnemy(this.enemyState.angle);
-this.c.fillStyle=this.color;
+  this.c.fillStyle=this.color;
   this.c.drawImage(this.image,this.x-(this.width/2),this.y-(this.height/2),this.width,this.height);
   this.c.restore();
 }
@@ -138,6 +136,7 @@ this.drawEnemyText = function(){
             scoreObj.increaseScore(750);
             scoreObj.displayScore();
         }
+
     if(this.enemyState.currentState!=9){
         this.drawRays();
     }
@@ -181,7 +180,6 @@ this.drawEnemyText = function(){
     }
   }
 
-
   this.initBullet = function(){
       this.bulletObj = new Gun(this.c,this.x,this.y,this.player.x,this.player.y,this.room,this.player);
       this.bulletArr.push(this.bulletObj);
@@ -198,6 +196,7 @@ this.drawEnemyText = function(){
       }
     }
   }
+  
   this.updatePos = function(){
     this.x -=this.player.moveX;
     this.y -=this.player.moveY;
