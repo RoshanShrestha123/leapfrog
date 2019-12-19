@@ -10,6 +10,7 @@ function EnemyState(player,angle){
   this.freezeLoop = false;
   this.afterArrestedAngle = 0;
   this.mesg = '';
+  this.previousState = null;
   //this.isVisible = false;
   this.state ={
     IDLE:0,
@@ -19,6 +20,7 @@ function EnemyState(player,angle){
   }
 
   this.initState = function(state){
+    this.previousState = this.currentState;
     this.currentState = state;
 
   }
@@ -65,7 +67,6 @@ function EnemyState(player,angle){
     this.width = 72;
     this.height = 34;
     this.mesg ='attack';
-
   }
   this.surrender = function(){
     this.image =document.getElementById('enemySurender');
@@ -100,7 +101,9 @@ function EnemyState(player,angle){
 
   }
   this.deadState = function(){
+    console.log("i am dead man");
     this.mesg ='Dead';
+    this.freezeLoop = true;
     this.isVisible = true;
   }
 

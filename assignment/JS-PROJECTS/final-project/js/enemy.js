@@ -28,6 +28,7 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.currentState =null;
   this.alreadyChanged = false;
   this.activateCounter = false;
+  this.isDead = false;
 
 
 
@@ -129,6 +130,7 @@ this.drawEnemyText = function(){
       this._SHOOT_INTERVAL++;
     }
 
+
     //condition to arrest
     if(this.x+this.width>this.player.x && this.x < this.player.x+this.player.width &&
         this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==2 && this.player.qPressed==true){
@@ -144,6 +146,19 @@ this.drawEnemyText = function(){
     }
 
     this.updateBulletPos();
+    if(this.isDead==true){
+      this.enemyState.initState(10);
+      if(this.enemyState.previousState==1){
+      scoreObj.increaseScore(500);
+      scoreObj.displayScore();
+      }
+      else{
+        scoreObj.decreaseScore(500);
+        scoreObj.displayScore();
+      }
+      console.log("this is dead");
+      this.isDead=false;
+    }
     if(this.isVisible==true){
       this.enemyDraw();
       this.drawEnemyText();
@@ -178,7 +193,7 @@ this.drawEnemyText = function(){
         var bulletCollided = this.bulletArr[i].checkBulletCollision(this.player);
         if(bulletCollided){
           this.bulletArr.splice(i,1);
-          console.log("player die");
+          this.player.isDead=true;
         }
       }
     }
@@ -199,8 +214,9 @@ this.drawEnemyText = function(){
       }
     }
     this.lookAngle = this.enemyState.angle*(180/Math.PI);
+  //  this.rayArr[i].draw();
     this.rayArr[i].updateAngle(this.x,this.y,this.lookAngle+i);
-   //this.rayArr[i].draw();
+
     }
 
     if(this.visualStatus==true && this.enemyState.currentState==0){

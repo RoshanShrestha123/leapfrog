@@ -1,4 +1,5 @@
 function Menu(canvas,c){
+  var that = this;
   this.c = c;
   this.canvas = canvas;
   this.x = 0;
@@ -7,6 +8,7 @@ function Menu(canvas,c){
   this.height = this.canvas.height;
   this.bgImage = document.getElementById('menuBg');
   this.mouseObj = new Mouse(this.c);
+  this.exitMenu = false;
 
 
 
@@ -38,4 +40,9 @@ function Menu(canvas,c){
     this.c.rect(10,380,300,50);
     this.c.fill();
   }
+  document.addEventListener('keydown',function(event){
+    if(event.keyCode==69){
+      that.exitMenu = true;
+    }
+  });
 }

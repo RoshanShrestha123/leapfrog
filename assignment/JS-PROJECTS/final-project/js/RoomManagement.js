@@ -12,7 +12,21 @@ function ManageRoom(c,canvas){
  * color of the room and name of the room
  */
 
+ //outside of the room
+ this.outsideBottom = new Room(this.c,380,270,1193,290,0,1,1,0,'#949494',"outsideBottom");
+ this.img = document.getElementById('outsideBottom');
+ this.outsideBottom.setBgImage(this.img);
+ this.roomArr.push(this.outsideBottom);
 
+ this.livingroom = new Room(this.c,380,-124,361,387,0,0,1,1,'#949494',"livingroom1");
+ this.img = document.getElementById('livingroom');
+ this.livingroom.setBgImage(this.img);
+ this.roomArr.push(this.livingroom);
+
+ this.livingroom = new Room(this.c,380,-487,753,363,0,0,0,1,'#949494',"livingroom2");
+ this.img = document.getElementById('livingroom2');
+ this.livingroom.setBgImage(this.img);
+ this.roomArr.push(this.livingroom);
 //main entrance room
   this.entrance1 = new Room(this.c,770,100,359,168,0,1,0,1,'#949494',"entrance1");//top left room
   this.img = document.getElementById('entrance1');
@@ -37,15 +51,7 @@ function ManageRoom(c,canvas){
   this.roomArr.push(this.bathroom2);
 
 
-  this.livingroom = new Room(this.c,380,-124,361,387,0,0,1,1,'#949494',"livingroom1");
-  this.img = document.getElementById('livingroom');
-  this.livingroom.setBgImage(this.img);
-  this.roomArr.push(this.livingroom);
 
-  this.livingroom = new Room(this.c,380,-487,753,363,0,0,0,1,'#949494',"livingroom2");
-  this.img = document.getElementById('livingroom2');
-  this.livingroom.setBgImage(this.img);
-  this.roomArr.push(this.livingroom);
 
 
   this.path1 = new Room(this.c,1133,-487,225,173,0,0,0,0,'#949494',"path1");
@@ -68,7 +74,7 @@ function ManageRoom(c,canvas){
   this.path4.setBgImage(this.img);
   this.roomArr.push(this.path4);
 
-  this.livingroom = new Room(this.c,380,-878,553,361,1,1,0,1,'#949494',"meetingHall");
+  this.livingroom = new Room(this.c,380,-878,553,361,1,1,1,1,'#949494',"meetingHall");
   this.img = document.getElementById('meetingHall');
   this.livingroom.setBgImage(this.img);
   this.roomArr.push(this.livingroom);

@@ -16,6 +16,7 @@ this.sideOfRoom ={
   d:d
 }
 
+
   this.borderObj = new RoomBorder(this.c,0,0,this.sideOfRoom.t,this.sideOfRoom.r,this.sideOfRoom.d,this.sideOfRoom.l,this.room);
   this.borderObj.initBorder();
 
@@ -38,13 +39,11 @@ this.sideOfRoom ={
     this.room.y-=player.moveY;
     this.borderObj.verticalBorder.x-=player.moveX;
     this.borderObj.verticalBorder.y-=player.moveY;
-    this.borderObj.doorVertical.topX-=player.moveX;
-    this.borderObj.doorVertical.topY-=player.moveY;
-    this.borderObj.doorVertical.bottomX-=player.moveX;
-    this.borderObj.doorVertical.bottomY-=player.moveY;
+    this.borderObj.doorVertical.x-=player.moveX;
+    this.borderObj.doorVertical.y-=player.moveY;
     this.borderObj.horizontalBorder.x-=player.moveX;
     this.borderObj.horizontalBorder.y-=player.moveY;
-  
+
 
 
 

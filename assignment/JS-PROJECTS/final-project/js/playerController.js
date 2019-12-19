@@ -39,6 +39,8 @@ function Player(c,width,height){
   this.visualStatus = false;
   this.visibleEnemyArr = null;
   this.textDelay = 0;
+  this.isCollidedWithDoor = false;
+  this.isDead = false;
 
     this.sideOfEnemy = function(enemyArr){
     this.enemyArr = enemyArr;
@@ -215,7 +217,6 @@ function Player(c,width,height){
       }
     }
 
-
     for (var i = 0; i < this.rayArr.length; i++) {
       for (var j = 0; j < this.lineArr.length; j++) {
         for (var k = 0; k < this.enemyArr.length; k++) {
@@ -233,8 +234,9 @@ function Player(c,width,height){
         }
     }
     this.rayAngle = this.lookAngle*(180/Math.PI);
-    this.rayArr[i].updateAngle(this.x,this.y,this.rayAngle+(i-50));
     this.rayArr[i].draw();
+    this.rayArr[i].updateAngle(this.x,this.y,this.rayAngle+(i-50));
+
     }
     if(this.visualStatus==true){
       this.enemyArr[this.visibleEnemyArr].isVisible=true;
