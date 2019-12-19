@@ -7,6 +7,7 @@ function GameState(canvas){
   this.gameStarted = false;
   this.menuStart = false;
   this.c= this.canvas.getContext('2d');
+  this.bgMusic = new Audio('./music/bgMusic.ogg');
 
 
   this.startMenu = function(){
@@ -14,11 +15,17 @@ function GameState(canvas){
     this.menuStart = true;
     this.gameStarted = false;
 
+
+
   }
   document.addEventListener('keydown',function(event){
     if(event.keyCode==69 && that.gameStarted==false){  //press e
     console.log("game start");
     that.gameObj = new Game(that.canvas,that.c);
+    that.bgMusic.play();
+    that.bgMusic.loop = true;
+    that.bgMusic.volume = 0.4;
+
     that.gameStarted = true;
     that.menuStart = false;
 

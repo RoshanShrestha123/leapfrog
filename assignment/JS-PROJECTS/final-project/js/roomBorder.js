@@ -194,7 +194,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
           //check right side of collision
           if(this.verticalBorder.x>this.player.x){
-            console.log("right side");
             this.player.moveX -=1;
 
 
@@ -202,7 +201,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           }
           //check left side of collision
           if(this.verticalBorder.x<=this.player.x && this.verticalBorder.y+this.verticalBorder.height>this.player.y){
-            console.log("left side");
             this.player.moveX +=1;
           //  this.player.x+=200;
 
@@ -216,16 +214,13 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.doorVertical.x-this.doorVertical.width<= this.player.width +this.player.x-(this.player.width/2) &&
         this.doorVertical.y+this.doorVertical.height>= this.player.y-(this.player.height/2) &&
         this.doorVertical.y<=this.player.y+this.player.height-(this.player.height/2)){
-          console.log("collided with door");
           //check right side of collision
           this.isCollided = true;
           if(this.doorVertical.x>this.player.x){
-            console.log("right side door");
             this.player.moveX +=1;
           }
           //check left side of collision
           if(this.doorVertical.x<=this.player.x && this.doorVertical.y+this.doorVertical.height>this.player.y){
-            console.log("left side door");
             this.player.moveX -=1;
           }
         }
@@ -239,7 +234,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
           //check right side of collision
           if(this.verticalBorder.x+(this.roomInfo.width)>this.player.x ){
-            console.log("right side");
             this.player.moveX -=1;
             //this.player.movedown= true;
             //this.player.x-=10;
@@ -247,7 +241,6 @@ function RoomBorder(c,x,y,t,r,b,l,room){
 
           //check left side of collision
           if(this.verticalBorder.x+(this.roomInfo.width)<=this.player.x ){
-            console.log("left side");
             this.player.moveX +=1;
 
           }
@@ -267,12 +260,10 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.horizontalBorder.y-this.horizontalBorder.height<=this.player.y+this.player.height-(this.player.height/2)){
           //check top side of collision
           if(this.horizontalBorder.y>this.player.y ){
-            console.log("top side");
             this.player.moveY -=1;
           }
           //check bottom side of collision
           if(this.horizontalBorder.y<this.player.y ){
-            console.log("bottom side");
             this.player.moveY +=1;
           }
         }
@@ -287,12 +278,10 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.horizontalBorder.y+(this.roomInfo.height)<=this.player.y+this.player.height-(this.player.height/2)){
           //check top side of collision
           if(this.horizontalBorder.y+(this.roomInfo.height)>this.player.y ){
-            console.log("top side");
             this.player.moveY -=1;
           }
           //check bottom side of collision
           if(this.horizontalBorder.y+(this.roomInfo.height)<this.player.y ){
-            console.log("bottom side");
             this.player.moveY +=1;
 
 
@@ -316,13 +305,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
             //check right side of collision
             if(this.verticalBorder.x>this.player.x){
-              console.log("right side");
               this.player.moveup=false;
               this.player.x-=0.5;
             }
             //check left side of collision
             if(this.verticalBorder.x<=this.player.x && this.verticalBorder.y+this.verticalBorder.height>this.player.y){
-              console.log("left side");
               this.player.moveup=false;
               this.player.x+=0.5;
             }
@@ -338,13 +325,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
             //check right side of collision
             if(this.verticalBorder.x+(this.roomInfo.width)>this.player.x ){
-              console.log("right side");
               this.player.moveup=false;
               this.player.x-=0.5;
             }
             //check left side of collision
             if(this.verticalBorder.x+(this.roomInfo.width)<=this.player.x ){
-              console.log("left side");
               this.player.moveup=false;
               this.player.x+=0.5;
             }
@@ -360,13 +345,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           this.horizontalBorder.y-this.horizontalBorder.height<=this.player.y+this.player.height-(this.player.height/2)){
             //check top side of collision
             if(this.horizontalBorder.y>this.player.y ){
-              console.log("top side");
               this.player.moveup=false;
               this.player.y-=0.5;
             }
             //check bottom side of collision
             if(this.horizontalBorder.y<this.player.y ){
-              console.log("bottom side");
               this.player.moveup=false;
               this.player.y+=0.5;
             }
@@ -382,13 +365,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           this.horizontalBorder.y+(this.roomInfo.height)<=this.player.y+this.player.height-(this.player.height/2)){
             //check top side of collision
             if(this.horizontalBorder.y+(this.roomInfo.height)>this.player.y ){
-              console.log("top side");
               this.player.moveup=false;
               this.player.y-=0.5;
             }
             //check bottom side of collision
             if(this.horizontalBorder.y+(this.roomInfo.height)<this.player.y ){
-              console.log("bottom side");
               this.player.moveup=false;
               this.player.y+=0.5;
             }

@@ -196,7 +196,7 @@ this.drawEnemyText = function(){
       }
     }
   }
-  
+
   this.updatePos = function(){
     this.x -=this.player.moveX;
     this.y -=this.player.moveY;

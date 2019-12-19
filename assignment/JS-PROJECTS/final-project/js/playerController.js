@@ -249,6 +249,7 @@ function Player(c,width,height){
     }
     if(this.visualStatus==true){
       this.enemyArr[this.visibleEnemyArr].isVisible=true;
+      this.showMessage = true;
       this.visibleEnemyArr=null;
     }else{
       for (var i = 0; i < this.enemyArr.length; i++) {

@@ -12,6 +12,7 @@ function Game(canvas,c){
   this.canvas = canvas;
   this.c= c;
   this.playerObj = new Player(this.c,this.canvas.width,this.canvas.height);
+
   this.gunObj;
   this.bulletArr=[];
   this.isShooting=false;
@@ -27,7 +28,8 @@ function Game(canvas,c){
   this.gridObj = new Grid(this.c,this.canvas.width,this.canvas.height,this.manageRoomObj);
   this.gridObj.initGrid();
   this.gridObj.checkGridCollision();
-  this.uiObj = new Ui(this.c);
+  this.uiObj = new Ui(this.c,this.canvas);
+
 
 
 
@@ -43,6 +45,9 @@ function Game(canvas,c){
  */
 
   document.addEventListener('click',function(){
+    that.gunSound = new Audio('./music/rifle.ogg');
+    that.gunSound.play();
+    that.gunSound.volume = 0.2;
     that.isShooting=true;
     that.playerX = that.playerObj.x;
     that.playerY= that.playerObj.y;
@@ -62,13 +67,13 @@ function Game(canvas,c){
           if(collision==true && this.enemyManagementObj.enemyArr[j].enemyState.currentState!=10 ){
 
             this.enemyManagementObj.enemyArr[j].isDead=true;
-            console.log("bullet collided");
-            this.bulletArr.splice(i,1);
+
+
 
           }
           if(this.bulletArr[i].x>this.canvas.width || this.bulletArr[i].x<0 || this.bulletArr[i].y>this.canvas.height|| this.bulletArr[i].y<0){
-                this.bulletArr.shift();
-                console.log("bullet out");
+
+
               }
         }
 
@@ -144,7 +149,7 @@ this.gameLoop = function(){
       }
       that.fireBullet();
       that.uiObj.updateScore(that.scoreObj.score);
-      that.uiObj.renderUi();
+      that.uiObj.renderUi(that.playerObj,that.enemyManagementObj.enemyArr);
 
     }
     else{
