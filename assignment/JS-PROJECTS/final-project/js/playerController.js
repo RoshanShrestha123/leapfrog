@@ -5,7 +5,7 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
-  this.speed =3;
+  this.speed =1.5;
   this.width=50;
   this.height=78;
   this.qPressed = false;
@@ -183,6 +183,9 @@ function Player(c,width,height){
       that.ePressed = true;
       that.textDelay = 200;
     }
+    if(event.keyCode==70){ // release e
+      that.fPressed = true;
+    }
   });
   /**
    * Event to listener to detect the KEY UP event
@@ -205,6 +208,9 @@ function Player(c,width,height){
     }
     if(event.keyCode==69){ // release e
       that.ePressed = false;
+    }
+    if(event.keyCode==70){ // release e
+      that.fPressed = false;
     }
   });
   //-----------------------------------------RAYCATING from the enemy the cordinate ------------------------------------------------------//

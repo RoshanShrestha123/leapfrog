@@ -38,8 +38,7 @@ function GameState(canvas){
     that.menuStart = false;
   }
 
-function animate(){
-  requestAnimationFrame(animate);
+setInterval(function(){
   that.c.clearRect(this.x,this.y,this.width,this.height);
   //start Game
   if(that.gameStarted==true){
@@ -72,9 +71,12 @@ function animate(){
   if(that.menuStart==true){
     that.menuObj.showMenu();
   }
-}
 
-animate();
+},1);
+
+
+
+
 
 
 

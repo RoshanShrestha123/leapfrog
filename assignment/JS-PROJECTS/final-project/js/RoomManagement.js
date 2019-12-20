@@ -1,20 +1,28 @@
+/**
+ * can manage the room position and size, image from here
+ * @method      ManageRoom
+ * @param       {[type]}   c      [description]
+ * @param       {[type]}   canvas [description]
+ * @constructor
+ */
+
 function ManageRoom(c,canvas){
   this.c =c;
   this.canvas =canvas;
-
   this.roomArr = [];
   this.loadCount = 0;
-
 /**
  * here you can create the room ,
  * for the paramerter of the object
  * (context,x,y,width,height,borderTOP,borderRIGHT,borderBOTTOM,borderLEFT)
- * for border, 0 = No border/wall, 1 = 100% border/wall, 2 = border/wall with door
+ * for border, 0 = No border/wall, 1 = 100% border/wall,
  * color of the room and name of the room
  */
 
 
  //outside of the room
+ 
+
  this.outsideBottom = new Room(this.c,350,270,1193,300,0,1,1,0,'#949494',"outsideBottom");
  this.img = document.getElementById('outsideBottom');
  this.outsideBottom.setBgImage(this.img);
@@ -25,7 +33,7 @@ function ManageRoom(c,canvas){
  this.outsideBottom.setBgImage(this.img);
  this.roomArr.push(this.outsideBottom);
 
- this.bathroom = new Room(this.c,1145,100,184,168,0,1,1,0,'#949494',"bathroom");
+ this.bathroom = new Room(this.c,1145,100,184,168,0,0,1,0,'#949494',"bathroom");
  this.img = document.getElementById('bathroom3');
  this.bathroom.setBgImage(this.img);
  this.roomArr.push(this.bathroom);
@@ -66,7 +74,7 @@ function ManageRoom(c,canvas){
   this.img = document.getElementById('bathroom4');
   this.bathroom4.setBgImage(this.img);
   this.roomArr.push(this.bathroom4);
-  this.bathroom5 = new Room(this.c,1328,-878,197,161,1,0,0,0,'#949494',"bathroom2");//top left room
+  this.bathroom5 = new Room(this.c,1328,-878,197,161,1,1,0,0,'#949494',"bathroom2");//top left room
   this.img = document.getElementById('bathroom5');
   this.bathroom5.setBgImage(this.img);
   this.roomArr.push(this.bathroom5);
@@ -76,12 +84,22 @@ function ManageRoom(c,canvas){
   this.bedroomDown.setBgImage(this.img);
   this.roomArr.push(this.bedroomDown);
 
+  this.bedRoomUp = new Room(this.c,1555,-878,455,360,1,1,1,0,'#949494',"bedroom2");//top left room
+  this.img = document.getElementById('bedRoomUp');
+  this.bedRoomUp.setBgImage(this.img);
+  this.roomArr.push(this.bedRoomUp);
+
   this.storeRoom = new Room(this.c,1528,-285,360,170,1,1,1,0,'#949494',"storeRoom");//top left room
   this.img = document.getElementById('storeRoom');
   this.storeRoom.setBgImage(this.img);
   this.roomArr.push(this.storeRoom);
 
-  this.pathUp = new Room(this.c,933,-878,200,391,1,0,0,0,'#949494',"bathroom2");//top left room
+  this.bikeRoom = new Room(this.c,1528,-487,140,173,0,1,0,0,'#949494',"bikeRoom");
+  this.img = document.getElementById('bikeRoom');
+  this.bikeRoom.setBgImage(this.img);
+  this.roomArr.push(this.bikeRoom);
+
+  this.pathUp = new Room(this.c,933,-878,200,391,1,0,0,0,'#949494',"pathup");
   this.img = document.getElementById('pathUp');
   this.pathUp.setBgImage(this.img);
   this.roomArr.push(this.pathUp);
@@ -106,7 +124,7 @@ function ManageRoom(c,canvas){
   this.path4.setBgImage(this.img);
   this.roomArr.push(this.path4);
 
-  this.livingroom = new Room(this.c,380,-878,553,361,1,1,1,1,'#949494',"meetingHall");
+  this.livingroom = new Room(this.c,380,-878,553,361,1,0,1,1,'#949494',"meetingHall");
   this.img = document.getElementById('meetingHall');
   this.livingroom.setBgImage(this.img);
   this.roomArr.push(this.livingroom);

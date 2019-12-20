@@ -13,9 +13,22 @@ this.initEnemyArr = function(){
       this.enemyObj.initEnemy(500,100,Math.floor(Math.random()*350));
       this.enemyArr.push(this.enemyObj);
 
-      // this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
-      // this.enemyObj.initEnemy(1100,-10,Math.floor(Math.random()*350));
-      // this.enemyArr.push(this.enemyObj);
+      this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
+      this.enemyObj.initEnemy(1100,-10,Math.floor(Math.random()*350));
+      this.enemyArr.push(this.enemyObj);
+
+      this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
+      this.enemyObj.initEnemy(1800,10,Math.floor(Math.random()*350));
+      this.enemyArr.push(this.enemyObj);
+
+      this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
+      this.enemyObj.initEnemy(500,-700,Math.floor(Math.random()*350));
+      this.enemyArr.push(this.enemyObj);
+
+      this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
+      this.enemyObj.initEnemy(700,-600,Math.floor(Math.random()*350));
+      this.enemyArr.push(this.enemyObj);
+
       //
       // this.enemyObj = new Enemy(this.c,this.playerX,this.playerY,this.playerObj,this.manageRoomObj);
       // this.enemyObj.initEnemy(1200,-30,Math.floor(Math.random()*350));

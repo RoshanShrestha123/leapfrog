@@ -30,6 +30,7 @@ function Game(canvas,c){
   this.uiObj = new Ui(this.c,this.canvas);
   this.enemyCount =0;
   this.gameOver = false;
+  this.objectManagement = new ObjectManagement(this.c);
 
 
 
@@ -110,6 +111,12 @@ this.resetGame = function(){
       for (var i = 0; i < this.manageRoomObj.roomArr.length; i++) {
         this.manageRoomObj.roomArr[i].update(this.playerObj);
       }
+      for (var i = 0; i < this.objectManagement.objArr.length; i++) {
+
+        this.objectManagement.objArr[i].updatePos(this.playerObj.moveX,this.playerObj.moveY);
+
+      }
+
   }
   //-----------------------------------------GAME LOOP------------------------------------------------------//
 
@@ -121,6 +128,8 @@ this.resetGame = function(){
 this.gameLoop = function(){
     if(this.playerObj.isDead==false){
       this.updateEnvironmentPosition();
+
+
 
       //this.gridObj.updateGridPos(this.playerObj.moveX,this.playerObj.moveY);
       this.playerObj.moveX =0;
@@ -162,6 +171,16 @@ this.gameLoop = function(){
         console.log("game over");
         this.gameOver = true;
       }
+
+      for (var i = 0; i < this.objectManagement.objArr.length; i++) {
+        this.objectManagement.objArr[i].checkCollisionObject(this.playerObj);
+        this.objectManagement.objArr[i].show();
+        if(this.objectManagement.objArr[i].itemPicked==true){
+          this.scoreObj.increaseScore(250);
+          this.objectManagement.objArr.splice(i,1);
+        }
+      }
+
       //that.gridObj.renderGrid();
 
     }

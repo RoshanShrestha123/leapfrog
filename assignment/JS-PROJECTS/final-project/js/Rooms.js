@@ -1,3 +1,20 @@
+/**
+ * [Room description]
+ * @method      Room
+ * @param       {context} c
+ * @param       {*} x
+ * @param       {*} y
+ * @param       {*} width
+ * @param       {*} height
+ * @param       {*} t
+ * @param       {*} r
+ * @param       {*} d
+ * @param       {*} l
+ * @param       {*} color
+ * @param       {*} name   optional
+ * @constructor
+ */
+
 function Room(c,x,y,width,height,t,r,d,l,color,name) {
   this.c = c;
   this.room = {
@@ -16,6 +33,10 @@ this.sideOfRoom ={
   d:d
 }
 
+/**
+ * Create the room object from here
+ * @type {RoomBorder}
+ */
 
   this.borderObj = new RoomBorder(this.c,0,0,this.sideOfRoom.t,this.sideOfRoom.r,this.sideOfRoom.d,this.sideOfRoom.l,this.room);
   this.borderObj.initBorder();
@@ -35,8 +56,15 @@ this.sideOfRoom ={
   this.setBgImage = function(img){
     this.room.img = img;
   }
-  this.update = function(player){
 
+  /**
+   * update the position of the rooms
+   * @method
+   * @param  {[type]} player 
+   * @return {[type]}
+   */
+
+  this.update = function(player){
     this.room.x-=player.moveX;
     this.room.y-=player.moveY;
     this.borderObj.verticalBorder.x-=player.moveX;
