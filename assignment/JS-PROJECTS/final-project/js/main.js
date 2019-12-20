@@ -161,6 +161,12 @@ this.gameLoop = function(){
           this.enemyCount++;
           this.enemyManagementObj.enemyArr[i].enemyStatusCount = true;
         }
+        if(this.enemyManagementObj.enemyArr[i].enemyStatusCount == false && this.enemyManagementObj.enemyArr[i].isArrested == true){
+          this.enemyCount++;
+          this.enemyManagementObj.enemyArr[i].enemyStatusCount = true;
+
+        }
+
       //  this.enemyManagementObj.enemyArr[i].drawRays();
       }
       this.fireBullet();

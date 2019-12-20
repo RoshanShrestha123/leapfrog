@@ -31,6 +31,7 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.isDead = false;
   this.canDie = true;
   this.enemyStatusCount = false;
+  this.isArrested = false;
 
 
 
@@ -137,7 +138,7 @@ this.drawEnemyText = function(){
         this.y+this.height> this.player.y && this.y<this.player.y+ this.player.height &&this.enemyState.currentState==2 && this.player.qPressed==true){
             this.enemyState.initState(9);
             scoreObj.increaseScore(750);
-            scoreObj.displayScore();
+            this.isArrested = true;
         }
 
     if(this.enemyState.currentState!=9){

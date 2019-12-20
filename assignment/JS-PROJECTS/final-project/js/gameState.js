@@ -51,6 +51,7 @@ setInterval(function(){
       that.gameStarted=false;
       that.endScreenStart=true;
       that.startEndScreen();
+
     }
     //console.log("inside loop");
   }
