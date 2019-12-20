@@ -36,6 +36,7 @@ function GameState(canvas){
     that.gameObj = new Game(that.canvas,that.c);
     that.gameStarted = true;
     that.menuStart = false;
+    that.bgMusic.play();
   }
 
 setInterval(function(){
