@@ -29,6 +29,8 @@ function Enemy(c,x,y,player,room,index,collisionObj){
   this.alreadyChanged = false;
   this.activateCounter = false;
   this.isDead = false;
+  this.canDie = true;
+  this.enemyStatusCount = false;
 
 
 
@@ -117,6 +119,7 @@ this.drawEnemyText = function(){
 
   this.update = function(scoreObj){
     if(this.enemyState.freezeLoop==false){
+
       this.enemyState.update(this.x,this.y);
       this.updateValueFromState();
 
@@ -139,13 +142,14 @@ this.drawEnemyText = function(){
 
     if(this.enemyState.currentState!=9){
         this.drawRays();
+        this.checkDistance();
     }
     }else{
       this.isVisible=true;
     }
 
     this.updateBulletPos();
-    if(this.isDead==true){
+    if(this.isDead==true && this.canDie == true){
       this.enemyState.initState(10);
       if(this.enemyState.previousState==1){
       scoreObj.increaseScore(500);
@@ -155,8 +159,7 @@ this.drawEnemyText = function(){
         scoreObj.decreaseScore(500);
         scoreObj.displayScore();
       }
-      console.log("this is dead");
-      this.isDead=false;
+      this.canDie=false;
     }
     if(this.isVisible==true){
       this.enemyDraw();
@@ -239,7 +242,6 @@ this.drawEnemyText = function(){
     }
   }
 
-
   //-----------------------------------------function to rotate the enemy------------------------------------------------------//
 
   this.rotateEnemy = function(angle){
@@ -259,5 +261,19 @@ this.drawEnemyText = function(){
         this.isVisible = this.enemyState.isVisible;
     }
 
+  }
+  this.checkDistance = function(){
+    if (this.isVisible==true) {
+      this.distance = Math.sqrt((Math.pow(this.player.x-this.x,2))+(this.player.y- this.y,2));
+
+      if(this.distance<60){
+        this.c.beginPath();
+        console.log("distance",this.distance);
+        this.c.save();
+        this.angle = Math.atan2(this.player.y-this.y,this.player.x-this.y);
+        this.rotateEnemy(this.angle);
+        this.c.restore();
+      }
+    }
   }
 }

@@ -194,14 +194,14 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
           //check right side of collision
           if(this.verticalBorder.x>this.player.x){
-            this.player.moveX -=1;
+            this.player.moveX -=this.player.speed;
 
 
 
           }
           //check left side of collision
           if(this.verticalBorder.x<=this.player.x && this.verticalBorder.y+this.verticalBorder.height>this.player.y){
-            this.player.moveX +=1;
+            this.player.moveX +=this.player.speed;
           //  this.player.x+=200;
 
 
@@ -217,11 +217,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
           //check right side of collision
           this.isCollided = true;
           if(this.doorVertical.x>this.player.x){
-            this.player.moveX +=1;
+            this.player.moveX +=this.player.speed;
           }
           //check left side of collision
           if(this.doorVertical.x<=this.player.x && this.doorVertical.y+this.doorVertical.height>this.player.y){
-            this.player.moveX -=1;
+            this.player.moveX -=this.player.speed;
           }
         }
     }
@@ -234,14 +234,14 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.verticalBorder.y<=this.player.y+this.player.height-(this.player.height/2)){
           //check right side of collision
           if(this.verticalBorder.x+(this.roomInfo.width)>this.player.x ){
-            this.player.moveX -=1;
+            this.player.moveX -=this.player.speed;
             //this.player.movedown= true;
             //this.player.x-=10;
           }
 
           //check left side of collision
           if(this.verticalBorder.x+(this.roomInfo.width)<=this.player.x ){
-            this.player.moveX +=1;
+            this.player.moveX +=this.player.speed;
 
           }
         }
@@ -260,11 +260,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.horizontalBorder.y-this.horizontalBorder.height<=this.player.y+this.player.height-(this.player.height/2)){
           //check top side of collision
           if(this.horizontalBorder.y>this.player.y ){
-            this.player.moveY -=1;
+            this.player.moveY -=this.player.speed;
           }
           //check bottom side of collision
           if(this.horizontalBorder.y<this.player.y ){
-            this.player.moveY +=1;
+            this.player.moveY +=this.player.speed;
           }
         }
     }
@@ -278,11 +278,11 @@ function RoomBorder(c,x,y,t,r,b,l,room){
         this.horizontalBorder.y+(this.roomInfo.height)<=this.player.y+this.player.height-(this.player.height/2)){
           //check top side of collision
           if(this.horizontalBorder.y+(this.roomInfo.height)>this.player.y ){
-            this.player.moveY -=1;
+            this.player.moveY -=this.player.speed;
           }
           //check bottom side of collision
           if(this.horizontalBorder.y+(this.roomInfo.height)<this.player.y ){
-            this.player.moveY +=1;
+            this.player.moveY +=this.player.speed;
 
 
           }

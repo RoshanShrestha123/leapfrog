@@ -10,8 +10,8 @@
 #canvas{
   border: 1px solid black;
   cursor: none;
-    background-color: black;
-    font-family: gameFont;
+  background-color: black;
+  font-family: gameFont,"Arial";
 }
 img{
   display: none;

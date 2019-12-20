@@ -2,7 +2,7 @@ function Grid(c,width,height,manageRoomObj){
   // console.log("room", manageRoomObj.roomArr[0].borderObj);
   this.width = width+200;
   this.height = height+200;
-  this.size = 30;
+  this.size = 50;
   this.color='rgba(189, 189, 189,0.3)';
   this.nodeArr = [];
   this.rows = this.width/this.size;
@@ -15,7 +15,7 @@ function Grid(c,width,height,manageRoomObj){
   this.initGrid = function(){
     for(var i =0; i<this.rows;i++){
       for(var j =0; j<this.cols ; j++){
-        this.nodeObj = new Node(c,i+6,j-20,this.size,this.color);
+        this.nodeObj = new Node(c,i+6,j-20,this.size,this.color,i);
         this.nodeObj.initCell();
         this.nodeArr.push(this.nodeObj);
       }
@@ -49,13 +49,11 @@ function Grid(c,width,height,manageRoomObj){
 
             }
         }
-
       }
     }
   }
 
   this.renderGrid = function(){
-
     for (var i = 0; i < this.nodeArr.length; i++) {
       this.nodeArr[i].drawCell();
     }
@@ -67,17 +65,4 @@ function Grid(c,width,height,manageRoomObj){
       this.nodeArr[i].updateCellPos(this.moveX,this.moveY);
     }
   }
-  this.getEnemyPosition = function(x,y){
-    //console.log(x,y);
-  }
-
-  this.updateSet = function(){
-
-  }
-
-  this.startNode = function(){
-    
-  }
-
-
 }

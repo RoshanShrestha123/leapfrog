@@ -5,7 +5,7 @@ function Player(c,width,height){
   this.gameHeight=height;
   this.x=this.gameWidth/2;
   this.y=this.gameHeight/2;
-  this.speed =1.5;
+  this.speed =3;
   this.width=50;
   this.height=78;
   this.qPressed = false;
@@ -245,6 +245,7 @@ function Player(c,width,height){
     this.rayAngle = this.lookAngle*(180/Math.PI);
     this.rayArr[i].draw();
     this.rayArr[i].updateAngle(this.x,this.y,this.rayAngle+(i-50));
+
 
     }
     if(this.visualStatus==true){

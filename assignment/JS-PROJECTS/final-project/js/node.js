@@ -1,4 +1,4 @@
-function Node(c,x,y,size,color){
+function Node(c,x,y,size,color,index){
   this.c = c;
   this.x = x;
   this.y = y;
@@ -7,7 +7,7 @@ function Node(c,x,y,size,color){
   this.height = this.size;
   this.color = color;
   this.tag ='path';
-  this.index = null;
+  this.index = index;
   this.fn =0;
   this.gn =0;
   this.hn =0;
@@ -18,6 +18,8 @@ function Node(c,x,y,size,color){
 
   this.drawCell = function(){
     this.c. beginPath();
+    this.c.font = '10px gameFont';
+    this.c.fillText(index,this.x,this.y);
     this.c.strokeStyle= this.color;
     this.c.rect(this.x,this.y,this.width,this.height);
     this.c.stroke();

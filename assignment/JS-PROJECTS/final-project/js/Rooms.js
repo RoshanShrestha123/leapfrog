@@ -21,17 +21,19 @@ this.sideOfRoom ={
   this.borderObj.initBorder();
 
   this.draw = function(){
+
     this.c.beginPath();
     this.c.fillStyle=this.room.color;
     // this.c.rect(this.room.x,this.room.y,this.room.width,this.room.height);
     // this.c.fill();
+
     this.c.drawImage(this.room.img,this.room.x,this.room.y,this.room.width,this.room.height);
     this.borderObj.renderBorder();
+    this.c.beginPath();
   }
 
   this.setBgImage = function(img){
     this.room.img = img;
-
   }
   this.update = function(player){
 
